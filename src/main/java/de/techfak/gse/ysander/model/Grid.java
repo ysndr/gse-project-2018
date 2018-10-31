@@ -3,8 +3,7 @@ package de.techfak.gse.ysander.model;
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.figures.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color.BLACK;
 import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
@@ -74,6 +73,38 @@ public class Grid {
         return new Grid(grid);
     }
 
+    public String toFEN() {
+        List<String > rows = new ArrayList<>();
+
+        for (String y: Y_KEYS.split("")) {
+            int empty = 0;
+            StringBuilder row = new StringBuilder();
+            for (String x: X_KEYS.split("")) {
+                Field field = new Field(x+y);
+                Figure fig = grid.get(field);
+
+                if (fig == null) {
+                    empty++;
+                    continue;
+                }
+
+                if (empty != 0) {
+                    row.append(empty);
+                }
+                row.append(fig.symbol());
+                empty = 0;
+            }
+            if (empty != 0) {
+                row.append(empty);
+            }
+            rows.add(row.toString());
+
+        }
+
+        return String.join("/", rows);
+    }
+
+
     /**
      * A wrapper around coordinates on the grid.
      */
@@ -107,6 +138,20 @@ public class Grid {
             return String.format("[Field %s @ (%s, %s)]", this.toCoords(), this.x, this.y);
         }
 
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Field field = (Field) o;
+            return x == field.x &&
+                y == field.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
     }
 
 
