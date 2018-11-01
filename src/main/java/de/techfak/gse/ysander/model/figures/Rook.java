@@ -6,7 +6,7 @@ package de.techfak.gse.ysander.model.figures;
 public class Rook extends Figure {
 
     public Rook(Color color) {
-        super(color,'r', 'R');
+        super(color, 'r', 'R');
     }
 
     /**

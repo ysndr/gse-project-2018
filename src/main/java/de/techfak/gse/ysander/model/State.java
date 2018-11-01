@@ -6,7 +6,11 @@ import java.util.Objects;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color;
 
-public class State {
+/**
+ * Runtime state of the game.
+ * Contains current grid configuration a well as the current player who's turn it is
+ */
+public final class State {
 
     private final Grid grid;
     private final Color color;
@@ -21,15 +25,17 @@ public class State {
     }
 
 
-    static State fromFEN(String fen) {
+    static State fromFEN(String fen) throws FENParseException {
         String[] split = fen.trim().split(" ");
-        if (split.length != 2) throw new FENParseException();
+        if (split.length != 2) {
+            throw new FENParseException();
+        }
         return State.defaultState()
             .withGrid(Grid.fromFEN(split[0]))
             .withColor(Color.fromFEN(split[1]));
     }
 
-    private State withGrid(Grid grid) {
+    public State withGrid(Grid grid) {
         return new State(grid, this.color);
     }
 

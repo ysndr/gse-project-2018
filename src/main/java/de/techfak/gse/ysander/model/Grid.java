@@ -11,7 +11,7 @@ import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
 /**
  * The internal representation of the grid.
  */
-public class Grid {
+public final class Grid {
 
     private static final int GRID_SIZE = 8;
     private static final Figure[] FIGURES = {
@@ -29,9 +29,9 @@ public class Grid {
     private static final String X_KEYS = "abcdefgh";
 
     /**
-     * Our internal representation of the grid
+     * Our internal representation of the grid.
      */
-    private Map<Field, Figure> grid;
+    private final Map<Field, Figure> grid;
 
     private Grid(Map<Field, Figure> grid) {
         this.grid = grid;
@@ -85,13 +85,13 @@ public class Grid {
     }
 
     /**
-     * Creates a Grid from a given String in FENotation
+     * Creates a Grid from a given String in FENotation.
      *
      * @param fen Serialized grid
      * @return deserialized Grid
      * @throws FENParseException if FEN format is not obeyed
      */
-    static Grid fromFEN(String fen) throws FENParseException {
+    public static Grid fromFEN(String fen) throws FENParseException {
         String[] rows = fen.split("/");
         if (rows.length < GRID_SIZE) throw new FENParseException();
 
@@ -124,13 +124,13 @@ public class Grid {
     }
 
     String toFEN() {
-        List<String > rows = new ArrayList<>();
+        List<String> rows = new ArrayList<>();
 
         for (String y: Y_KEYS.split("")) {
             int empty = 0;
             StringBuilder row = new StringBuilder();
             for (String x: X_KEYS.split("")) {
-                Field field = new Field(x+y);
+                Field field = new Field(x + y);
                 Figure fig = grid.get(field);
 
                 if (fig == null) {
@@ -197,7 +197,7 @@ public class Grid {
         }
 
         /**
-         * Print the field
+         * Print the field.
          * @return Verbose string representation of a field
          */
         public String toString() {

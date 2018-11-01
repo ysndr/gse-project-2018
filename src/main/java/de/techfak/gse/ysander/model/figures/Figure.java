@@ -18,12 +18,12 @@ public abstract class Figure {
     private final Color color;
 
     /**
-     * The figures Symbol if black
+     * The figures Symbol if black.
      */
     private final char symbolBlack;
 
     /**
-     * The figures Symbol if white
+     * The figures Symbol if white.
      */
     private final char symbolWhite;
 
@@ -82,21 +82,25 @@ public abstract class Figure {
         BLACK,
         WHITE;
 
-        public String toFEN() {
-            return (this == Color.BLACK) ? "b" : "w";
-        }
+
+        private static final String COLOR_STRING_BLACK = "b";
+        private static final String COLOR_STRING_WHITE = "w";
 
         /**
-         * Converts a string serialized color into a color object
+         * Converts a string serialized color into a color object.
          *
          * @param fen the serialized color
          * @return Deserialized Color
          * @throws FENParseException if `fen` is no valid color representation
          */
         public static Color fromFEN(String fen) throws FENParseException {
-            if (fen.equals("b")) return BLACK;
-            if (fen.equals("w")) return WHITE;
+            if (fen.equals(COLOR_STRING_BLACK)) return BLACK;
+            if (fen.equals(COLOR_STRING_WHITE)) return WHITE;
             throw new FENParseException();
+        }
+
+        public String toFEN() {
+            return (this == Color.BLACK) ? COLOR_STRING_BLACK : COLOR_STRING_WHITE;
         }
     }
 
