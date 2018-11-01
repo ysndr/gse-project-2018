@@ -1,6 +1,10 @@
 package de.techfak.gse.ysander.model.figures;
 
 
+import de.techfak.gse.ysander.model.error.FENParseException;
+
+import java.util.Objects;
+
 /**
  * The abstract figure class.
  * All possible figures must extend this class.
@@ -24,11 +28,19 @@ public abstract class Figure {
     private final char symbolWhite;
 
 
-    public Figure(Color color, char symbolBlack, char symbolWhite) {
+    Figure(Color color, char symbolBlack, char symbolWhite) {
         this.color = color;
         this.symbolBlack = symbolBlack;
         this.symbolWhite = symbolWhite;
     }
+
+
+    /**
+     * Creates a copy of the Figure.
+     *
+     * @return a copy of itself
+     */
+    public abstract Figure copy();
 
 
     /**
@@ -38,14 +50,30 @@ public abstract class Figure {
         if (this.color == Color.WHITE) return symbolWhite;
         if (this.color == Color.BLACK) return  symbolBlack;
         return '·';
-    };
+    }
 
     /**
      * @return the figures color
      */
     public Color color() {
         return this.color;
-    };
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Figure figure = (Figure) o;
+        return symbolBlack == figure.symbolBlack &&
+            symbolWhite == figure.symbolWhite &&
+            color == figure.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, symbolBlack, symbolWhite);
+    }
 
     /**
      * Possible Colors for figures.
@@ -56,6 +84,19 @@ public abstract class Figure {
 
         public String toFEN() {
             return (this == Color.BLACK) ? "b" : "w";
+        }
+
+        /**
+         * Converts a string serialized color into a color object
+         *
+         * @param fen the serialized color
+         * @return Deserialized Color
+         * @throws FENParseException if `fen` is no valid color representation
+         */
+        public static Color fromFEN(String fen) throws FENParseException {
+            if (fen.equals("b")) return BLACK;
+            if (fen.equals("w")) return WHITE;
+            throw new FENParseException();
         }
     }
 

@@ -9,4 +9,13 @@ public class Knight extends Figure {
         super(color, 'n', 'N');
     }
 
+    /**
+     * Creates a copy of the Figure.
+     *
+     * @return a copy of itself
+     */
+    @Override
+    public Figure copy() {
+        return new Knight((this.color()));
+    }
 }

@@ -14,6 +14,17 @@ import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
 public class Grid {
 
     private static final int GRID_SIZE = 8;
+    private static final Figure[] FIGURES = {
+        new Rook(WHITE), new Rook(BLACK),
+        new Knight(WHITE), new Knight(BLACK),
+        new Bishop(WHITE), new Bishop(BLACK),
+        new Queen(WHITE), new Queen(BLACK),
+        new King(WHITE), new King(BLACK),
+        new Bishop(WHITE), new Bishop(BLACK),
+        new Knight(WHITE), new Knight(BLACK),
+        new Rook(WHITE), new Rook(BLACK),
+        new Pawn(WHITE), new Pawn(BLACK)
+    };
     private static final String Y_KEYS = "12345678";
     private static final String X_KEYS = "abcdefgh";
 
@@ -30,7 +41,7 @@ public class Grid {
      * Creates a preconfigured grd with the default common setup.
      * @return a setup grid
      */
-    public static Grid defaultGrid() {
+    static Grid defaultGrid() {
         Map<Field, Figure> grid = new HashMap<>();
 
         grid.put(new Field("a8"), new Rook(WHITE));
@@ -73,7 +84,46 @@ public class Grid {
         return new Grid(grid);
     }
 
-    public String toFEN() {
+    /**
+     * Creates a Grid from a given String in FENotation
+     *
+     * @param fen Serialized grid
+     * @return deserialized Grid
+     * @throws FENParseException if FEN format is not obeyed
+     */
+    static Grid fromFEN(String fen) throws FENParseException {
+        String[] rows = fen.split("/");
+        if (rows.length < GRID_SIZE) throw new FENParseException();
+
+        Map<Field, Figure> grid = new HashMap<>();
+        Map<Character, Figure> mapping = new HashMap<>();
+        Arrays.asList(FIGURES).forEach((Figure f) -> mapping.put(f.symbol(), f));
+
+        for (int r = 0; r < rows.length; r++) {
+            String row = rows[r];
+            int processed = 0;
+            for (int i = 0; i < row.length(); i++) {
+                char field = row.charAt(i);
+
+                if (!mapping.containsKey(field)) {
+                    try {
+                        processed += Integer.parseInt(String.valueOf(field));
+                    } catch (NumberFormatException e) {
+                        throw new FENParseException();
+                    }
+                    continue;
+                }
+
+                grid.put(new Field(processed, r), mapping.get(field).copy());
+                processed++;
+            }
+            if (processed != GRID_SIZE) throw new FENParseException();
+        }
+
+        return new Grid(grid);
+    }
+
+    String toFEN() {
         List<String > rows = new ArrayList<>();
 
         for (String y: Y_KEYS.split("")) {
@@ -104,6 +154,22 @@ public class Grid {
         return String.join("/", rows);
     }
 
+    public Set<Map.Entry<Field, Figure>> getFigures() {
+        return this.grid.entrySet();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grid grid1 = (Grid) o;
+        return Objects.equals(grid, grid1.grid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(grid);
+    }
 
     /**
      * A wrapper around coordinates on the grid.
@@ -112,21 +178,21 @@ public class Grid {
         final int x;
         final int y;
 
-        Field(char x, int y) {
+        Field(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
-        public Field(String coord) {
-            this.y = X_KEYS.indexOf(coord.charAt(0));
-            this.x = Y_KEYS.indexOf(coord.charAt(1));
+        Field(String coord) {
+            this.x = X_KEYS.indexOf(coord.charAt(0));
+            this.y = Y_KEYS.indexOf(coord.charAt(1));
         }
 
         /**
          * Creates a canonical representation of the field as string.
          * @return coordinate String
          */
-        public String toCoords() {
+        String toCoords() {
             return ("" + X_KEYS.charAt(this.x) + Y_KEYS.charAt(this.y));
         }
 

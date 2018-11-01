@@ -9,4 +9,13 @@ public class Rook extends Figure {
         super(color,'r', 'R');
     }
 
+    /**
+     * Creates a copy of the Figure.
+     *
+     * @return a copy of itself
+     */
+    @Override
+    public Figure copy() {
+        return new Rook(this.color());
+    }
 }
