@@ -1,6 +1,8 @@
 package de.techfak.gse.ysander;
 
+import de.techfak.gse.ysander.model.Grid;
 import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.error.FENParseException;
 
 /**
  * The main Gameclass.
@@ -9,7 +11,19 @@ import de.techfak.gse.ysander.model.State;
 public class ChessGame {
 
     public static void main(final String... args) {
-        System.out.println(State.defaultState().toFEN());
+
+        State state = State.defaultState();
+
+        if (args.length > 0) {
+            try {
+                state = state.withGrid(Grid.fromFEN(args[0]));
+            } catch (FENParseException e) {
+                System.err.println(e.getReason());
+                System.exit(e.getErrorCode());
+            }
+        }
+
+        System.out.println(state.toFEN());
     }
 
 }
