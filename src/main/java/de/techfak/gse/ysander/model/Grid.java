@@ -1,6 +1,8 @@
 package de.techfak.gse.ysander.model;
 
 import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
+import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.*;
 
 import java.util.*;
@@ -36,6 +38,26 @@ public final class Grid {
     private Grid(Map<Field, Figure> grid) {
         this.grid = grid;
     }
+
+    public Grid applyMove(Move move, Figure.Color currentPlayer)
+        throws NoFigureOnFieldException, NotPlayersTurnException {
+
+        Figure startFigure = grid.get(move.getFrom());
+
+        if (startFigure == null) {
+            throw new NoFigureOnFieldException(move.getFrom());
+        }
+
+        if (startFigure.color() != currentPlayer) {
+            throw new NotPlayersTurnException(startFigure.color());
+        }
+
+        HashMap<Field,Figure> gridCopy = new HashMap<>(this.grid);
+        gridCopy.replace(move.getTo(), startFigure);
+        gridCopy.remove(move.getFrom());
+        return new Grid(gridCopy);
+    }
+
 
     /**
      * Convert fields char represented index into absolut int coordinate on grid

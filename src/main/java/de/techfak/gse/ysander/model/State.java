@@ -1,6 +1,9 @@
 package de.techfak.gse.ysander.model;
 
 import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.model.error.InvalidMoveException;
+import de.techfak.gse.ysander.model.error.NoFigureMovedException;
+import de.techfak.gse.ysander.model.figures.Figure;
 
 import java.util.Objects;
 
@@ -43,6 +46,18 @@ public final class State {
         return new State(this.grid, color);
     }
 
+    public State applyMove(Move move) throws InvalidMoveException {
+
+        if (move.getFrom().equals(move.getTo())) {
+            throw new NoFigureMovedException();
+        }
+
+        Grid gridAfterMove = this.grid.applyMove(move, this.color);
+        Color playerAfterMove = (this.color == Color.BLACK) ? Color.WHITE : Color.BLACK;
+
+        return new State(gridAfterMove, playerAfterMove);
+
+    }
 
     public String toFEN() {
         return String.format("%s %s", this.grid.toFEN(), this.color.toFEN());
@@ -61,4 +76,6 @@ public final class State {
     public int hashCode() {
         return Objects.hash(grid, color);
     }
+
+
 }

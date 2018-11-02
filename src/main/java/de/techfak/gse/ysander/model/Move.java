@@ -16,6 +16,7 @@ public final class Move {
         this.to = to;
     }
 
+
     public static  Move fromString(String move) throws InvalidMoveException {
         String[] fields = move.trim().split("-");
 
@@ -39,4 +40,11 @@ public final class Move {
         return new Move(from, to);
     }
 
+    public Field getFrom() {
+        return from;
+    }
+
+    public Field getTo() {
+        return to;
+    }
 }
