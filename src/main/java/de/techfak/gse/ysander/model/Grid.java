@@ -13,7 +13,7 @@ import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
  */
 public final class Grid {
 
-    private static final int GRID_SIZE = 8;
+    public static final int GRID_SIZE = 8;
     private static final Figure[] FIGURES = {
         new Rook(WHITE), new Rook(BLACK),
         new Knight(WHITE), new Knight(BLACK),
@@ -25,8 +25,8 @@ public final class Grid {
         new Rook(WHITE), new Rook(BLACK),
         new Pawn(WHITE), new Pawn(BLACK)
     };
-    private static final String Y_KEYS = "12345678";
-    private static final String X_KEYS = "abcdefgh";
+    public static final String Y_KEYS = "12345678";
+    public static final String X_KEYS = "abcdefgh";
 
     /**
      * Our internal representation of the grid.
@@ -36,6 +36,25 @@ public final class Grid {
     private Grid(Map<Field, Figure> grid) {
         this.grid = grid;
     }
+
+    /**
+     * Convert fields char represented index into absolut int coordinate on grid
+     * @param key field key in x
+     * @return x index
+     */
+    public static int getIndexX(char key) {
+        return X_KEYS.indexOf(key);
+    }
+
+    /**
+     * Convert fields char represented index into absolut int coordinate on grid
+     * @param key field key in y
+     * @return y index
+     */
+    public static int getIndexY(char key) {
+        return Y_KEYS.indexOf(key);
+    }
+
 
     /**
      * Creates a preconfigured grd with the default common setup.
@@ -171,54 +190,6 @@ public final class Grid {
         return Objects.hash(grid);
     }
 
-    /**
-     * A wrapper around coordinates on the grid.
-     */
-    private static class Field {
-        final int x;
-        final int y;
-
-        Field(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        Field(String coord) {
-            this.x = X_KEYS.indexOf(coord.charAt(0));
-            this.y = Y_KEYS.indexOf(coord.charAt(1));
-        }
-
-        /**
-         * Creates a canonical representation of the field as string.
-         * @return coordinate String
-         */
-        String toCoords() {
-            return ("" + X_KEYS.charAt(this.x) + Y_KEYS.charAt(this.y));
-        }
-
-        /**
-         * Print the field.
-         * @return Verbose string representation of a field
-         */
-        public String toString() {
-            return String.format("[Field %s @ (%s, %s)]", this.toCoords(), this.x, this.y);
-        }
-
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Field field = (Field) o;
-            return x == field.x &&
-                y == field.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-    }
 
 
 }
