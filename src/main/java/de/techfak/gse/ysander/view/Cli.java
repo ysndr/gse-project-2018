@@ -1,32 +1,64 @@
 package de.techfak.gse.ysander.view;
 
-import de.techfak.gse.ysander.model.Move;
-import de.techfak.gse.ysander.model.error.InvalidMoveException;
-import jdk.nashorn.internal.codegen.CompilerConstants;
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.error.ChessGameException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class Cli implements MovesInput {
+import java.util.Scanner;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
+
+public class Cli implements Output<State>, View<ChessGameException>, RawInput {
 
     private final Scanner scanner;
+
+
+
+    private BiConsumer<ChessGameException, Output<State>> exceptionCB = (e, o) -> {};
+    private BiConsumer<String, Output<State>> rawInputCB = (m, o) -> {};
+    private Consumer<Output<State>> onInitCB = (o) -> {};
 
     public Cli() {
         this.scanner = new Scanner(System.in);
     }
 
     @Override
-    public List<Move> requestMoves() throws InvalidMoveException {
-        String line = scanner.next();
-        String[] moveCommands = line.trim().split(";");
-
-        return Arrays.stream(moveCommands).map(Move::fromString).collect(Collectors.toList());
+    public void setExceptionCB(BiConsumer<ChessGameException, Output<State>> exceptionCB) {
+        this.exceptionCB = exceptionCB;
     }
+
+    @Override
+    public void setRawInputCB(BiConsumer<String, Output<State>> rawInputCB) {
+        this.rawInputCB = rawInputCB;
+    }
+
+    @Override
+    public void setOnInitCB(Consumer<Output<State>> onInitCB) {
+        this.onInitCB = onInitCB;
+    }
+
+    @Override
+    public void display(State state) {
+        System.out.println(state.toFEN());
+    }
+
+
+
+    public void start() {
+        onInitCB.accept(this);
+        new BufferedReader(new InputStreamReader(System.in))
+            .lines()
+            .forEach(m -> {
+                try {
+                    rawInputCB.accept(m, this);
+                } catch (ChessGameException e) {
+                    exceptionCB.accept(e, this);
+                }
+            });
+    }
+
 
 }
