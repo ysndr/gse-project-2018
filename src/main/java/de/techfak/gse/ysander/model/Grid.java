@@ -1,6 +1,7 @@
 package de.techfak.gse.ysander.model;
 
 import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
 import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.*;
@@ -154,9 +155,13 @@ public final class Grid {
                     }
                     continue;
                 }
+                try {
+                    grid.put(new Field(processed, r), mapping.get(field).copy());
+                } catch (InvalidFieldException e) {
+                    throw new FENParseException();
+                }
 
-                grid.put(new Field(processed, r), mapping.get(field).copy());
-                processed++;
+                 processed++;
             }
             if (processed != GRID_SIZE) throw new FENParseException();
         }
