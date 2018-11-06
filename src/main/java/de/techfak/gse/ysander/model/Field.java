@@ -16,7 +16,7 @@ public class Field {
         this.x = x;
         this.y = y;
 
-        if (x >= Grid.GRID_SIZE || x < 0) {
+        if (x >= Grid.GRID_SIZE || x < 0 || y >= Grid.GRID_SIZE || y < 0) {
             throw new InvalidFieldException(this);
         }
     }

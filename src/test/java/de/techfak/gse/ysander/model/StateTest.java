@@ -1,6 +1,7 @@
 package de.techfak.gse.ysander.model;
 
-import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.model.error.*;
+import de.techfak.gse.ysander.model.figures.Figure;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,4 +38,27 @@ class StateTest {
         assertThrows(FENParseException.class, () -> State.fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
 
     }
+
+    @Test
+    void applyMove() {
+        Move move = Move.fromString("a2-a3");
+        Move invalid = Move.fromString("a4-a2");
+        Move noop = Move.fromString("a2-a2");
+
+        assertEquals("rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b",
+            State.defaultState().applyMove(move).toFEN());
+
+        assertThrows(NotPlayersTurnException.class,
+            () -> State.defaultState().withColor(Figure.Color.BLACK).applyMove(move));
+
+        assertThrows(InvalidMoveException.class,
+            () -> State.defaultState().applyMove(invalid));
+
+        assertThrows(NoFigureMovedException.class,
+            () -> State.defaultState().applyMove(noop));
+
+
+    }
+
+
 }

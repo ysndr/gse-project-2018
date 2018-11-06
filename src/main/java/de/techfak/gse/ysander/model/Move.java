@@ -3,6 +3,8 @@ package de.techfak.gse.ysander.model;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 
+import java.util.Objects;
+
 /**
  * Move wraps the origin and target field of a move
  */
@@ -33,9 +35,7 @@ public final class Move {
              throw new InvalidMoveException();
         }
 
-        if (from.equals(to)) {
-            throw new InvalidMoveException();
-        }
+        // TODO: NoFigureMoved exception to be thrown here already?
 
         return new Move(from, to);
     }
@@ -46,5 +46,19 @@ public final class Move {
 
     public Field getTo() {
         return to;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Move move = (Move) o;
+        return Objects.equals(from, move.from) &&
+            Objects.equals(to, move.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to);
     }
 }

@@ -49,7 +49,7 @@ public final class State {
         return new State(grid, this.color);
     }
 
-    private State withColor(Color color) {
+    public State withColor(Color color) {
         return new State(this.grid, color);
     }
 
