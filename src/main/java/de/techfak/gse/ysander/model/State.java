@@ -28,14 +28,21 @@ public final class State {
     }
 
 
-    static State fromFEN(String fen) throws FENParseException {
+    public static State fromFEN(String fen) throws FENParseException {
+
         String[] split = fen.trim().split(" ");
         if (split.length != 2) {
             throw new FENParseException();
         }
+
+        return State.fromFEN(split[0], split[1]);
+    }
+
+    public static State fromFEN(String grid, String color) throws FENParseException {
+
         return State.defaultState()
-            .withGrid(Grid.fromFEN(split[0]))
-            .withColor(Color.fromFEN(split[1]));
+            .withGrid(Grid.fromFEN(grid))
+            .withColor(Color.fromFEN(color));
     }
 
     public State withGrid(Grid grid) {
