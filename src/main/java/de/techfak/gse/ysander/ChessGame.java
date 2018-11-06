@@ -1,8 +1,10 @@
 package de.techfak.gse.ysander;
 
+import de.techfak.gse.ysander.controller.ChessController;
 import de.techfak.gse.ysander.model.Grid;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.view.Cli;
 
 /**
  * The main Gameclass.
@@ -23,7 +25,10 @@ public class ChessGame {
             }
         }
 
-        System.out.println(state.toFEN());
+        Cli view = new Cli();
+        ChessController<Cli> controller = new ChessController(view, state);
+
+        view.start();
     }
 
 }
