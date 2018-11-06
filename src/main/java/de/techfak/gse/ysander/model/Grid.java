@@ -7,6 +7,7 @@ import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.*;
 
 import java.util.*;
+import java.util.concurrent.BlockingDeque;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color.BLACK;
 import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
@@ -28,7 +29,7 @@ public final class Grid {
         new Rook(WHITE), new Rook(BLACK),
         new Pawn(WHITE), new Pawn(BLACK)
     };
-    public static final String Y_KEYS = "12345678";
+    public static final String Y_KEYS = "87654321";
     public static final String X_KEYS = "abcdefgh";
 
     /**
@@ -86,42 +87,42 @@ public final class Grid {
     static Grid defaultGrid() {
         Map<Field, Figure> grid = new HashMap<>();
 
-        grid.put(new Field("a8"), new Rook(WHITE));
-        grid.put(new Field("b8"), new Knight(WHITE));
-        grid.put(new Field("c8"), new Bishop(WHITE));
-        grid.put(new Field("d8"), new Queen(WHITE));
-        grid.put(new Field("e8"), new King(WHITE));
-        grid.put(new Field("f8"), new Bishop(WHITE));
-        grid.put(new Field("g8"), new Knight(WHITE));
-        grid.put(new Field("h8"), new Rook(WHITE));
+        grid.put(new Field("a8"), new Rook(BLACK));
+        grid.put(new Field("b8"), new Knight(BLACK));
+        grid.put(new Field("c8"), new Bishop(BLACK));
+        grid.put(new Field("d8"), new Queen(BLACK));
+        grid.put(new Field("e8"), new King(BLACK));
+        grid.put(new Field("f8"), new Bishop(BLACK));
+        grid.put(new Field("g8"), new Knight(BLACK));
+        grid.put(new Field("h8"), new Rook(BLACK));
 
-        grid.put(new Field("a7"), new Pawn(WHITE));
-        grid.put(new Field("b7"), new Pawn(WHITE));
-        grid.put(new Field("c7"), new Pawn(WHITE));
-        grid.put(new Field("d7"), new Pawn(WHITE));
-        grid.put(new Field("e7"), new Pawn(WHITE));
-        grid.put(new Field("f7"), new Pawn(WHITE));
-        grid.put(new Field("g7"), new Pawn(WHITE));
-        grid.put(new Field("h7"), new Pawn(WHITE));
+        grid.put(new Field("a7"), new Pawn(BLACK));
+        grid.put(new Field("b7"), new Pawn(BLACK));
+        grid.put(new Field("c7"), new Pawn(BLACK));
+        grid.put(new Field("d7"), new Pawn(BLACK));
+        grid.put(new Field("e7"), new Pawn(BLACK));
+        grid.put(new Field("f7"), new Pawn(BLACK));
+        grid.put(new Field("g7"), new Pawn(BLACK));
+        grid.put(new Field("h7"), new Pawn(BLACK));
 
 
-        grid.put(new Field("a1"), new Rook(BLACK));
-        grid.put(new Field("b1"), new Knight(BLACK));
-        grid.put(new Field("c1"), new Bishop(BLACK));
-        grid.put(new Field("d1"), new Queen(BLACK));
-        grid.put(new Field("e1"), new King(BLACK));
-        grid.put(new Field("f1"), new Bishop(BLACK));
-        grid.put(new Field("g1"), new Knight(BLACK));
-        grid.put(new Field("h1"), new Rook(BLACK));
+        grid.put(new Field("a1"), new Rook(WHITE));
+        grid.put(new Field("b1"), new Knight(WHITE));
+        grid.put(new Field("c1"), new Bishop(WHITE));
+        grid.put(new Field("d1"), new Queen(WHITE));
+        grid.put(new Field("e1"), new King(WHITE));
+        grid.put(new Field("f1"), new Bishop(WHITE));
+        grid.put(new Field("g1"), new Knight(WHITE));
+        grid.put(new Field("h1"), new Rook(WHITE));
 
-        grid.put(new Field("a2"), new Pawn(BLACK));
-        grid.put(new Field("b2"), new Pawn(BLACK));
-        grid.put(new Field("c2"), new Pawn(BLACK));
-        grid.put(new Field("d2"), new Pawn(BLACK));
-        grid.put(new Field("e2"), new Pawn(BLACK));
-        grid.put(new Field("f2"), new Pawn(BLACK));
-        grid.put(new Field("g2"), new Pawn(BLACK));
-        grid.put(new Field("h2"), new Pawn(BLACK));
+        grid.put(new Field("a2"), new Pawn(WHITE));
+        grid.put(new Field("b2"), new Pawn(WHITE));
+        grid.put(new Field("c2"), new Pawn(WHITE));
+        grid.put(new Field("d2"), new Pawn(WHITE));
+        grid.put(new Field("e2"), new Pawn(WHITE));
+        grid.put(new Field("f2"), new Pawn(WHITE));
+        grid.put(new Field("g2"), new Pawn(WHITE));
+        grid.put(new Field("h2"), new Pawn(WHITE));
 
         return new Grid(grid);
     }
