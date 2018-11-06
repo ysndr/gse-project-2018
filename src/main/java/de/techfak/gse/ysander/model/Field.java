@@ -21,9 +21,9 @@ public class Field {
         }
     }
 
-    Field(String coord) {
-        this.x = Grid.getIndexX(coord.charAt(0));
-        this.y = Grid.getIndexY(coord.charAt(1));
+    Field(String coord) throws InvalidFieldException {
+        this(Grid.getIndexX(coord.charAt(0)),
+            Grid.getIndexY(coord.charAt(1)));
     }
 
     /**
