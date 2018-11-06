@@ -55,7 +55,7 @@ public final class Grid {
         }
 
         HashMap<Field,Figure> gridCopy = new HashMap<>(this.grid);
-        gridCopy.replace(move.getTo(), startFigure);
+        gridCopy.put(move.getTo(), startFigure);
         gridCopy.remove(move.getFrom());
         return new Grid(gridCopy);
     }
