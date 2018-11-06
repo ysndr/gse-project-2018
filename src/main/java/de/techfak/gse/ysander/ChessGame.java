@@ -22,7 +22,6 @@ public class ChessGame {
             try {
                 state = State.fromFEN(args[0]);
             } catch (FENParseException e) {
-                System.err.println(e.getReason());
                 System.exit(e.getErrorCode());
             }
         }
