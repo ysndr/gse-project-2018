@@ -4,19 +4,15 @@ import de.techfak.gse.ysander.model.Field;
 
 public class GameInterruptedException extends ChessGameException {
 
+    private static final int ERROR_CODE = 0;
     private static final String REASON = "Player interrupted the game";
 
-    /**
-     * Returns the exceptions error code.
-     *
-     * @return error code
-     */
-    @Override
-    public int getErrorCode() {
-        return 0;
+    public GameInterruptedException() {
+        super(ERROR_CODE, REASON);
     }
 
-    public String getReason() {
-        return REASON;
+    public GameInterruptedException(Throwable cause) {
+        super(ERROR_CODE, REASON, cause);
     }
+
 }

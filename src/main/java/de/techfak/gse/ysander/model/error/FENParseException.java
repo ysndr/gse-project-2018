@@ -8,13 +8,11 @@ public class FENParseException extends ChessGameException {
     private static final int ERROR_CODE = 100;
     private static final String REASON = "FEN invalid";
 
-    @Override
-    public int getErrorCode() {
-        return ERROR_CODE;
+    public FENParseException() {
+        super(ERROR_CODE, REASON);
     }
 
-    @Override
-    public String getReason() {
-        return REASON;
+    public FENParseException(Throwable cause) {
+        super(ERROR_CODE, REASON, cause);
     }
 }
