@@ -1,10 +1,10 @@
 package de.techfak.gse.ysander.view;
 
 
+import java.util.List;
+
 import de.techfak.gse.ysander.model.Move;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
-
-import java.util.List;
 
 public interface MovesInput {
 

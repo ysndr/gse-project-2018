@@ -6,6 +6,7 @@ package de.techfak.gse.ysander.model.error;
 public class FENParseException extends ChessGameException {
 
     private static final int ERROR_CODE = 100;
+
     private static final String REASON = "FEN invalid";
 
     public FENParseException() {

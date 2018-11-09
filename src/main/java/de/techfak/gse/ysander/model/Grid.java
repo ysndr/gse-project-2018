@@ -1,13 +1,12 @@
 package de.techfak.gse.ysander.model;
 
+import java.util.*;
+
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
 import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.*;
-
-import java.util.*;
-import java.util.concurrent.BlockingDeque;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color.BLACK;
 import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
@@ -18,6 +17,11 @@ import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
 public final class Grid {
 
     public static final int GRID_SIZE = 8;
+
+    public static final String Y_KEYS = "87654321";
+
+    public static final String X_KEYS = "abcdefgh";
+
     private static final Figure[] FIGURES = {
         new Rook(WHITE), new Rook(BLACK),
         new Knight(WHITE), new Knight(BLACK),
@@ -29,8 +33,6 @@ public final class Grid {
         new Rook(WHITE), new Rook(BLACK),
         new Pawn(WHITE), new Pawn(BLACK)
     };
-    public static final String Y_KEYS = "87654321";
-    public static final String X_KEYS = "abcdefgh";
 
     /**
      * Our internal representation of the grid.
@@ -41,28 +43,9 @@ public final class Grid {
         this.grid = grid;
     }
 
-    public Grid applyMove(Move move, Figure.Color currentPlayer)
-        throws NoFigureOnFieldException, NotPlayersTurnException {
-
-        Figure startFigure = grid.get(move.getFrom());
-
-        if (startFigure == null) {
-            throw new NoFigureOnFieldException(move.getFrom());
-        }
-
-        if (startFigure.color() != currentPlayer) {
-            throw new NotPlayersTurnException(startFigure.color());
-        }
-
-        HashMap<Field,Figure> gridCopy = new HashMap<>(this.grid);
-        gridCopy.put(move.getTo(), startFigure);
-        gridCopy.remove(move.getFrom());
-        return new Grid(gridCopy);
-    }
-
-
     /**
      * Convert fields char represented index into absolut int coordinate on grid
+     *
      * @param key field key in x
      * @return x index
      */
@@ -72,6 +55,7 @@ public final class Grid {
 
     /**
      * Convert fields char represented index into absolut int coordinate on grid
+     *
      * @param key field key in y
      * @return y index
      */
@@ -79,9 +63,9 @@ public final class Grid {
         return Y_KEYS.indexOf(key);
     }
 
-
     /**
      * Creates a preconfigured grd with the default common setup.
+     *
      * @return a setup grid
      */
     static Grid defaultGrid() {
@@ -136,7 +120,9 @@ public final class Grid {
      */
     public static Grid fromFEN(String fen) throws FENParseException {
         String[] rows = fen.split("/");
-        if (rows.length < GRID_SIZE) throw new FENParseException();
+        if (rows.length < GRID_SIZE) {
+            throw new FENParseException();
+        }
 
         Map<Field, Figure> grid = new HashMap<>();
         Map<Character, Figure> mapping = new HashMap<>();
@@ -162,21 +148,42 @@ public final class Grid {
                     throw new FENParseException();
                 }
 
-                 processed++;
+                processed++;
             }
-            if (processed != GRID_SIZE) throw new FENParseException();
+            if (processed != GRID_SIZE) {
+                throw new FENParseException();
+            }
         }
 
         return new Grid(grid);
     }
 
+    public Grid applyMove(Move move, Figure.Color currentPlayer)
+        throws NoFigureOnFieldException, NotPlayersTurnException {
+
+        Figure startFigure = grid.get(move.getFrom());
+
+        if (startFigure == null) {
+            throw new NoFigureOnFieldException(move.getFrom());
+        }
+
+        if (startFigure.color() != currentPlayer) {
+            throw new NotPlayersTurnException(startFigure.color());
+        }
+
+        HashMap<Field, Figure> gridCopy = new HashMap<>(this.grid);
+        gridCopy.put(move.getTo(), startFigure);
+        gridCopy.remove(move.getFrom());
+        return new Grid(gridCopy);
+    }
+
     String toFEN() {
         List<String> rows = new ArrayList<>();
 
-        for (String y: Y_KEYS.split("")) {
+        for (String y : Y_KEYS.split("")) {
             int empty = 0;
             StringBuilder row = new StringBuilder();
-            for (String x: X_KEYS.split("")) {
+            for (String x : X_KEYS.split("")) {
                 Field field = new Field(x + y);
                 Figure fig = grid.get(field);
 
@@ -207,8 +214,12 @@ public final class Grid {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Grid grid1 = (Grid) o;
         return Objects.equals(grid, grid1.grid);
     }
@@ -217,7 +228,6 @@ public final class Grid {
     public int hashCode() {
         return Objects.hash(grid);
     }
-
 
 
 }

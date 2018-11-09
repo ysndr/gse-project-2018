@@ -1,12 +1,9 @@
 package de.techfak.gse.ysander;
 
 import de.techfak.gse.ysander.controller.ChessController;
-import de.techfak.gse.ysander.model.Grid;
 import de.techfak.gse.ysander.model.State;
-import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.view.Cli;
-import de.techfak.gse.ysander.view.View;
 
 /**
  * The main Gameclass.

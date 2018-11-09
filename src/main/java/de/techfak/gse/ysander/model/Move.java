@@ -1,9 +1,9 @@
 package de.techfak.gse.ysander.model;
 
+import java.util.Objects;
+
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
-
-import java.util.Objects;
 
 /**
  * Move wraps the origin and target field of a move
@@ -11,6 +11,7 @@ import java.util.Objects;
 public final class Move {
 
     private final Field from;
+
     private final Field to;
 
     public Move(Field from, Field to) {
@@ -19,7 +20,7 @@ public final class Move {
     }
 
 
-    public static  Move fromString(String move) throws InvalidMoveException {
+    public static Move fromString(String move) throws InvalidMoveException {
         String[] fields = move.trim().split("-");
 
         if (fields.length != 2) {
@@ -32,7 +33,7 @@ public final class Move {
             from = new Field(fields[0]);
             to = new Field(fields[1]);
         } catch (InvalidFieldException e) {
-             throw new InvalidMoveException();
+            throw new InvalidMoveException();
         }
 
         // TODO: NoFigureMoved exception to be thrown here already?
@@ -50,11 +51,15 @@ public final class Move {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Move move = (Move) o;
         return Objects.equals(from, move.from) &&
-            Objects.equals(to, move.to);
+               Objects.equals(to, move.to);
     }
 
     @Override

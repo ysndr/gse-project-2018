@@ -5,18 +5,17 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.GameInterruptedException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
-import de.techfak.gse.ysander.view.MovesInput;
-import de.techfak.gse.ysander.view.Output;
 import de.techfak.gse.ysander.view.RawInput;
 import de.techfak.gse.ysander.view.View;
-
-import java.util.List;
-import java.util.stream.Collector;
 
 public class ChessController<V extends View<ChessGameException> & RawInput> {
 
 
     private State state;
+
+    public ChessController(V view) {
+        this(view, State.defaultState());
+    }
 
     public ChessController(V view, State startState) {
 
@@ -45,12 +44,6 @@ public class ChessController<V extends View<ChessGameException> & RawInput> {
             o.display(state);
         });
     }
-
-    public ChessController(V view) {
-        this(view, State.defaultState());
-    }
-
-
 
 
 }

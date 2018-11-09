@@ -1,14 +1,13 @@
 package de.techfak.gse.ysander.view;
 
-import de.techfak.gse.ysander.model.State;
-import de.techfak.gse.ysander.model.error.ChessGameException;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import java.util.Scanner;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.error.ChessGameException;
 
 
 public class Cli implements Output<State>, View<ChessGameException>, RawInput {
@@ -16,9 +15,10 @@ public class Cli implements Output<State>, View<ChessGameException>, RawInput {
     private final Scanner scanner;
 
 
-
     private BiConsumer<ChessGameException, Output<State>> exceptionCB = (e, o) -> {};
+
     private BiConsumer<String, Output<State>> rawInputCB = (m, o) -> {};
+
     private Consumer<Output<State>> onInitCB = (o) -> {};
 
     public Cli() {
@@ -44,7 +44,6 @@ public class Cli implements Output<State>, View<ChessGameException>, RawInput {
     public void display(State state) {
         System.out.println(state.toFEN());
     }
-
 
 
     public void start() {

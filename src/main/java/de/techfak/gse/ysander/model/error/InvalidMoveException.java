@@ -2,6 +2,7 @@ package de.techfak.gse.ysander.model.error;
 
 public class InvalidMoveException extends ChessGameException {
     private static final int ERROR_CODE = 101;
+
     private static final String REASON = "Invalid move";
 
 

@@ -1,9 +1,9 @@
 package de.techfak.gse.ysander.model.figures;
 
 
-import de.techfak.gse.ysander.model.error.FENParseException;
-
 import java.util.Objects;
+
+import de.techfak.gse.ysander.model.error.FENParseException;
 
 /**
  * The abstract figure class.
@@ -47,8 +47,12 @@ public abstract class Figure {
      * @return the figures symbolic representation (must take its color into consideration)
      */
     public char symbol() {
-        if (this.color == Color.WHITE) return symbolWhite;
-        if (this.color == Color.BLACK) return  symbolBlack;
+        if (this.color == Color.WHITE) {
+            return symbolWhite;
+        }
+        if (this.color == Color.BLACK) {
+            return symbolBlack;
+        }
         return '·';
     }
 
@@ -62,12 +66,16 @@ public abstract class Figure {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Figure figure = (Figure) o;
         return symbolBlack == figure.symbolBlack &&
-            symbolWhite == figure.symbolWhite &&
-            color == figure.color;
+               symbolWhite == figure.symbolWhite &&
+               color == figure.color;
     }
 
     @Override
@@ -84,6 +92,7 @@ public abstract class Figure {
 
 
         private static final String COLOR_STRING_BLACK = "b";
+
         private static final String COLOR_STRING_WHITE = "w";
 
         /**
@@ -94,8 +103,12 @@ public abstract class Figure {
          * @throws FENParseException if `fen` is no valid color representation
          */
         public static Color fromFEN(String fen) throws FENParseException {
-            if (fen.equals(COLOR_STRING_BLACK)) return BLACK;
-            if (fen.equals(COLOR_STRING_WHITE)) return WHITE;
+            if (fen.equals(COLOR_STRING_BLACK)) {
+                return BLACK;
+            }
+            if (fen.equals(COLOR_STRING_WHITE)) {
+                return WHITE;
+            }
             throw new FENParseException();
         }
 
