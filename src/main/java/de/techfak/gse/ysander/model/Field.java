@@ -53,10 +53,16 @@ public class Field {
     /**
      * Creates a canonical representation of the field as string.
      *
-     * @return coordinate String
+     * @return coordinate String or {@code "<undefined>"}
      */
     String toCoords() {
-        return ("" + Grid.X_KEYS.charAt(this.x) + Grid.Y_KEYS.charAt(this.y));
+
+        try {
+            return ("" + Grid.X_KEYS.charAt(this.x) + Grid.Y_KEYS.charAt(this.y));
+        } catch (IndexOutOfBoundsException e) {
+            return "<undefined>";
+        }
+
     }
 
     @Override
