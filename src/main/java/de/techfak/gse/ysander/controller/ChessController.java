@@ -8,6 +8,11 @@ import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.view.RawInput;
 import de.techfak.gse.ysander.view.View;
 
+/**
+ * Main controller managing the the control flow between
+ * input -> model -> output.
+ * @param <V>
+ */
 public class ChessController<V extends View<ChessGameException> & RawInput> {
 
 
@@ -17,6 +22,12 @@ public class ChessController<V extends View<ChessGameException> & RawInput> {
         this(view, State.defaultState());
     }
 
+    /**
+     * Contructs a chess controller with a given view and a start state.
+     *
+     * @param view the view to attach to
+     * @param startState to begin with
+     */
     public ChessController(V view, State startState) {
 
         state = startState;

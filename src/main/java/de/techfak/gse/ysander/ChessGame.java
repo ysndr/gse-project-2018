@@ -10,7 +10,10 @@ import de.techfak.gse.ysander.view.Cli;
  * This will manage a sstate and the games control flow
  */
 public class ChessGame {
-
+    /**
+     * The mai entry method.
+     * @param args command line arguments
+     */
     public static void main(final String... args) {
 
         State state = State.defaultState();

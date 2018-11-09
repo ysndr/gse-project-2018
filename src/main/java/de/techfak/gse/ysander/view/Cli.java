@@ -9,17 +9,19 @@ import java.util.function.Consumer;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 
-
+/**
+ * Implementation for Input, Output and view View based on stdin/-out.
+ */
 public class Cli implements Output<State>, View<ChessGameException>, RawInput {
 
     private final Scanner scanner;
 
 
-    private BiConsumer<ChessGameException, Output<State>> exceptionCB = (e, o) -> {};
+    private BiConsumer<ChessGameException, Output<State>> exceptionCB = (e, o) -> { };
 
-    private BiConsumer<String, Output<State>> rawInputCB = (m, o) -> {};
+    private BiConsumer<String, Output<State>> rawInputCB = (m, o) -> { };
 
-    private Consumer<Output<State>> onInitCB = (o) -> {};
+    private Consumer<Output<State>> onInitCB = (o) -> { };
 
     public Cli() {
         this.scanner = new Scanner(System.in);
@@ -45,7 +47,10 @@ public class Cli implements Output<State>, View<ChessGameException>, RawInput {
         System.out.println(state.toFEN());
     }
 
-
+    /**
+     * Start the CLI view by looping over the inputs and calling the
+     * {@link #rawInputCB} on each inputs line.
+     */
     public void start() {
         onInitCB.accept(this);
         new BufferedReader(new InputStreamReader(System.in))

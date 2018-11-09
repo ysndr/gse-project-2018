@@ -5,6 +5,8 @@ package de.techfak.gse.ysander.model.error;
  */
 public class ChessGameException extends RuntimeException {
 
+    private static final int GENERAL_ERROR_CODE = 255;
+
     private final int ERROR_CODE;
 
     /**
@@ -17,18 +19,18 @@ public class ChessGameException extends RuntimeException {
 
     /**
      * Constructs a new chess game exception with the specified detail message
-     * and error code {@code 255}
+     * and error code {@code 255}.
      *
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
     public ChessGameException(String message) {
-        this(255, message);
+        this(GENERAL_ERROR_CODE, message);
     }
 
     /**
      * Constructs a new chess game exception with the specified detail message
-     * and error code;
+     * and error code.
      *
      * @param code    the error code of this exception. can be retrieved
      *                with a call to {@link #getErrorCode()}

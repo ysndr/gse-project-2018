@@ -13,6 +13,11 @@ public class FENParseException extends ChessGameException {
         super(ERROR_CODE, REASON);
     }
 
+    /**
+     * Delegate cause to parent {@link ChessGameException}.
+     *
+     * @param cause why the error was thrown
+     */
     public FENParseException(Throwable cause) {
         super(ERROR_CODE, REASON, cause);
     }

@@ -34,6 +34,8 @@ public final class Grid {
         new Pawn(WHITE), new Pawn(BLACK)
     };
 
+    // Constructors
+
     /**
      * Our internal representation of the grid.
      */
@@ -43,25 +45,6 @@ public final class Grid {
         this.grid = grid;
     }
 
-    /**
-     * Convert fields char represented index into absolut int coordinate on grid
-     *
-     * @param key field key in x
-     * @return x index
-     */
-    public static int getIndexX(char key) {
-        return X_KEYS.indexOf(key);
-    }
-
-    /**
-     * Convert fields char represented index into absolut int coordinate on grid
-     *
-     * @param key field key in y
-     * @return y index
-     */
-    public static int getIndexY(char key) {
-        return Y_KEYS.indexOf(key);
-    }
 
     /**
      * Creates a preconfigured grd with the default common setup.
@@ -111,6 +94,44 @@ public final class Grid {
         return new Grid(grid);
     }
 
+
+    // Accessors
+
+    /**
+     * Convert fields char represented index into absolut int coordinate on the
+     * grid.
+     *
+     * @param key field key in x
+     * @return x index
+     */
+    public static int getIndexX(char key) {
+        return X_KEYS.indexOf(key);
+    }
+
+    /**
+     * Convert fields char represented index into absolut int coordinate on the
+     * grid.
+     *
+     * @param key field key in y
+     * @return y index
+     */
+    public static int getIndexY(char key) {
+        return Y_KEYS.indexOf(key);
+    }
+
+
+    /**
+     * Extract the fields with figures on them.
+     *
+     * @return a list of pairs of field and figure
+     */
+    public Set<Map.Entry<Field, Figure>> getFigures() {
+        return this.grid.entrySet();
+    }
+
+
+    // Converters
+
     /**
      * Creates a Grid from a given String in FENotation.
      *
@@ -158,25 +179,11 @@ public final class Grid {
         return new Grid(grid);
     }
 
-    public Grid applyMove(Move move, Figure.Color currentPlayer)
-        throws NoFigureOnFieldException, NotPlayersTurnException {
-
-        Figure startFigure = grid.get(move.getFrom());
-
-        if (startFigure == null) {
-            throw new NoFigureOnFieldException(move.getFrom());
-        }
-
-        if (startFigure.color() != currentPlayer) {
-            throw new NotPlayersTurnException(startFigure.color());
-        }
-
-        HashMap<Field, Figure> gridCopy = new HashMap<>(this.grid);
-        gridCopy.put(move.getTo(), startFigure);
-        gridCopy.remove(move.getFrom());
-        return new Grid(gridCopy);
-    }
-
+    /**
+     * Generate FEN notation from internal representation.
+     *
+     * @return FEN notated String
+     */
     String toFEN() {
         List<String> rows = new ArrayList<>();
 
@@ -208,8 +215,36 @@ public final class Grid {
         return String.join("/", rows);
     }
 
-    public Set<Map.Entry<Field, Figure>> getFigures() {
-        return this.grid.entrySet();
+    // Modifiers
+
+    /**
+     * Apply a move onto the field by trying to make the move and if successul
+     * return a new Grid with the new configuration.
+     *
+     * @param move the move to apply
+     * @param currentPlayer the player currently in turn
+     * @return new grid with changed configuration
+     * @throws NoFigureOnFieldException if the move references an empty field
+     * @throws NotPlayersTurnException if the given user tries to move a figure
+     * of its opponents color
+     */
+    public Grid applyMove(Move move, Figure.Color currentPlayer)
+        throws NoFigureOnFieldException, NotPlayersTurnException {
+
+        Figure startFigure = grid.get(move.getFrom());
+
+        if (startFigure == null) {
+            throw new NoFigureOnFieldException(move.getFrom());
+        }
+
+        if (startFigure.color() != currentPlayer) {
+            throw new NotPlayersTurnException(startFigure.color());
+        }
+
+        HashMap<Field, Figure> gridCopy = new HashMap<>(this.grid);
+        gridCopy.put(move.getTo(), startFigure);
+        gridCopy.remove(move.getFrom());
+        return new Grid(gridCopy);
     }
 
     @Override

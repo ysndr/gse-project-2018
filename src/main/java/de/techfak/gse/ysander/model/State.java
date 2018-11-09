@@ -23,6 +23,14 @@ public final class State {
         this.color = color;
     }
 
+    /**
+     * Converts a FEN string into a state where the players color is included in
+     * the string.
+     *
+     * @param fen the fen string
+     * @return A state representing the FEN
+     * @throws FENParseException if the fen could not be parsed
+     */
     public static State fromFEN(String fen) throws FENParseException {
 
         String[] split = fen.trim().split(" ");
@@ -33,6 +41,17 @@ public final class State {
         return State.fromFEN(split[0], split[1]);
     }
 
+    // Modifiers
+
+    /**
+     * Converts a FEN string into a state where the players color is <b>not</b>
+     * included in the string.
+     *
+     * @param grid  the grid part of the fen
+     * @param color the initial players color
+     * @return A state representing the FEN
+     * @throws FENParseException if the fen could not be parsed
+     */
     public static State fromFEN(String grid, String color) throws FENParseException {
 
         return State.defaultState()
@@ -48,10 +67,22 @@ public final class State {
         return new State(grid, this.color);
     }
 
+    // Converters
+
     public State withColor(Color color) {
         return new State(this.grid, color);
     }
 
+    /**
+     * Applies a {@link Move} onto the current State. If successful returns a
+     * new State from containing the new current player in turn and the new Grid
+     * configuration.
+     *
+     * @param move the move to apply.
+     * @return Updated state
+     * @throws InvalidMoveException if the move can not be performed for some
+     * reason.
+     */
     public State applyMove(Move move) throws InvalidMoveException {
 
         if (move.getFrom().equals(move.getTo())) {
@@ -65,6 +96,11 @@ public final class State {
 
     }
 
+    /**
+     * Converts state into FEN notation.
+     *
+     * @return FEN notated State
+     */
     public String toFEN() {
         return String.format("%s %s", this.grid.toFEN(), this.color.toFEN());
     }

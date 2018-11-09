@@ -112,6 +112,12 @@ public abstract class Figure {
             throw new FENParseException();
         }
 
+        /**
+         * turns the color into fen notation (possibly different from a more
+         * meaningful string representation).
+         *
+         * @return FEN notation of the color
+         */
         public String toFEN() {
             return (this == Color.BLACK) ? COLOR_STRING_BLACK : COLOR_STRING_WHITE;
         }
