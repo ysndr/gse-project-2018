@@ -1,4 +1,4 @@
-package de.techfak.gse.ysander.view;
+package de.techfak.gse.ysander.communication.output;
 
 /**
  * The generic Output interface.
