@@ -4,6 +4,7 @@ import de.techfak.gse.ysander.communication.drivers.RawDriver;
 import de.techfak.gse.ysander.communication.drivers.RawInputDriver;
 import de.techfak.gse.ysander.controller.ChessController;
 import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.view.CLI;
 
@@ -18,11 +19,11 @@ public class ChessGame {
      */
     public static void main(final String... args) {
 
-        State state = State.defaultState();
+        State state = StateBuilder.defaultState();
 
         if (args.length > 0) {
             try {
-                state = State.fromFEN(args[0]);
+                state = StateBuilder.fromFEN(args[0]);
             } catch (FENParseException e) {
                 System.exit(e.getErrorCode());
             }
