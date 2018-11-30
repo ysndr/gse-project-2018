@@ -1,5 +1,6 @@
 package de.techfak.gse.ysander.controller;
 
+import de.techfak.gse.ysander.communication.drivers.PlayerInputDriver;
 import de.techfak.gse.ysander.communication.drivers.RawInputDriver;
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
 import de.techfak.gse.ysander.communication.handlers.MoveHandler;
@@ -28,6 +29,7 @@ public class ChessController implements MoveHandler, ErrorHandler {
         this.view = view;
         this.rawInput = rawInput;
         this.state = initialState;
+
 
         view.setOnInitCB(() -> view.display(initialState));
         rawInput.setErrorHandler(this);
