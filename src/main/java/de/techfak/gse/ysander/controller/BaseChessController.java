@@ -5,20 +5,20 @@ import de.techfak.gse.ysander.communication.output.Output;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
-import de.techfak.gse.ysander.view.View;
 
-public abstract class AbstractChessController implements ErrorHandler {
+public abstract class BaseChessController implements ErrorHandler {
+
 
     protected Output<State> output;
     protected State state;
 
-    AbstractChessController(final Output<State> output, final State initialState) {
+    BaseChessController(final Output<State> output, final State initialState) {
         this.output = output;
         this.state = initialState;
     }
 
-    AbstractChessController(final State initialState) {
-        this((s) -> {}, initialState);
+    BaseChessController(final State initialState) {
+     this((s) -> {}, initialState);
     }
 
     public void setOutput(final Output<State> output) {

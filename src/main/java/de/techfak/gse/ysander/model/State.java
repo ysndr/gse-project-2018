@@ -32,6 +32,10 @@ public final class State {
         this.selection = selection;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     // Modifiers
     State withGrid(Grid grid) {
         return new StateBuilder().setGrid(grid).setColor(this.color).setSelection(this.selection).createState();
