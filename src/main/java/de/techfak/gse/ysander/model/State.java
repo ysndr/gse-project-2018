@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.error.NoFigureMovedException;
+import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
+import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
+import de.techfak.gse.ysander.model.figures.Figure;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color;
 
@@ -30,11 +33,11 @@ public final class State {
     }
 
     // Modifiers
-    public State withGrid(Grid grid) {
+    State withGrid(Grid grid) {
         return new StateBuilder().setGrid(grid).setColor(this.color).setSelection(this.selection).createState();
     }
 
-    public State withColor(Color color) {
+    State withColor(Color color) {
         return new StateBuilder().setGrid(this.grid).setColor(color).setSelection(this.selection).createState();
     }
 
@@ -50,7 +53,7 @@ public final class State {
     /**
      * Applies a {@link Move} onto the current State. If successful returns a
      * new State from containing the new current player in turn and the new Grid
-     * configuration.
+     * configuration. Invalidates the current selected fiels.
      *
      * @param move the move to apply.
      * @return Updated state
@@ -70,8 +73,45 @@ public final class State {
 
     }
 
+    /**
+     * Tries to apply a field onto the current state by setting the currently
+     * selected field, resetting it called with the same field again and calls
+     * apply move if a selecte field is set and is called with adifferent one.
+     *
+     * Also validates the figure on field against current players color and
+     * existence
+     *
+     * @param field the field that should be (un)selected or with which a move
+     *              should be committed
+     * @return a new state that contains either a selected field and an
+     * unchanged grid, no selection or no selection and a changed grid
+     * @throws InvalidMoveException if the move of both fields combined  or the
+     * to be selected field itself is somehow invalid
+     */
+    public State applyField(Field field) throws InvalidMoveException {
 
+        // unselect if field requested again
+        if (field.equals(this.selection)) {
+            return this.withoutSelection();
+        }
 
+        if (this.selection != null) {
+            return this.applyMove(new Move(this.selection, field));
+        }
+
+        Optional<Figure> onField = grid.getFigureOnField(field);
+
+        if(!onField.isPresent()) {
+            throw new NoFigureOnFieldException(field);
+        }
+
+        if (onField.get().color() != this.color) {
+            throw new NotPlayersTurnException(onField.get().color());
+        }
+
+        return this.withSelection(field);
+
+    }
 
 
     // Converters
