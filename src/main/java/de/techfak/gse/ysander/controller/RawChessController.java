@@ -36,6 +36,7 @@ public class RawChessController extends BaseChessController implements MoveHandl
             this.handleError(e);
             return;
         }
+        super.setState(newState);
         output.display(newState);
     }
 }

@@ -51,7 +51,7 @@ public class MultiplayerChessController extends BaseChessController implements P
         }else {
             playerBlack.startTurn(newState);
         }
-
+        super.setState(newState);
         output.display(newState);
     }
 
