@@ -1,12 +1,14 @@
 package de.techfak.gse.ysander.model;
 
+import java.util.Optional;
+
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.figures.Figure;
 
 public class StateBuilder {
     private Grid grid;
-
     private Figure.Color color;
+    private Field selection;
 
     /**
      * Converts a FEN string into a state where the players color is included in
@@ -65,6 +67,11 @@ public class StateBuilder {
         return this;
     }
 
+    StateBuilder setSelection(final Field selection) {
+        this.selection = selection;
+        return this;
+    }
+
     public State createState() {
         if (grid == null) {
             grid = Grid.defaultGrid();
@@ -72,7 +79,7 @@ public class StateBuilder {
         if (color == null) {
             color = Figure.Color.WHITE;
         }
-        return new State(grid, color);
+        return new State(grid, color, selection);
     }
 
 

@@ -1,6 +1,7 @@
 package de.techfak.gse.ysander.model;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.error.NoFigureMovedException;
@@ -15,19 +16,36 @@ public final class State {
 
     private final Grid grid;
     private final Color color;
+    private final Field selection;
+
 
     State(Grid grid, Color color) {
+        this(grid, color, null);
+    }
+
+    State(Grid grid, Color color, Field selection) {
         this.grid = grid;
         this.color = color;
+        this.selection = selection;
     }
 
     // Modifiers
     public State withGrid(Grid grid) {
-        return new StateBuilder().setGrid(grid).setColor(this.color).createState();
+        return new StateBuilder().setGrid(grid).setColor(this.color).setSelection(this.selection).createState();
     }
+
     public State withColor(Color color) {
-        return new StateBuilder().setGrid(this.grid).setColor(color).createState();
+        return new StateBuilder().setGrid(this.grid).setColor(color).setSelection(this.selection).createState();
     }
+
+    private State withSelection(Field selection) {
+        return new StateBuilder().setGrid(this.grid).setColor(this.color).setSelection(selection).createState();
+    }
+
+    private State withoutSelection() {
+        return new StateBuilder().setGrid(this.grid).setColor(this.color).createState();
+    }
+
 
     /**
      * Applies a {@link Move} onto the current State. If successful returns a
@@ -53,6 +71,9 @@ public final class State {
     }
 
 
+
+
+
     // Converters
     /**
      * Converts state into FEN notation.
@@ -66,22 +87,21 @@ public final class State {
 
     // Util
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        State state = (State) o;
+        final State state = (State) o;
         return Objects.equals(grid, state.grid) &&
-               color == state.color;
+               color == state.color &&
+               Objects.equals(selection, state.selection);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(grid, color);
+        return Objects.hash(grid, color, selection);
     }
-
-
 }
