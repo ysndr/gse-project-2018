@@ -49,14 +49,34 @@ class StateTest {
                      StateBuilder.defaultState().applyMove(move).toFEN());
 
         assertThrows(NotPlayersTurnException.class,
-            () -> StateBuilder.defaultState().withColor(Figure.Color.BLACK).applyMove(move));
+                     () -> StateBuilder.defaultState().withColor(Figure.Color.BLACK).applyMove(move));
 
         assertThrows(InvalidMoveException.class,
-            () -> StateBuilder.defaultState().applyMove(invalid));
+                     () -> StateBuilder.defaultState().applyMove(invalid));
 
         assertThrows(NoFigureMovedException.class,
-            () -> StateBuilder.defaultState().applyMove(noop));
+                     () -> StateBuilder.defaultState().applyMove(noop));
+    }
 
+    @Test
+    void applyField() {
+        State state = StateBuilder.defaultState();
+
+        assertEquals(new StateBuilder().setSelection(new Field("a1")).createState(),
+                     state.applyField(new Field("a1")));
+
+        assertThrows(NotPlayersTurnException.class,
+                     () -> state.applyField(new Field("a8")));
+
+        assertThrows(NoFigureOnFieldException.class,
+                     () -> state.applyField(new Field("a4")));
+
+        State selected = state.applyField(new Field("a1"));
+
+        assertEquals(state.applyMove(new Move(new Field("a1"), new Field("a3"))),
+                     selected.applyField(new Field("a3")));
+
+        assertEquals(state, selected.applyField(new Field("a1")));
 
     }
 
