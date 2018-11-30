@@ -24,7 +24,7 @@ public class CombinedChessController extends BaseChessController implements Play
         super(view, null);
 
         if(!raw.state.equals(multiplayer.state)) {
-            throw new RuntimeException("The state on both subcontrollers must be the same");
+            throw new IllegalArgumentException("The state on both subcontrollers must be the same");
         }
 
         this.raw = raw;

@@ -3,7 +3,7 @@ package de.techfak.gse.ysander.controller;
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 
-public class GlobalErrorEmergencyExit implements ErrorHandler {
+public final class GlobalErrorEmergencyExit implements ErrorHandler {
     private static GlobalErrorEmergencyExit ourInstance = new GlobalErrorEmergencyExit();
 
     private GlobalErrorEmergencyExit() {
