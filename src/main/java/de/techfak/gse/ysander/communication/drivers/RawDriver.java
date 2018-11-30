@@ -38,5 +38,6 @@ public class RawDriver implements RawInputDriver {
                 return;
             }
         }
+        moveHandler.handleMove(null);
     }
 }

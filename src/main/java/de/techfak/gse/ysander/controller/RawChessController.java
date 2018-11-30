@@ -29,6 +29,13 @@ public class RawChessController extends BaseChessController implements MoveHandl
 
     @Override
     public void handleMove(Move move) {
+        // end of series of moves
+        // TODO: think about it, is this the right way?
+        if (move == null) {
+             output.display(state);
+             return;
+        }
+
         State newState;
         try {
              newState = state.applyMove(move);
@@ -37,6 +44,5 @@ public class RawChessController extends BaseChessController implements MoveHandl
             return;
         }
         super.setState(newState);
-        output.display(newState);
     }
 }
