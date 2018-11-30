@@ -2,7 +2,8 @@ package de.techfak.gse.ysander;
 
 import de.techfak.gse.ysander.communication.drivers.RawDriver;
 import de.techfak.gse.ysander.communication.drivers.RawInputDriver;
-import de.techfak.gse.ysander.controller.ChessController;
+import de.techfak.gse.ysander.controller.GlobalErrorEmergencyExit;
+import de.techfak.gse.ysander.controller.RawChessController;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.error.FENParseException;
@@ -25,7 +26,7 @@ public class ChessGame {
             try {
                 state = StateBuilder.fromFEN(args[0]);
             } catch (FENParseException e) {
-                System.exit(e.getErrorCode());
+                GlobalErrorEmergencyExit.getInstance().handleError(e);
             }
         }
 
@@ -33,7 +34,7 @@ public class ChessGame {
         RawInputDriver rawDriver = new RawDriver();
         view.setRawInputHandler(rawDriver);
 
-        ChessController controller = new ChessController(view, rawDriver, state);
+        RawChessController controller = new RawChessController(view, rawDriver, state);
         view.start();
     }
 

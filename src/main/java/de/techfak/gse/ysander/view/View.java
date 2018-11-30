@@ -11,7 +11,7 @@ import de.techfak.gse.ysander.model.State;
 public interface View extends Output<State> {
 
     /**
-     * Start the view whatever that means for the implementation.
+     * Start the output whatever that means for the implementation.
      * - Should call the {@code onInitCB} to notify listeners about its creation
      */
     void start();
