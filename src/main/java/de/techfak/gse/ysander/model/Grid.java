@@ -167,7 +167,7 @@ public final class Grid {
                     continue;
                 }
                 try {
-                    grid.put(new Field(processed, r), mapping.get(field).copy());
+                    grid.put(new Field(processed, r), mapping.get(field));
                 } catch (InvalidFieldException e) {
                     throw new FENParseException();
                 }

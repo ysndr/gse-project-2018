@@ -36,14 +36,6 @@ public abstract class Figure {
 
 
     /**
-     * Creates a copy of the Figure.
-     *
-     * @return a copy of itself
-     */
-    public abstract Figure copy();
-
-
-    /**
      * @return the figures symbolic representation (must take its color into consideration)
      */
     public char symbol() {

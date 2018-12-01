@@ -9,13 +9,4 @@ public class King extends Figure {
         super(color, 'k', 'K');
     }
 
-    /**
-     * Creates a copy of the Figure.
-     *
-     * @return a copy of itself
-     */
-    @Override
-    public Figure copy() {
-        return new King(this.color());
-    }
 }

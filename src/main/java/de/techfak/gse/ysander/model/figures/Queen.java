@@ -9,13 +9,4 @@ public class Queen extends Figure {
         super(color, 'q', 'Q');
     }
 
-    /**
-     * Creates a copy of the Figure.
-     *
-     * @return a copy of itself
-     */
-    @Override
-    public Figure copy() {
-        return new Queen(this.color());
-    }
 }

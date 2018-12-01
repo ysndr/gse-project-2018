@@ -9,13 +9,4 @@ public class Pawn extends Figure {
         super(color, 'p', 'P');
     }
 
-    /**
-     * Creates a copy of the Figure.
-     *
-     * @return a copy of itself
-     */
-    @Override
-    public Figure copy() {
-        return new Pawn(this.color());
-    }
 }
