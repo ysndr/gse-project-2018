@@ -24,7 +24,7 @@ import de.techfak.gse.ysander.model.figures.Figure;
 
 public class ChessTile extends AnchorPane {
 
-    private final static Color SELECTED = Color.rgb(23, 23, 223, 200);
+    private final static Color SELECTED = Color.rgb(23, 23, 223, 0.8);
     private final static Color UNSELECTED = Color.rgb(23, 23, 223, 0);
 
 
@@ -91,7 +91,7 @@ public class ChessTile extends AnchorPane {
     }
 
     private void update(final State value) {
-        if (value.getSelection().equals(this.fieldKey)) {
+        if (this.fieldKey.equals(value.getSelection())) {
             this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
         } else {
             this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
