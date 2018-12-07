@@ -17,7 +17,7 @@ public class ChessUIController implements Output<State>, FieldInput {
     private GridPane grid;
     private ObjectProperty<State> state = new SimpleObjectProperty<>();
 
-    private FieldInputHandler fieldInputHandler = (f) -> {System.out.println(f);};
+    private FieldInputHandler fieldInputHandler = (f) -> {};
 
 
     @FXML
@@ -30,18 +30,7 @@ public class ChessUIController implements Output<State>, FieldInput {
                 tile.onClickProperty().addListener((observable, old, current) -> {
                     this.fieldInputHandler.handleFieldInput(current);
                 });
-
             });
-
-
-
-/*
-
-            .forEach(tile -> tile.setOnMouseClicked(mouseEvent -> {
-                int y  = GridPane.getRowIndex(tile);
-                int x = GridPane.getColumnIndex(tile);
-            }));
-            */
     }
 
     @Override

@@ -20,8 +20,14 @@ import javafx.scene.paint.Color;
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
+import de.techfak.gse.ysander.model.figures.Figure;
 
 public class ChessTile extends AnchorPane {
+
+    private final static Color SELECTED = Color.rgb(23, 23, 223, 200);
+    private final static Color UNSELECTED = Color.rgb(23, 23, 223, 0);
+
+
 
     private final ReadOnlyIntegerWrapper y = new ReadOnlyIntegerWrapper();
 
@@ -77,6 +83,29 @@ public class ChessTile extends AnchorPane {
         )));
 
         this.tileInput.setOnMouseClicked(event -> this.onClick.setValue(this.fieldKey));
+        this.stateProperty().addListener((observable, old, value) -> {
+            this.update(value);
+        });
+
+
+    }
+
+    private void update(final State value) {
+        if (value.getSelection().equals(this.fieldKey)) {
+            this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
+        } else {
+            this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+
+
+        if (!value.getGrid().getFigureOnField(fieldKey).isPresent()) {
+            this.tileInput.setText("");
+        } else {
+            Figure fig = value.getGrid().getFigureOnField(fieldKey).get();
+            this.tileInput.setText(String.valueOf(fig.utf8Symbol()));
+        }
+
+
     }
 
 

@@ -1,8 +1,10 @@
 package de.techfak.gse.ysander.model.figures;
 
 
+import java.util.List;
 import java.util.Objects;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.error.FENParseException;
 
 /**
@@ -44,6 +46,16 @@ public abstract class Figure {
         }
         if (this.color == Color.BLACK) {
             return symbolBlack;
+        }
+        return '·';
+    }
+
+    public char utf8Symbol() {
+        if (this.color == Color.WHITE) {
+            return 'w';
+        }
+        if (this.color == Color.BLACK) {
+            return 'b';
         }
         return '·';
     }

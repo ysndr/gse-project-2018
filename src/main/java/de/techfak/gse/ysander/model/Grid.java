@@ -129,7 +129,7 @@ public final class Grid {
         return this.grid.entrySet();
     }
 
-    Optional<Figure> getFigureOnField(Field field) {
+    public Optional<Figure> getFigureOnField(Field field) {
         return Optional.ofNullable(this.grid.get(field));
     }
 
