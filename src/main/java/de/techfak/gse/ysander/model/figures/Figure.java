@@ -29,11 +29,25 @@ public abstract class Figure {
      */
     private final char symbolWhite;
 
+    /**
+     * The figures Symbol if black.
+     */
+    private final char utf8symbolBlack;
 
-    Figure(Color color, char symbolBlack, char symbolWhite) {
+    /**
+     * The figures Symbol if white.
+     */
+    private final char utf8symbolWhite;
+
+
+
+
+    Figure(Color color, char symbolBlack, char symbolWhite, char utf8symbolBlack, char utf8symbolWhite) {
         this.color = color;
         this.symbolBlack = symbolBlack;
         this.symbolWhite = symbolWhite;
+        this.utf8symbolBlack = utf8symbolBlack;
+        this.utf8symbolWhite = utf8symbolWhite;
     }
 
 
@@ -52,10 +66,10 @@ public abstract class Figure {
 
     public char utf8Symbol() {
         if (this.color == Color.WHITE) {
-            return 'w';
+            return this.utf8symbolWhite;
         }
         if (this.color == Color.BLACK) {
-            return 'b';
+            return this.utf8symbolBlack;
         }
         return '·';
     }

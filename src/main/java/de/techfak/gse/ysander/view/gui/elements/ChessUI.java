@@ -12,10 +12,10 @@ public class ChessUI extends BorderPane {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/gui/elements/ChessUI.fxml"));
         loader.setRoot(this);
-        this.controller = loader.getController();
 
         try {
             loader.load();
+            this.controller = loader.getController();
         } catch (IOException exc) {
             throw new RuntimeException(exc);
         }

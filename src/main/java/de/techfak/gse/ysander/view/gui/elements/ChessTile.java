@@ -71,7 +71,6 @@ public class ChessTile extends AnchorPane {
 
     }
 
-
     @FXML
     public void initialize() {
 
