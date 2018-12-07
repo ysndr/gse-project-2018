@@ -17,97 +17,97 @@
    <center>
       <GridPane fx:id="grid" gridLinesVisible="true" hgap="1.0" vgap="1.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="25.0" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints minWidth="-Infinity" prefWidth="50.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
+          <RowConstraints minHeight="-Infinity" prefHeight="50.0" />
         </rowConstraints>
          <children>
-           <ChessTile y="5" x="0" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-           <ChessTile y="5" x="0" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+           <ChessTile x="0" y="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="1" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="2" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="3" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="4" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="5" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="6" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="0" y="7" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-           <ChessTile y="5" x="1" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+           <ChessTile x="1" y="0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="1" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="2" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="3" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="4" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="5" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="6" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="1" y="7" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="2" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
-           <ChessTile y="5" x="2" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+           <ChessTile x="2" y="0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="1" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="2" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="3" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="4" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="5" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="6" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="2" y="7" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="3" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="6" GridPane.columnIndex="3"/>
-           <ChessTile y="5" x="3" GridPane.rowIndex="7" GridPane.columnIndex="3" />
+           <ChessTile x="3" y="0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="1" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="2" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="3" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="4" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="5" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="6" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="3" y="7" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="4" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="2" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="3" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="4" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="5" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="6" GridPane.columnIndex="4"/>
-           <ChessTile y="5" x="4" GridPane.rowIndex="7" GridPane.columnIndex="4"/>
+           <ChessTile x="4" y="0" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="1" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="2" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="3" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="4" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="5" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="6" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="4" y="7" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="5" GridPane.rowIndex="0" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="2" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="3" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="4" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="5" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="6" GridPane.columnIndex="5"/>
-           <ChessTile y="5" x="5" GridPane.rowIndex="7" GridPane.columnIndex="5"/>
+           <ChessTile x="5" y="0" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="1" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="2" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="3" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="4" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="5" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="6" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="5" y="7" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="6" GridPane.rowIndex="0" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="2" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="3" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="4" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="5" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="6" GridPane.columnIndex="6"/>
-           <ChessTile y="5" x="6" GridPane.rowIndex="7" GridPane.columnIndex="6"/>
+           <ChessTile x="6" y="0" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="1" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="2" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="3" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="4" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="5" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="6" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="6" y="7" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
 
-           <ChessTile y="5" x="7" GridPane.rowIndex="0" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="1" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="2" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="3" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="4" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="5" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="6" GridPane.columnIndex="7"/>
-           <ChessTile y="5" x="7" GridPane.rowIndex="7" GridPane.columnIndex="7"/>
+           <ChessTile minHeight="0.0" minWidth="0.0" x="7" y="0" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="1" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="2" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="3" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="4" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="5" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="6" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+           <ChessTile x="7" y="7" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -139,7 +139,7 @@
       <VBox alignment="BOTTOM_LEFT" BorderPane.alignment="BOTTOM_CENTER">
          <children>
             <Label text="Current Player:" />
-            <ImageView fx:id="CurrentPlayerIndicator" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="currentPlayerIndicator" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <BorderPane.margin>
             <Insets bottom="30.0" left="10.0" right="10.0" top="10.0" />
