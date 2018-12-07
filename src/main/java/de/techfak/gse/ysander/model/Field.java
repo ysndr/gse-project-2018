@@ -31,7 +31,7 @@ public class Field {
      * @param y vertical coordinate of the field
      * @throws InvalidFieldException if the field is outside the grid
      */
-    Field(int x, int y) throws InvalidFieldException {
+    public Field(int x, int y) throws InvalidFieldException {
         this.x = x;
         this.y = y;
 
