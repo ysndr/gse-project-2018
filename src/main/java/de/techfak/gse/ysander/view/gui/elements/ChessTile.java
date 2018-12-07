@@ -81,7 +81,11 @@ public class ChessTile extends AnchorPane {
 
         )));
 
-        this.tileInput.setOnMouseClicked(event -> this.onClick.setValue(this.fieldKey));
+        this.tileInput.setCache(false);
+        this.tileInput.setOnMouseClicked(event -> {
+            this.onClick.setValue(null);
+            this.onClick.setValue(this.fieldKey);
+        });
         this.stateProperty().addListener((observable, old, value) -> {
             this.update(value);
         });
@@ -92,8 +96,9 @@ public class ChessTile extends AnchorPane {
     private void update(final State value) {
         if (this.fieldKey.equals(value.getSelection())) {
             this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
+            this.tileInput.getBackground();
         } else {
-            this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
+            this.tileInput.setBackground(new Background(new BackgroundFill(UNSELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
         }
 
 

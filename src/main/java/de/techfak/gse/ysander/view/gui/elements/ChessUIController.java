@@ -38,6 +38,9 @@ public class ChessUIController implements View, FieldInput {
             .forEach(tile -> {
                 tile.stateProperty().bind(state);
                 tile.onClickProperty().addListener((observableValue, field, t1) -> {
+                    if (t1 == null) {
+                        return;
+                    }
                     inputHandler.handleFieldInput(t1);
                 });
             });
