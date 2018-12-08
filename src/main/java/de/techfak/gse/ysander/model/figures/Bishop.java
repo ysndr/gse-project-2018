@@ -1,6 +1,7 @@
 package de.techfak.gse.ysander.model.figures;
 
 import java.util.List;
+import java.util.Objects;
 
 import de.techfak.gse.ysander.model.Field;
 
@@ -9,20 +10,46 @@ import de.techfak.gse.ysander.model.Field;
  */
 public class Bishop extends Figure {
 
+    private final String BLACK = "b";
+    private final String WHITE = "B";
+    private final String NAME = "bishop";
+
+
     public Bishop(Color color) {
         super(color);
     }
 
     @Override
     public String symbol() {
-        return this.color() == Color.WHITE ? "b" : "B";
+        return this.color() == Color.BLACK ? BLACK : WHITE;
     }
 
     @Override
     public String canonicalName() {
-        return "bishop";
+        return NAME;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Bishop)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        final Bishop bishop = (Bishop) o;
+        return Objects.equals(BLACK, bishop.BLACK) &&
+               Objects.equals(WHITE, bishop.WHITE) &&
+               Objects.equals(NAME, bishop.NAME);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), BLACK, WHITE, NAME);
+    }
 }
 
 

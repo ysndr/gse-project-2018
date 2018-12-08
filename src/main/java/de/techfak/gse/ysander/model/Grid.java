@@ -1,6 +1,7 @@
 package de.techfak.gse.ysander.model;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
@@ -156,11 +157,11 @@ public final class Grid {
             String row = rows[r];
             int processed = 0;
             for (int i = 0; i < row.length(); i++) {
-                char field = row.charAt(i);
+                String field = String.valueOf(row.charAt(i));
 
                 if (!mapping.containsKey(field)) {
                     try {
-                        processed += Integer.parseInt(String.valueOf(field));
+                        processed += Integer.parseInt(field);
                     } catch (NumberFormatException e) {
                         throw new FENParseException();
                     }
@@ -267,5 +268,10 @@ public final class Grid {
         return Objects.hash(grid);
     }
 
-
+    @Override
+    public String toString() {
+        return "Grid{" +
+               "grid=" + grid +
+               '}';
+    }
 }

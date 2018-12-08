@@ -1,6 +1,8 @@
 package de.techfak.gse.ysander.model.figures;
 
 
+import java.util.Objects;
+
 import de.techfak.gse.ysander.model.error.FENParseException;
 
 /**
@@ -82,4 +84,20 @@ public abstract class Figure {
         }
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Figure)) {
+            return false;
+        }
+        final Figure figure = (Figure) o;
+        return color == figure.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
+    }
 }
