@@ -5,13 +5,22 @@ import java.util.List;
 import de.techfak.gse.ysander.model.Field;
 
 /**
- * The King figure.
+ * The King figures.
  */
 public class King extends Figure {
 
     public King(Color color) {
-        super(color, 'k', 'K', '\u265A', '\u2654');
+        super(color);
     }
 
+    @Override
+    public String symbol() {
+        return this.color() == Color.WHITE ? "k" : "K";
+    }
+
+    @Override
+    public String canonicalName() {
+        return "king";
+    }
 }
 

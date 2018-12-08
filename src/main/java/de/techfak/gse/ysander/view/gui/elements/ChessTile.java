@@ -24,9 +24,8 @@ import de.techfak.gse.ysander.model.figures.Figure;
 
 public class ChessTile extends AnchorPane {
 
-    private final static Color SELECTED = Color.rgb(23, 23, 223, 0.8);
-    private final static Color UNSELECTED = Color.rgb(23, 23, 223, 0);
-
+    private static final  String SELECTED = "selected";
+    private static final  String UNSELECTED = "unselected";
 
 
     private final ReadOnlyIntegerWrapper y = new ReadOnlyIntegerWrapper();
@@ -52,6 +51,7 @@ public class ChessTile extends AnchorPane {
         loader.setRoot(this);
         loader.setController(this);
         loader.setClassLoader(this.getClass().getClassLoader());
+
 
         this.y.set(y);
         this.x.set(x);
@@ -81,7 +81,6 @@ public class ChessTile extends AnchorPane {
 
         )));
 
-        this.tileInput.setCache(false);
         this.tileInput.setOnMouseClicked(event -> {
             this.onClick.setValue(null);
             this.onClick.setValue(this.fieldKey);
@@ -94,22 +93,20 @@ public class ChessTile extends AnchorPane {
     }
 
     private void update(final State value) {
+        this.tileInput.getStyleClass().clear();
         if (this.fieldKey.equals(value.getSelection())) {
-            this.tileInput.setBackground(new Background(new BackgroundFill(SELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
-            this.tileInput.getBackground();
+            this.tileInput.getStyleClass().add(SELECTED);
         } else {
-            this.tileInput.setBackground(new Background(new BackgroundFill(UNSELECTED, CornerRadii.EMPTY, Insets.EMPTY)));
+            this.tileInput.getStyleClass().add(UNSELECTED);
         }
 
-
-        if (!value.getGrid().getFigureOnField(fieldKey).isPresent()) {
-            this.tileInput.setText("");
-        } else {
+        if (value.getGrid().getFigureOnField(fieldKey).isPresent()) {
             Figure fig = value.getGrid().getFigureOnField(fieldKey).get();
-            this.tileInput.setText(String.valueOf(fig.utf8Symbol()));
+            this.tileInput.getStyleClass().addAll(
+                "figure_image",
+                fig.canonicalName(),
+                fig.color().toString());
         }
-
-
     }
 
 

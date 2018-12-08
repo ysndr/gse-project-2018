@@ -123,7 +123,7 @@ public final class Grid {
     /**
      * Extract the fields with figures on them.
      *
-     * @return a list of pairs of field and figure
+     * @return a list of pairs of field and figures
      */
     public Set<Map.Entry<Field, Figure>> getFigures() {
         return this.grid.entrySet();
@@ -149,7 +149,7 @@ public final class Grid {
         }
 
         Map<Field, Figure> grid = new HashMap<>();
-        Map<Character, Figure> mapping = new HashMap<>();
+        Map<String, Figure> mapping = new HashMap<>();
         Arrays.asList(FIGURES).forEach((Figure f) -> mapping.put(f.symbol(), f));
 
         for (int r = 0; r < rows.length; r++) {
@@ -228,7 +228,7 @@ public final class Grid {
      * @param currentPlayer the player currently in turn
      * @return new grid with changed configuration
      * @throws NoFigureOnFieldException if the move references an empty field
-     * @throws NotPlayersTurnException if the given user tries to move a figure
+     * @throws NotPlayersTurnException if the given user tries to move a figures
      * of its opponents color
      */
     public Grid applyMove(Move move, Figure.Color currentPlayer)

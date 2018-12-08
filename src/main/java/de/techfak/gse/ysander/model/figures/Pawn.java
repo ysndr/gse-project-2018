@@ -5,14 +5,23 @@ import java.util.List;
 import de.techfak.gse.ysander.model.Field;
 
 /**
- * The Pawn figure.
+ * The Pawn figures.
  */
 public class Pawn extends Figure {
 
     public Pawn(Color color) {
-        super(color, 'p', 'P', '\u265F', '\u2659');
+        super(color);
     }
 
+    @Override
+    public String symbol() {
+        return this.color() == Color.WHITE ? "p" : "P";
+    }
+
+    @Override
+    public String canonicalName() {
+        return "pawn";
+    }
 }
 
 

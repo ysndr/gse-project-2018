@@ -1,0 +1,54 @@
+
+#tileInput.selected {
+  -fx-background-color: #00aae0f0 !important;
+}
+
+#tileInput.unselected {
+  -fx-background-color: #0000d00d ;
+}
+
+
+#tileInput.figure_image {
+  -fx-background-position: center;
+  -fx-background-size: 50%;
+  -fx-background-repeat: no-repeat;
+}
+
+#tileInput.black.bishop {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/bishop_black.png);
+}
+#tileInput.black.king {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/king_black.png);
+}
+#tileInput.black.queen {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/queen_black.png);
+}
+#tileInput.black.rook {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/rook_black.png);
+}
+#tileInput.black.pawn {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/pawn_black.png);
+}
+#tileInput.black.knight {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/knight_black.png);
+}
+#tileInput.white.bishop {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/bishop_white.png);
+}
+#tileInput.white.king {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/king_white.png);
+}
+#tileInput.white.queen {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/queen_white.png);
+}
+#tileInput.white.rook {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/rook_white.png);
+}
+#tileInput.white.pawn {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/pawn_white.png);
+}
+#tileInput.white.knight {
+  -fx-background-image: url(/de/techfak/gse/ysander/model/figures/knight_white.png);
+}
+
+

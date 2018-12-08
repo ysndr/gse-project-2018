@@ -91,7 +91,7 @@ public final class State {
      * selected field, resetting it called with the same field again and calls
      * apply move if a selecte field is set and is called with adifferent one.
      *
-     * Also validates the figure on field against current players color and
+     * Also validates the figures on field against current players color and
      * existence
      *
      * @param field the field that should be (un)selected or with which a move

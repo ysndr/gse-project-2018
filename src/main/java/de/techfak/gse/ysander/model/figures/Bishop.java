@@ -5,12 +5,22 @@ import java.util.List;
 import de.techfak.gse.ysander.model.Field;
 
 /**
- * The Bishop figure.
+ * The Bishop figures.
  */
 public class Bishop extends Figure {
 
     public Bishop(Color color) {
-        super(color, 'b', 'B', '\u265D', '\u2657');
+        super(color);
+    }
+
+    @Override
+    public String symbol() {
+        return this.color() == Color.WHITE ? "b" : "B";
+    }
+
+    @Override
+    public String canonicalName() {
+        return "bishop";
     }
 
 }
