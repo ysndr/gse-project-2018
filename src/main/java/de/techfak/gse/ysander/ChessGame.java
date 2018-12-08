@@ -73,6 +73,9 @@ public class ChessGame extends Application {
                 new FieldDriver(new Player(Figure.Color.WHITE), root.getController()),
                 new FieldDriver(new Player(Figure.Color.BLACK), root.getController()));
 
+            root.getController().setLoadHandler(controller);
+            root.getController().setSaveHandler(controller);
+
             root.getController().start();
 
 

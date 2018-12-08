@@ -1,5 +1,7 @@
 package de.techfak.gse.ysander.communication.inputs;
 
+import javafx.stage.Window;
+
 public interface LoadHandler {
-    void loadState();
+    void loadState(Window parent);
 }

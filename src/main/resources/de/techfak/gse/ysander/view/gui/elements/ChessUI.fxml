@@ -120,17 +120,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Load" fx:id="menuLoad" />
+              <MenuItem mnemonicParsing="false" text="Save"  fx:id="menuSave"/>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Game">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Start" fx:id="menuStart"/>
             </items>
           </Menu>
         </menus>
@@ -139,11 +135,10 @@
    <right>
       <VBox alignment="BOTTOM_LEFT" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Label text="Current Player:" />
-            <ImageView fx:id="currentPlayerIndicator" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../model/figures/king_white.png" />
-               </image></ImageView>
+           <Label fx:id="labelState"/>
+           <Label text="Current Player:" />
+           <ImageView fx:id="currentPlayerIndicator" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true"
+                      preserveRatio="true"/>
          </children>
          <BorderPane.margin>
             <Insets bottom="30.0" left="10.0" right="10.0" top="10.0" />

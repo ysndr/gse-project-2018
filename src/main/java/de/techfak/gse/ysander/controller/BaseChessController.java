@@ -3,12 +3,16 @@ package de.techfak.gse.ysander.controller;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import javax.swing.*;
+
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
 import de.techfak.gse.ysander.communication.inputs.LoadHandler;
@@ -49,17 +53,22 @@ public abstract class BaseChessController implements ErrorHandler, SaveHandler, 
 
     void setState(State state) {
         this.state = state;
+
     }
 
 
     @Override
-    public void saveState() {
-        final FileDialog fileDialog = this.getFileDialog();
-        fileDialog.setMode(FileDialog.SAVE);
-        fileDialog.setTitle("Save FEN");
-        fileDialog.setVisible(true);
+    public void saveState(Window parent) {
 
-        Path path = FileSystems.getDefault().getPath(fileDialog.getFile());
+        final FileChooser chooser = this.getFileChooser();
+        chooser.setTitle("Save FEN");
+        File file = chooser.showSaveDialog(parent);
+
+        if (file == null) {
+            return;
+        }
+        Path path = file.toPath();
+
         try {
             BufferedWriter writer = Files.newBufferedWriter(path);
             writer.write(state.toFEN());
@@ -69,24 +78,22 @@ public abstract class BaseChessController implements ErrorHandler, SaveHandler, 
         }
     }
 
-    private FileDialog getFileDialog() {
-        final JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        final FileDialog fileDialog = new FileDialog(frame, "Save FEN");
-        fileDialog.setFilenameFilter((dir, name) -> name.endsWith(".fen"));
-        fileDialog.setFile("*.fen");
-        return fileDialog;
+    private FileChooser getFileChooser() {
+        final FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "fen"));
+        return chooser;
     }
 
     @Override
-    public void loadState() {
-        final FileDialog fileDialog = this.getFileDialog();
-        fileDialog.setMode(FileDialog.LOAD);
-        fileDialog.setTitle("Load FEN");
-        fileDialog.setVisible(true);
+    public void loadState(Window parent) {
+        final FileChooser chooser = this.getFileChooser();
+        chooser.setTitle("Load FEN");
+        File file = chooser.showOpenDialog(parent);
+        if (file == null) {
+            return;
+        }
+        Path path = file.toPath();
 
-        Path path = FileSystems.getDefault().getPath(fileDialog.getFile());
         try {
             BufferedReader reader = Files.newBufferedReader(path);
             String fen = reader.readLine();

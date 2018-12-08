@@ -32,10 +32,20 @@ public class MultiplayerChessController extends BaseChessController implements P
         playerWhite.setPlayerInputHandler(this);
         playerBlack.setPlayerInputHandler(this);
 
-        playerWhite.startTurn(state); //TODO: remove
+        this.setState(initialState);
     }
 
 
+    @Override
+    void setState(final State state) {
+        super.setState(state);
+        if (this.state.getColor().equals(Figure.Color.WHITE)) {
+            playerWhite.startTurn(this.state);
+        } else if (this.state.getColor().equals((Figure.Color.BLACK))) {
+            playerBlack.startTurn(this.state);
+        }
+
+    }
 
     @Override
     public void handlePlayerInput(final Field input, final Player player) {

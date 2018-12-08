@@ -93,6 +93,8 @@ public class ChessTile extends AnchorPane {
     }
 
     private void update(final State value) {
+
+
         this.tileInput.getStyleClass().clear();
         if (this.fieldKey.equals(value.getSelection())) {
             this.tileInput.getStyleClass().add(SELECTED);
