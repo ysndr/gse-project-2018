@@ -1,4 +1,4 @@
-package de.techfak.gse.ysander.view.gui.elements;
+package de.techfak.gse.ysander.view.fx.elements;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ public class ChessUI extends BorderPane {
     private  final ChessUIController controller;
     public ChessUI() {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/gui/elements/ChessUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessUI.fxml"));
         loader.setRoot(this);
 
         try {

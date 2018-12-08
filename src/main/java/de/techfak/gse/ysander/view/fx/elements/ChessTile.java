@@ -1,4 +1,4 @@
-package de.techfak.gse.ysander.view.gui.elements;
+package de.techfak.gse.ysander.view.fx.elements;
 
 import java.io.IOException;
 
@@ -47,7 +47,7 @@ public class ChessTile extends AnchorPane {
 
     public ChessTile(@NamedArg("y") int y, @NamedArg("x") int x) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/gui/elements/ChessTile.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessTile.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         loader.setClassLoader(this.getClass().getClassLoader());

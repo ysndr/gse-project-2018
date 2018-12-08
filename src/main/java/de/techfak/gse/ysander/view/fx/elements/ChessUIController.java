@@ -1,18 +1,10 @@
-package de.techfak.gse.ysander.view.gui.elements;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+package de.techfak.gse.ysander.view.fx.elements;
 
 
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -22,8 +14,6 @@ import javafx.stage.Window;
 
 import de.techfak.gse.ysander.communication.handlers.FieldInputHandler;
 import de.techfak.gse.ysander.communication.inputs.*;
-import de.techfak.gse.ysander.communication.output.Output;
-import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.view.View;
@@ -48,6 +38,7 @@ public class ChessUIController implements View, FieldInput, LoadInput, SaveInput
     private Runnable onStartCB = () ->  {
         this.menuStart.setDisable(true);
         this.grid.setDisable(false);
+        this.labelState.setText("started");
     };
     private Window parent;
     private FieldInputHandler inputHandler = (f) -> {};

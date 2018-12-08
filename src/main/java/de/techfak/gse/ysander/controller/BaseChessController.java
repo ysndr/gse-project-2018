@@ -80,7 +80,7 @@ public abstract class BaseChessController implements ErrorHandler, SaveHandler, 
 
     private FileChooser getFileChooser() {
         final FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "fen"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "*.fen"));
         return chooser;
     }
 
