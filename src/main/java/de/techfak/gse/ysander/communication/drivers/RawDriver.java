@@ -6,10 +6,15 @@ import de.techfak.gse.ysander.model.Move;
 import de.techfak.gse.ysander.model.error.GameInterruptedException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 
+/**
+ * Converts a line of raw input into a consecutively handled list of Move
+ * inputs.
+ */
 public class RawDriver implements RawInputDriver {
 
-    private MoveHandler moveHandler = move -> {};
-    private ErrorHandler errorHandler = e -> {};
+    private MoveHandler moveHandler = move -> { };
+
+    private ErrorHandler errorHandler = e -> { };
 
 
     @Override
@@ -19,7 +24,7 @@ public class RawDriver implements RawInputDriver {
 
     @Override
     public void setErrorHandler(final ErrorHandler errorHandler) {
-        this.errorHandler= errorHandler;
+        this.errorHandler = errorHandler;
     }
 
     @Override

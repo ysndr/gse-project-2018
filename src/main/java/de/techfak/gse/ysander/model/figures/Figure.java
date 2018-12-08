@@ -26,6 +26,9 @@ public abstract class Figure {
      */
     public abstract String symbol();
 
+    /**
+     * @return the canonical of this figure
+     */
     public abstract String canonicalName();
 
     /**
@@ -33,6 +36,23 @@ public abstract class Figure {
      */
     public Color color() {
         return this.color;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Figure)) {
+            return false;
+        }
+        final Figure figure = (Figure) o;
+        return color == figure.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
     }
 
     /**
@@ -82,22 +102,5 @@ public abstract class Figure {
                 return "white";
             }
         }
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Figure)) {
-            return false;
-        }
-        final Figure figure = (Figure) o;
-        return color == figure.color;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(color);
     }
 }

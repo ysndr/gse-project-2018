@@ -1,9 +1,6 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.List;
 import java.util.Objects;
-
-import de.techfak.gse.ysander.model.Field;
 
 /**
  * The Rook figures.

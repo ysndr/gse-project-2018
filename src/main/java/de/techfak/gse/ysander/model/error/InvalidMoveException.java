@@ -29,7 +29,7 @@ public class InvalidMoveException extends ChessGameException {
      * providing extra capability of overriding the exact error code and
      * message.
      *
-     * @param code of the child exception
+     * @param code    of the child exception
      * @param message of the child exception
      */
     protected InvalidMoveException(int code, String message) {

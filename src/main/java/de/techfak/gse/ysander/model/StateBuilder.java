@@ -1,13 +1,17 @@
 package de.techfak.gse.ysander.model;
 
-import java.util.Optional;
-
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.figures.Figure;
 
+/**
+ * A builder class to create states by setting all values for a state or
+ * converting from fen notation String.
+ */
 public class StateBuilder {
     private Grid grid;
+
     private Figure.Color color;
+
     private Field selection;
 
     /**
@@ -45,7 +49,8 @@ public class StateBuilder {
 
     /**
      * Creates a default state with default {@link Grid} and White as starting
-     * player
+     * player.
+     *
      * @return default state
      */
     public static State defaultState() {
@@ -53,25 +58,43 @@ public class StateBuilder {
     }
 
     /**
-     * Set the grid
-     * @param grid
-     * @return
+     * Set the grid.
+     *
+     * @param grid to be set
+     * @return this builder for fluent chaining
      */
     public StateBuilder setGrid(final Grid grid) {
         this.grid = grid;
         return this;
     }
 
+    /**
+     * Set the current players color.
+     *
+     * @param color of the current player
+     * @return this builder for fluent chaining
+     */
     public StateBuilder setColor(final Figure.Color color) {
         this.color = color;
         return this;
     }
 
+    /**
+     * Set current selected Field.
+     *
+     * @param selection
+     * @return this builder for fluent chaining
+     */
     StateBuilder setSelection(final Field selection) {
         this.selection = selection;
         return this;
     }
 
+    /**
+     * Build a full state from gathered information.
+     *
+     * @return packed State
+     */
     public State createState() {
         if (grid == null) {
             grid = Grid.defaultGrid();

@@ -18,7 +18,9 @@ import static de.techfak.gse.ysander.model.figures.Figure.Color;
 public final class State {
 
     private final Grid grid;
+
     private final Color color;
+
     private final Field selection;
 
 
@@ -47,59 +49,51 @@ public final class State {
 
     // Modifiers
     State withGrid(Grid grid) {
-        return new StateBuilder().setGrid(grid).setColor(this.color).setSelection(this.selection).createState();
+        return new StateBuilder()
+            .setGrid(grid)
+            .setColor(this.color)
+            .setSelection(this.selection)
+            .createState();
     }
 
     State withColor(Color color) {
-        return new StateBuilder().setGrid(this.grid).setColor(color).setSelection(this.selection).createState();
+        return new StateBuilder()
+            .setGrid(this.grid)
+            .setColor(color)
+            .setSelection(this.selection)
+            .createState();
     }
 
     private State withSelection(Field selection) {
-        return new StateBuilder().setGrid(this.grid).setColor(this.color).setSelection(selection).createState();
+        return new StateBuilder()
+            .setGrid(this.grid)
+            .setColor(this.color)
+            .setSelection(selection)
+            .createState();
     }
 
     private State withoutSelection() {
-        return new StateBuilder().setGrid(this.grid).setColor(this.color).createState();
+        return new StateBuilder()
+            .setGrid(this.grid)
+            .setColor(this.color)
+            .createState();
     }
 
-
-    /**
-     * Applies a {@link Move} onto the current State. If successful returns a
-     * new State from containing the new current player in turn and the new Grid
-     * configuration. Invalidates the current selected fiels.
-     *
-     * @param move the move to apply.
-     * @return Updated state
-     * @throws InvalidMoveException if the move can not be performed for some
-     * reason.
-     */
-    public State applyMove(Move move) throws InvalidMoveException {
-
-        if (move.getFrom().equals(move.getTo())) {
-            throw new NoFigureMovedException();
-        }
-
-        Grid gridAfterMove = this.grid.applyMove(move, this.color);
-        Color playerAfterMove = (this.color == Color.BLACK) ? Color.WHITE : Color.BLACK;
-
-        return new StateBuilder().setGrid(gridAfterMove).setColor(playerAfterMove).createState();
-
-    }
 
     /**
      * Tries to apply a field onto the current state by setting the currently
      * selected field, resetting it called with the same field again and calls
      * apply move if a selecte field is set and is called with adifferent one.
-     *
+     * <p>
      * Also validates the figures on field against current players color and
-     * existence
+     * existence.
      *
      * @param field the field that should be (un)selected or with which a move
      *              should be committed
      * @return a new state that contains either a selected field and an
      * unchanged grid, no selection or no selection and a changed grid
      * @throws InvalidMoveException if the move of both fields combined  or the
-     * to be selected field itself is somehow invalid
+     *                              to be selected field itself is somehow invalid
      */
     public State applyField(Field field) throws InvalidMoveException {
 
@@ -114,7 +108,7 @@ public final class State {
 
         Optional<Figure> onField = grid.getFigureOnField(field);
 
-        if(!onField.isPresent()) {
+        if (!onField.isPresent()) {
             throw new NoFigureOnFieldException(field);
         }
 
@@ -127,7 +121,32 @@ public final class State {
     }
 
 
+    /**
+     * Applies a {@link Move} onto the current State. If successful returns a
+     * new State from containing the new current player in turn and the new Grid
+     * configuration. Invalidates the current selected fiels.
+     *
+     * @param move the move to apply.
+     * @return Updated state
+     * @throws InvalidMoveException if the move can not be performed for some
+     *                              reason.
+     */
+    public State applyMove(Move move) throws InvalidMoveException {
+
+        if (move.getFrom().equals(move.getTo())) {
+            throw new NoFigureMovedException();
+        }
+
+        Grid gridAfterMove = this.grid.applyMove(move, this.color);
+        Color playerAfterMove = (this.color == Color.BLACK) ? Color.WHITE : Color.BLACK;
+
+        return new StateBuilder().setGrid(gridAfterMove).setColor(playerAfterMove).createState();
+
+    }
+
+
     // Converters
+
     /**
      * Converts state into FEN notation.
      *

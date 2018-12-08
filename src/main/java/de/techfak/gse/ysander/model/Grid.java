@@ -1,7 +1,6 @@
 package de.techfak.gse.ysander.model;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
@@ -120,22 +119,6 @@ public final class Grid {
         return Y_KEYS.indexOf(key);
     }
 
-
-    /**
-     * Extract the fields with figures on them.
-     *
-     * @return a list of pairs of field and figures
-     */
-    public Set<Map.Entry<Field, Figure>> getFigures() {
-        return this.grid.entrySet();
-    }
-
-    public Optional<Figure> getFigureOnField(Field field) {
-        return Optional.ofNullable(this.grid.get(field));
-    }
-
-    // Converters
-
     /**
      * Creates a Grid from a given String in FENotation.
      *
@@ -184,6 +167,27 @@ public final class Grid {
     }
 
     /**
+     * Extract the fields with figures on them.
+     *
+     * @return a list of pairs of field and figures
+     */
+    public Set<Map.Entry<Field, Figure>> getFigures() {
+        return this.grid.entrySet();
+    }
+
+    // Converters
+
+    /**
+     * Tries to find the figure on the given field.
+     *
+     * @param field field to search for figure on it for
+     * @return returns an {@link Optional} filled with the figre or else nothing
+     */
+    public Optional<Figure> getFigureOnField(Field field) {
+        return Optional.ofNullable(this.grid.get(field));
+    }
+
+    /**
      * Generate FEN notation from internal representation.
      *
      * @return FEN notated String
@@ -225,12 +229,12 @@ public final class Grid {
      * Apply a move onto the field by trying to make the move and if successul
      * return a new Grid with the new configuration.
      *
-     * @param move the move to apply
+     * @param move          the move to apply
      * @param currentPlayer the player currently in turn
      * @return new grid with changed configuration
      * @throws NoFigureOnFieldException if the move references an empty field
-     * @throws NotPlayersTurnException if the given user tries to move a figures
-     * of its opponents color
+     * @throws NotPlayersTurnException  if the given user tries to move a figures
+     *                                  of its opponents color
      */
     public Grid applyMove(Move move, Figure.Color currentPlayer)
         throws NoFigureOnFieldException, NotPlayersTurnException {

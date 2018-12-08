@@ -1,22 +1,18 @@
 package de.techfak.gse.ysander.controller;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import javax.swing.*;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
-import de.techfak.gse.ysander.communication.inputs.LoadHandler;
-import de.techfak.gse.ysander.communication.inputs.SaveHandler;
+import de.techfak.gse.ysander.communication.handlers.LoadHandler;
+import de.techfak.gse.ysander.communication.handlers.SaveHandler;
 import de.techfak.gse.ysander.communication.output.Output;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.StateBuilder;
@@ -24,19 +20,23 @@ import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.error.JavaPlatformException;
 
-
+/**
+ * The base of other chess controllers defines common actions main controllers
+ * need to be able to handle.
+ */
 public abstract class BaseChessController implements ErrorHandler, SaveHandler, LoadHandler {
 
     protected Output<State> output;
+
     protected State state;
+
+    BaseChessController(final State initialState) {
+        this((s) -> { }, initialState);
+    }
 
     BaseChessController(final Output<State> output, final State initialState) {
         this.output = output;
         this.state = initialState;
-    }
-
-    BaseChessController(final State initialState) {
-        this((s) -> {}, initialState);
     }
 
     public void setOutput(final Output<State> output) {
@@ -50,12 +50,6 @@ public abstract class BaseChessController implements ErrorHandler, SaveHandler, 
         }
         GlobalErrorEmergencyExit.getInstance().handleError(e);
     }
-
-    void setState(State state) {
-        this.state = state;
-
-    }
-
 
     @Override
     public void saveState(Window parent) {
@@ -102,8 +96,13 @@ public abstract class BaseChessController implements ErrorHandler, SaveHandler, 
             this.setState(loaded);
             this.output.display(loaded);
         } catch (IOException e) {
-            throw new JavaPlatformException(String.format("Could not save file to %s", path), e);
+            throw new JavaPlatformException(String.format("Could not load file %s", path), e);
         }
+    }
+
+    void setState(State state) {
+        this.state = state;
+
     }
 }
 

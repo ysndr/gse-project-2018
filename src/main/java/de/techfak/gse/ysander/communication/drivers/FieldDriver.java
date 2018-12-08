@@ -8,12 +8,18 @@ import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Player;
 import de.techfak.gse.ysander.model.State;
 
+/**
+ * Connects to a {@link FieldInput} and enriches that.
+ */
 public class FieldDriver implements PlayerInputDriver, FieldInputHandler {
 
     private final Player player;
+
     private final FieldInput input;
-    private PlayerInputHandler output = (f, p) -> {};
-    private ErrorHandler errorHandler = (e) -> {};
+
+    private PlayerInputHandler output = (f, p) -> { };
+
+    private ErrorHandler errorHandler = (e) -> { };
 
     public FieldDriver(final Player player, final FieldInput input) {
         this.player = player;

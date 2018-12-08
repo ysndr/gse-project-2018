@@ -16,6 +16,7 @@ import de.techfak.gse.ysander.view.View;
 public class MultiplayerChessController extends BaseChessController implements PlayerInputHandler {
 
     private final PlayerInputDriver playerWhite;
+
     private final PlayerInputDriver playerBlack;
 
 
@@ -51,14 +52,14 @@ public class MultiplayerChessController extends BaseChessController implements P
     public void handlePlayerInput(final Field input, final Player player) {
         State newState = state;
         try {
-             newState = state.applyField(input);
+            newState = state.applyField(input);
         } catch (InvalidMoveException e) {
             this.handleError(e);
         }
 
         if (newState != null && newState.getColor() == Figure.Color.WHITE) {
             playerWhite.startTurn(newState);
-        }else {
+        } else {
             playerBlack.startTurn(newState);
         }
         super.setState(newState);

@@ -4,6 +4,11 @@ import java.util.Objects;
 
 import de.techfak.gse.ysander.model.figures.Figure;
 
+/**
+ * Maps a Color to a physical Player.
+ * Note: Does not yet do anything besides wrapping a color - quite redundant
+ * I know ¯\_(ツ)_/¯
+ */
 public class Player {
 
     private final Figure.Color color;

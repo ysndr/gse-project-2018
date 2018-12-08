@@ -1,9 +1,6 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.List;
 import java.util.Objects;
-
-import de.techfak.gse.ysander.model.Field;
 
 /**
  * The Bishop figures.
@@ -11,7 +8,9 @@ import de.techfak.gse.ysander.model.Field;
 public class Bishop extends Figure {
 
     private final String BLACK = "b";
+
     private final String WHITE = "B";
+
     private final String NAME = "bishop";
 
 

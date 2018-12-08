@@ -20,7 +20,7 @@ public final class Move {
      * Binds two field into a move.
      *
      * @param from field on which the moves starts
-     * @param to field on which the moves ends
+     * @param to   field on which the moves ends
      */
     public Move(Field from, Field to) {
         this.from = from;
@@ -28,26 +28,8 @@ public final class Move {
     }
 
     /**
-     * Access start field.
-     *
-     * @return start field
-     */
-    public Field getFrom() {
-        return from;
-    }
-
-
-    /**
-     * Access end field.
-     *
-     * @return end field
-     */
-    public Field getTo() {
-        return to;
-    }
-
-    /**
      * Converts the string notation of a move into the Move pair.
+     *
      * @param move the string version of a move
      * @return A move constructed by first extracting fields from the string
      * then combines them into a move
@@ -74,6 +56,23 @@ public final class Move {
         return new Move(from, to);
     }
 
+    /**
+     * Access start field.
+     *
+     * @return start field
+     */
+    public Field getFrom() {
+        return from;
+    }
+
+    /**
+     * Access end field.
+     *
+     * @return end field
+     */
+    public Field getTo() {
+        return to;
+    }
 
     @Override
     public boolean equals(Object o) {

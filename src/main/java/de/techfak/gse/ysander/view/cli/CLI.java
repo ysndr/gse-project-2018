@@ -1,4 +1,4 @@
-package de.techfak.gse.ysander.view;
+package de.techfak.gse.ysander.view.cli;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,10 +6,11 @@ import java.util.Scanner;
 import java.util.function.BiConsumer;
 
 import de.techfak.gse.ysander.communication.handlers.RawInputHandler;
+import de.techfak.gse.ysander.communication.inputs.RawInput;
+import de.techfak.gse.ysander.communication.output.Output;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.ChessGameException;
-import de.techfak.gse.ysander.communication.output.Output;
-import de.techfak.gse.ysander.communication.inputs.RawInput;
+import de.techfak.gse.ysander.view.View;
 
 /**
  * Implementation for Input, Output and view_v1 View based on stdin/-out.
@@ -21,7 +22,7 @@ public class CLI implements View, RawInput {
 
     private BiConsumer<ChessGameException, Output<State>> exceptionCB = (e, o) -> { };
 
-    private RawInputHandler rawInputHandler =  input -> {};
+    private RawInputHandler rawInputHandler = input -> { };
 
     private Runnable onInitCB = () -> { };
 

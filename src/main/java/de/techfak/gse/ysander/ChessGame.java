@@ -1,21 +1,23 @@
 package de.techfak.gse.ysander;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
 import de.techfak.gse.ysander.controller.GlobalErrorEmergencyExit;
-
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.view.cli.CLIApplication;
 import de.techfak.gse.ysander.view.fx.FXApplication;
 
-
+/**
+ * Main Chess Game Class.
+ */
 public class ChessGame {
 
+    /**
+     * Game launch method.
+     * Parses arguments and runs the the kind of Application depending on
+     * {@code --gui} flag
+     * @param args programm args
+     */
     public static void main(String[] args) {
 
         State state = StateBuilder.defaultState();
@@ -49,7 +51,6 @@ public class ChessGame {
         }
 
     }
-
 
 
 }

@@ -22,10 +22,17 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.figures.Figure;
 
+/**
+ * Custom JavaFX element to wrap one tile that can hold a figure and receives
+ * clicks. Further, each tile responsible for showing the correct content.
+ * This is achieved by letting the tile itself know which tile on a chess grid
+ * it represents and binding it to the current (changing) state.
+ */
 public class ChessTile extends AnchorPane {
 
-    private static final  String SELECTED = "selected";
-    private static final  String UNSELECTED = "unselected";
+    private static final String SELECTED = "selected";
+
+    private static final String UNSELECTED = "unselected";
 
 
     private final ReadOnlyIntegerWrapper y = new ReadOnlyIntegerWrapper();
@@ -44,10 +51,16 @@ public class ChessTile extends AnchorPane {
     @FXML
     private AnchorPane background;
 
-
+    /**
+     * Component constructor of the CHessTile.
+     *
+     * @param y position on the chess grid
+     * @param x position on the chess grid
+     */
     public ChessTile(@NamedArg("y") int y, @NamedArg("x") int x) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessTile.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessTile.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         loader.setClassLoader(this.getClass().getClassLoader());
@@ -71,6 +84,9 @@ public class ChessTile extends AnchorPane {
 
     }
 
+    /**
+     * Component initialization. Binds to clicks and state changes.
+     */
     @FXML
     public void initialize() {
 
@@ -92,9 +108,13 @@ public class ChessTile extends AnchorPane {
 
     }
 
+    /**
+     * Performs the updating of this tile by checking if the tile is selected
+     * and what figure is placed on this tile's filed.
+     *
+     * @param value the new state
+     */
     private void update(final State value) {
-
-
         this.tileInput.getStyleClass().clear();
         if (this.fieldKey.equals(value.getSelection())) {
             this.tileInput.getStyleClass().add(SELECTED);
@@ -117,12 +137,16 @@ public class ChessTile extends AnchorPane {
         return x.get();
     }
 
-    public ReadOnlyIntegerProperty xProperty() {
-        return x.getReadOnlyProperty();
-    }
-
     public int getY() {
         return y.get();
+    }
+
+    public ObjectProperty<State> stateProperty() {
+        return state;
+    }
+
+    public ReadOnlyIntegerProperty xProperty() {
+        return x.getReadOnlyProperty();
     }
 
     public ReadOnlyIntegerProperty yProperty() {
@@ -131,10 +155,6 @@ public class ChessTile extends AnchorPane {
 
     public State getState() {
         return state.get();
-    }
-
-    public ObjectProperty<State> stateProperty() {
-        return state;
     }
 
     public Field getOnClick() {

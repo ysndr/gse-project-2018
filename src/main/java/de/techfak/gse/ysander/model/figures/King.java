@@ -1,9 +1,6 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.List;
 import java.util.Objects;
-
-import de.techfak.gse.ysander.model.Field;
 
 /**
  * The King figures.
@@ -15,7 +12,7 @@ public class King extends Figure {
 
     private final String WHITE = "K";
 
-    private final String NAME = "king" ;
+    private final String NAME = "king";
 
     public King(Color color) {
         super(color);

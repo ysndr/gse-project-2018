@@ -5,12 +5,20 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Wrapper class for the whole screen.
+ */
 public class ChessUI extends BorderPane {
 
-    private  final ChessUIController controller;
+    private final ChessUIController controller;
+
+    /**
+     * Component Constructor.
+     */
     public ChessUI() {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/de/techfak/gse/ysander/view/fx/elements/ChessUI.fxml"));
         loader.setRoot(this);
 
         try {

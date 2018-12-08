@@ -32,13 +32,13 @@ public class RawChessController extends BaseChessController implements MoveHandl
         // end of series of moves
         // TODO: think about it, is this the right way?
         if (move == null) {
-             output.display(state);
-             return;
+            output.display(state);
+            return;
         }
 
         State newState;
         try {
-             newState = state.applyMove(move);
+            newState = state.applyMove(move);
         } catch (InvalidMoveException e) {
             this.handleError(e);
             return;

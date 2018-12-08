@@ -1,20 +1,17 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.List;
 import java.util.Objects;
-
-import de.techfak.gse.ysander.model.Field;
 
 /**
  * The Queen figures.
  */
 public class Queen extends Figure {
 
-    private  final String BLACK = "q";
+    private final String BLACK = "q";
 
-    private  final String WHITE = "Q";
+    private final String WHITE = "Q";
 
-    private  final String NAME = "queen";
+    private final String NAME = "queen";
 
 
     public Queen(Color color) {

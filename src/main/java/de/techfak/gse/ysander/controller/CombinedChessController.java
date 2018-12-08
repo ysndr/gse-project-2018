@@ -13,17 +13,29 @@ import de.techfak.gse.ysander.view.View;
  * Main controller managing the the control flow between
  * input -> model -> output.
  */
-public class CombinedChessController extends BaseChessController implements PlayerInputHandler, MoveHandler , Output<State> {
+public class CombinedChessController extends BaseChessController
+    implements PlayerInputHandler, MoveHandler, Output<State> {
 
     private final MultiplayerChessController multiplayer;
+
     private final RawChessController raw;
 
+    /**
+     * Creates a combined Controller that can do what both,
+     * {@link MultiplayerChessController} and {@link RawChessController} do.
+     *
+     * This has mostly been created out of fun ;)
+     *
+     * @param view
+     * @param multiplayer
+     * @param raw
+     */
     public CombinedChessController(final View view,
                                    final MultiplayerChessController multiplayer,
                                    final RawChessController raw) {
         super(view, null);
 
-        if(!raw.state.equals(multiplayer.state)) {
+        if (!raw.state.equals(multiplayer.state)) {
             throw new IllegalArgumentException("The state on both subcontrollers must be the same");
         }
 

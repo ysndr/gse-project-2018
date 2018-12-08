@@ -5,5 +5,6 @@ import de.techfak.gse.ysander.model.State;
 
 public interface PlayerInputDriver extends Driver {
     void setPlayerInputHandler(PlayerInputHandler playerInputHandler);
+
     void startTurn(State state);
 }
