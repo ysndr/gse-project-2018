@@ -19,16 +19,19 @@ public class ChessGame {
     public static void main(String[] args) {
 
         State state = StateBuilder.defaultState();
-        boolean withGUI = args[0].equals("--gui");
+        boolean withGUI = false;
 
         String fen = null;
 
-        if (!withGUI) {
-            fen = args[0];
-        } else if (args.length > 1) {
-            fen = args[1];
-        }
 
+        if (args.length > 0) {
+            withGUI = args[0].equals("--gui");
+            if (!withGUI) {
+                fen = args[0];
+            } else if (args.length > 1) {
+                fen = args[1];
+            }
+        }
 
         if (fen != null) {
             try {
