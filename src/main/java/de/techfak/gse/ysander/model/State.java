@@ -3,6 +3,8 @@ package de.techfak.gse.ysander.model;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
+
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.error.NoFigureMovedException;
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
@@ -102,11 +104,21 @@ public final class State {
             return this.withoutSelection();
         }
 
+        Optional<Figure> onField = grid.getFigureOnField(field);
+
+
         if (this.selection != null) {
+            Optional<Figure> onSelection= grid.getFigureOnField(this.selection);
+            // switch to other figure of the same player
+            if (onSelection.isPresent() && onField.isPresent() && onField.get().color().equals(onSelection.get().color())) {
+                return this.withSelection(field);
+            }
+
             return this.applyMove(new Move(this.selection, field));
+
         }
 
-        Optional<Figure> onField = grid.getFigureOnField(field);
+
 
         if (!onField.isPresent()) {
             throw new NoFigureOnFieldException(field);
