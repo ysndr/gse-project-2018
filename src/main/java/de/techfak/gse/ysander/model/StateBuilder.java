@@ -46,6 +46,13 @@ public class StateBuilder {
             .withColor(Figure.Color.fromFEN(color));
     }
 
+    public static StateBuilder of(State state) {
+        return new StateBuilder()
+            .setSelection(state.getSelection())
+            .setColor(state.getColor())
+            .setGrid(state.getGrid());
+    }
+
 
     /**
      * Creates a default state with default {@link Grid} and White as starting
@@ -85,8 +92,17 @@ public class StateBuilder {
      * @param selection
      * @return this builder for fluent chaining
      */
-    StateBuilder setSelection(final Field selection) {
+    public StateBuilder setSelection(final Field selection) {
         this.selection = selection;
+        return this;
+    }
+
+    /**
+     * Delete selection
+     * @return
+     */
+    public StateBuilder resetSelection() {
+        this.selection = null;
         return this;
     }
 

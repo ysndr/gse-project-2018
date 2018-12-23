@@ -51,25 +51,19 @@ public final class State {
 
     // Modifiers
     State withGrid(Grid grid) {
-        return new StateBuilder()
+        return StateBuilder.of(this)
             .setGrid(grid)
-            .setColor(this.color)
-            .setSelection(this.selection)
             .createState();
     }
 
     State withColor(Color color) {
-        return new StateBuilder()
-            .setGrid(this.grid)
+        return StateBuilder.of(this)
             .setColor(color)
-            .setSelection(this.selection)
             .createState();
     }
 
     private State withSelection(Field selection) {
-        return new StateBuilder()
-            .setGrid(this.grid)
-            .setColor(this.color)
+        return StateBuilder.of(this)
             .setSelection(selection)
             .createState();
     }
