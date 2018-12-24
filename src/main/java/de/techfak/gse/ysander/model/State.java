@@ -162,6 +162,10 @@ public final class State {
         return String.format("%s %s", this.grid.toFEN(), this.color.toFEN());
     }
 
+    @Override
+    public String toString() {
+        return toFEN();
+    }
 
     // Util
     @Override
