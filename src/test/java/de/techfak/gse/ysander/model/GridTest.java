@@ -1,6 +1,5 @@
 package de.techfak.gse.ysander.model;
 
-import de.techfak.gse.ysander.model.error.NoFigureMovedException;
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
 import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.Figure;
@@ -13,16 +12,16 @@ class GridTest {
 
     @Test
     void toFEN() {
-        Grid grid = Grid.defaultGrid();
+        Grid grid = GridBuilder.defaultGrid();
 
         assertEquals("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", grid.toFEN());
     }
 
     @Test
     void fromFEN() {
-        assertEquals(Grid.defaultGrid(), Grid.fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
+        assertEquals(GridBuilder.defaultGrid(), GridBuilder.fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
         assertEquals("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
-            Grid.fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR").toFEN());
+                     GridBuilder.fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR").toFEN());
     }
 
 
@@ -33,12 +32,12 @@ class GridTest {
 
 
         assertEquals("rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR",
-            Grid.defaultGrid().applyMove(move, Figure.Color.WHITE).toFEN());
+                     GridBuilder.defaultGrid().applyMove(move, Figure.Color.WHITE).toFEN());
 
         assertThrows(NotPlayersTurnException.class,
-            () -> Grid.defaultGrid().applyMove(move, Figure.Color.BLACK));
+            () -> GridBuilder.defaultGrid().applyMove(move, Figure.Color.BLACK));
 
         assertThrows(NoFigureOnFieldException.class,
-            () -> Grid.defaultGrid().applyMove(invalid, Figure.Color.WHITE));
+            () -> GridBuilder.defaultGrid().applyMove(invalid, Figure.Color.WHITE));
     }
 }

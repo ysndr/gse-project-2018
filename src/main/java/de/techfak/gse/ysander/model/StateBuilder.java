@@ -42,7 +42,7 @@ public class StateBuilder {
      */
     public static State fromFEN(String grid, String color) throws FENParseException {
         return defaultState()
-            .withGrid(Grid.fromFEN(grid))
+            .withGrid(GridBuilder.fromFEN(grid))
             .withColor(Figure.Color.fromFEN(color));
     }
 
@@ -61,7 +61,7 @@ public class StateBuilder {
      * @return default state
      */
     public static State defaultState() {
-        return new StateBuilder().setGrid(Grid.defaultGrid()).setColor(Figure.Color.WHITE).createState();
+        return new StateBuilder().setGrid(GridBuilder.defaultGrid()).setColor(Figure.Color.WHITE).createState();
     }
 
     /**
@@ -113,7 +113,7 @@ public class StateBuilder {
      */
     public State createState() {
         if (grid == null) {
-            grid = Grid.defaultGrid();
+            grid = GridBuilder.defaultGrid();
         }
         if (color == null) {
             color = Figure.Color.WHITE;
