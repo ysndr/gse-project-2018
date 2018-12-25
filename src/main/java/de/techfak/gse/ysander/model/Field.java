@@ -9,9 +9,9 @@ import de.techfak.gse.ysander.model.error.InvalidFieldException;
  * A wrapper around coordinates on the grid.
  */
 public class Field {
-    final int x;
+    private final int x;
 
-    final int y;
+    private final int y;
 
     /**
      * Generates a field from a canonical chess coordinate.
@@ -19,7 +19,7 @@ public class Field {
      * @param coord coordiate of the field (a4, e3, ...)
      * @throws InvalidFieldException if the field is outside the grid
      */
-    Field(String coord) throws InvalidFieldException {
+    public Field(String coord) throws InvalidFieldException {
         this(Grid.getIndexX(coord.charAt(0)),
              Grid.getIndexY(coord.charAt(1)));
     }
@@ -38,6 +38,14 @@ public class Field {
         if (x >= Grid.GRID_SIZE || x < 0 || y >= Grid.GRID_SIZE || y < 0) {
             throw new InvalidFieldException(this);
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     /**
