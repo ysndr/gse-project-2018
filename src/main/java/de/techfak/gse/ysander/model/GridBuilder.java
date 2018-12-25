@@ -148,7 +148,7 @@ public class GridBuilder {
      * @param figure value
      * @return GridBuilder Instance
      */
-    GridBuilder setField(final Field field, final Figure figure) {
+    public GridBuilder setField(final Field field, final Figure figure) {
         this.grid.put(field, figure);
         return this;
     }
@@ -186,7 +186,7 @@ public class GridBuilder {
      * Assemble {@link Grid}.
      * @return {@link Grid}
      */
-    Grid createGrid() {
+    public Grid createGrid() {
         return new Grid(grid);
     }
 }

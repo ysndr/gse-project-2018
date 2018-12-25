@@ -2,15 +2,19 @@ package de.techfak.gse.ysander.model.figures;
 
 
 import java.util.Objects;
+import java.util.Set;
 
+import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.FENParseException;
+import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.HintProvider;
 
 /**
  * The abstract figures class.
  * All possible figures must extend this class.
  * It is used to abstract over the symbolc representation of each Figure.
  */
-public abstract class Figure {
+public abstract class Figure implements HintProvider {
 
 
     private Color color;
@@ -32,11 +36,23 @@ public abstract class Figure {
     public abstract String canonicalName();
 
     /**
+     * GetHints implementation for {@link HintProvider}.
+     * Used to get the hints for the selected field. Therefore it does not take
+     * the specific {@link Figure}s {@link Color} into account. Color regards are left to the
+     * underlying {@link HintProvider}s.
+     * @param state the state to create rules for
+     * @return hints for a figure of this kind
+     */
+    @Override
+    public abstract Set<? extends Hint> getHints(final State state);
+
+    /**
      * @return the figures color
      */
     public Color color() {
         return this.color;
     }
+
 
     @Override
     public boolean equals(final Object o) {

@@ -48,6 +48,9 @@ public final class State {
         return selection;
     }
 
+    public Optional<Figure> getSelectedFigure() {
+        return grid.getFigureOnField(getSelection());
+    }
 
     // Modifiers
     State withGrid(Grid grid) {

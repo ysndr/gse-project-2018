@@ -1,6 +1,11 @@
 package de.techfak.gse.ysander.model.figures;
 
 import java.util.Objects;
+import java.util.Set;
+
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 
 /**
  * The Bishop figures.
@@ -26,6 +31,11 @@ public class Bishop extends Figure {
     @Override
     public String canonicalName() {
         return NAME;
+    }
+
+    @Override
+    public Set<? extends Hint> getHints(final State state) {
+        return new LinearMoveHintProvider(LinearMoveHintProvider.Axis.DIAGONAL).getHints(state);
     }
 
     @Override
