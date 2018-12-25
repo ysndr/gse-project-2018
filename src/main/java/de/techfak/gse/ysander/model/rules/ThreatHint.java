@@ -12,4 +12,11 @@ public class ThreatHint extends MoveHint {
     public ThreatHint(final Move move) {
         super(move);
     }
+
+    @Override
+    public String toString() {
+        return "ThreatHint{}";
+    }
 }
+
+

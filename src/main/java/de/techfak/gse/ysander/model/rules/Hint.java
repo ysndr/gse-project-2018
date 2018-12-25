@@ -1,5 +1,7 @@
 package de.techfak.gse.ysander.model.rules;
 
+import java.util.Objects;
+
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 

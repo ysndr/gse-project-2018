@@ -1,5 +1,7 @@
 package de.techfak.gse.ysander.model.rules;
 
+import java.util.Objects;
+
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Move;
 import de.techfak.gse.ysander.model.State;
@@ -28,6 +30,30 @@ public class MoveHint implements Hint {
     @Override
     public State apply(final State state) {
         return state.applyMove(move);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final MoveHint moveHint = (MoveHint) o;
+        return Objects.equals(getMove(), moveHint.getMove());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMove());
+    }
+
+    @Override
+    public String toString() {
+        return "MoveHint{" +
+               "move=" + move +
+               '}';
     }
 }
 
