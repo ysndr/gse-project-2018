@@ -26,7 +26,7 @@ class ChainedHintProviderTest {
         assertEquals(12, counter.get());
 
         counter.set(0);
-        Cache<Set<Hint>> C = A.chain(B).getHintsCached(null);
+        Cache<Set<? extends Hint>> C = A.chain(B).getHintsCached(null);
         C.result();
         C.result(); // should be cached here;
 

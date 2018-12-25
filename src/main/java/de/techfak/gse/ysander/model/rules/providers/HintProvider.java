@@ -13,9 +13,9 @@ public interface HintProvider {
      * @param state the state to create rules for
      * @return a set of rules
      */
-    Set<Hint> getHints(State state);
+    Set<? extends Hint> getHints(State state);
 
-    default Cache<Set<Hint>> getHintsCached(State state) {
+    default Cache<Set<? extends Hint>> getHintsCached(State state) {
         return Cache.cache(() -> this.getHints(state));
     };
 

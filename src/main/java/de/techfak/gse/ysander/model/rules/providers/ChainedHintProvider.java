@@ -39,7 +39,7 @@ public class ChainedHintProvider implements HintProvider {
      * @return A combined set of rules contained in the chain
      */
     @Override
-    public Set<Hint> getHints(final State state) {
+    public Set<? extends Hint> getHints(final State state) {
         Set<Hint> hints = new HashSet<>(wrapped.getHints(state));
         if (tail != null) {
             hints.addAll(tail.getHints(state));
