@@ -1,6 +1,12 @@
 package de.techfak.gse.ysander.model.figures;
 
 import java.util.Objects;
+import java.util.Set;
+
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis;
 
 /**
  * The Rook figures.
@@ -27,6 +33,11 @@ public class Rook extends Figure {
         return NAME;
     }
 
+    @Override
+    public Set<? extends Hint> getHints(final State state) {
+        return new LinearMoveHintProvider(Axis.VERTICAL)
+            .chain(new LinearMoveHintProvider(Axis.HORIZONTAL)).getHints(state);
+    }
 
     @Override
     public boolean equals(final Object o) {
