@@ -25,8 +25,8 @@ class MoveHintProviderTest {
     void getHintsSelectionEmpty() {
 
 
-        State state = StateBuilder.fromFEN("8/8/8/8/8/8/8/8 w");
-        state = StateBuilder.of(state)
+        State state = StateBuilder.fromFEN("8/8/8/8/8/8/8/8 w")
+            .builder()
             .setSelection(new Field(0, 0))
             .createState();
 
@@ -77,8 +77,8 @@ class MoveHintProviderTest {
     void getHintsSelectionWitCollision() {
 
 
-        State state = StateBuilder.fromFEN("3r4/8/8/8/8/8/8/8 w");
-        state = StateBuilder.of(state)
+        State state = StateBuilder.fromFEN("3r4/8/8/8/8/8/8/8 w")
+            .builder()
             .setSelection(new Field(0, 0))
             .createState();
 
@@ -89,7 +89,7 @@ class MoveHintProviderTest {
 
 
         // if on field below is not empty
-        state = StateBuilder.of(state)
+        state = state.builder()
             .setSelection(new Field(2, 0))
             .createState();
 

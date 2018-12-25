@@ -22,7 +22,7 @@ class LinearMoveHintProviderTest {
     private void testAxis(State state, final LinearMoveHintProvider provider) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                state = StateBuilder.of(state).setSelection(new Field(i, j)).createState();
+                state = state.builder().setSelection(new Field(i, j)).createState();
                 assertEquals(7, provider.getHints(state).size());
             }
         }

@@ -150,6 +150,14 @@ public final class State {
 
     }
 
+    /**
+     * Create a builder from ths intstance.
+     * @return StateBuilder loaded with this
+     */
+    public StateBuilder builder() {
+        return StateBuilder.of(this);
+    }
+
 
     // Converters
 

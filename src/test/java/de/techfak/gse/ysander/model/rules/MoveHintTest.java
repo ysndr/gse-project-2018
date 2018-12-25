@@ -41,7 +41,7 @@ class MoveHintTest {
         State state = StateBuilder.defaultState();
         assertEquals(
             this.hint.apply(state),
-            StateBuilder.of(state)
+            state.builder()
                 .setGrid(
                     state.getGrid()
                         .applyMove(hint.getMove(), Figure.Color.WHITE))
