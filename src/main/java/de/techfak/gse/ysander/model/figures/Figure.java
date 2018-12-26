@@ -17,13 +17,26 @@ import de.techfak.gse.ysander.model.rules.providers.HintProvider;
 public abstract class Figure implements HintProvider {
 
 
-    private Color color;
-
+    private final Color color;
+    private final boolean moved;
 
     public Figure(final Color color) {
-        this.color = color;
+        this(color, false);
     }
 
+    Figure(final Color color, final boolean moved) {
+        this.color = color;
+        this.moved = moved;
+    }
+
+
+    public Figure moved() {
+        return this;
+    }
+
+    protected boolean getMoved() {
+        return moved;
+    }
 
     /**
      * @return the figures symbolic representation (must take its color into consideration)

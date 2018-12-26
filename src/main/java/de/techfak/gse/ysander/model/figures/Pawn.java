@@ -1,6 +1,10 @@
 package de.techfak.gse.ysander.model.figures;
 
 import java.util.Objects;
+import java.util.Set;
+
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.rules.Hint;
 
 /**
  * The Pawn figures.
@@ -18,6 +22,15 @@ public class Pawn extends Figure {
         super(color);
     }
 
+    private Pawn(Color color, boolean moved) {
+        super(color, moved);
+    }
+
+    @Override
+    public Figure moved() {
+        return new Pawn(this.color(), true);
+    }
+
     @Override
     public String symbol() {
         return this.color() == Color.BLACK ? BLACK : WHITE;
@@ -26,6 +39,11 @@ public class Pawn extends Figure {
     @Override
     public String canonicalName() {
         return NAME;
+    }
+
+    @Override
+    public Set<? extends Hint> getHints(final State state) {
+        return null;
     }
 
     @Override

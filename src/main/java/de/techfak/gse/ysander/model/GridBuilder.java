@@ -176,7 +176,7 @@ public class GridBuilder {
             return this;
         }
 
-        this.setField(move.getTo(), movedFig);
+        this.setField(move.getTo(), movedFig.moved());
 
         return this;
     }
