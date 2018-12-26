@@ -1,6 +1,13 @@
 package de.techfak.gse.ysander.model.figures;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis;
 
 /**
  * The Queen figures.
@@ -26,6 +33,14 @@ public class Queen extends Figure {
     @Override
     public String canonicalName() {
         return NAME;
+    }
+
+    @Override
+    public Set<? extends Hint> getHints(final State state) {
+        return new LinearMoveHintProvider(Axis.DIAGONAL)
+            .chain(new LinearMoveHintProvider(Axis.VERTICAL))
+            .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
+            .getHints(state);
     }
 
     @Override
