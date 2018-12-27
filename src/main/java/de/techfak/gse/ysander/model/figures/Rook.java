@@ -7,6 +7,7 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis;
+import de.techfak.gse.ysander.model.rules.providers.LinearThreatHintProvider;
 
 /**
  * The Rook figures.
@@ -36,7 +37,10 @@ public class Rook extends Figure {
     @Override
     public Set<? extends Hint> getHints(final State state) {
         return new LinearMoveHintProvider(Axis.VERTICAL)
-            .chain(new LinearMoveHintProvider(Axis.HORIZONTAL)).getHints(state);
+            .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL))
+            .getHints(state);
     }
 
     @Override
