@@ -54,6 +54,9 @@ public class MoveHintProvider implements HintProvider {
             return new HashSet<>();
         }
 
+        if (this.xdelta == 0 && this.ydelta == 0) {
+            return new HashSet<>();
+        }
 
         for (int i = 1; i <= this.reach; i++) {
             int xpos = selection.getX() + i * xdelta;
