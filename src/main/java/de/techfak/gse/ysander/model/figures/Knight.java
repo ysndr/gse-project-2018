@@ -6,6 +6,7 @@ import java.util.Set;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.MoveHintProvider;
+import de.techfak.gse.ysander.model.rules.providers.ThreatHintProvider;
 
 /**
  * The Knight figures.
@@ -44,6 +45,14 @@ public class Knight extends Figure {
             .chain(new MoveHintProvider(2, -1, 1))
             .chain(new MoveHintProvider(1, 2, 1))
             .chain(new MoveHintProvider(1, -2, 1))
+            .chain(new ThreatHintProvider(-2, 1, 1))
+            .chain(new ThreatHintProvider(-2, -1, 1))
+            .chain(new ThreatHintProvider(-1, 2, 1))
+            .chain(new ThreatHintProvider(-1, -2, 1))
+            .chain(new ThreatHintProvider(2, 1, 1))
+            .chain(new ThreatHintProvider(2, -1, 1))
+            .chain(new ThreatHintProvider(1, 2, 1))
+            .chain(new ThreatHintProvider(1, -2, 1))
             .getHints(state);
     }
 
