@@ -1,6 +1,5 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,6 +7,7 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis;
+import de.techfak.gse.ysander.model.rules.providers.LinearThreatHintProvider;
 
 /**
  * The Queen figures.
@@ -40,6 +40,9 @@ public class Queen extends Figure {
         return new LinearMoveHintProvider(Axis.DIAGONAL)
             .chain(new LinearMoveHintProvider(Axis.VERTICAL))
             .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL))
             .getHints(state);
     }
 
