@@ -5,6 +5,8 @@ import java.util.Set;
 
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
+import de.techfak.gse.ysander.model.rules.providers.MoveHintProvider;
 
 /**
  * The Pawn figures.
@@ -43,7 +45,11 @@ public class Pawn extends Figure {
 
     @Override
     public Set<? extends Hint> getHints(final State state) {
-        return null;
+        if (!super.getMoved()) {
+            return new MoveHintProvider(0, -1, 2).getHints(state);
+        } else {
+            return new MoveHintProvider(0, -1, 1).getHints(state);
+        }
     }
 
     @Override
