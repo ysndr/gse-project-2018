@@ -1,7 +1,9 @@
 package de.techfak.gse.ysander.model.rules.providers;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.util.Cache;
@@ -13,7 +15,18 @@ public interface HintProvider {
      * @param state the state to create rules for
      * @return a set of rules
      */
-    Set<? extends Hint> getHints(State state);
+    default Set<? extends Hint> getHints(State state) {
+        if (state == null) {
+            return new HashSet<>();
+        }
+        return getHints(state, state.getSelection());
+    }
+
+    Set<? extends Hint> getHints(State state, Field base);
+
+    default Cache<Set<? extends Hint>> getHintsCached(State state, final Field base) {
+        return Cache.cache(() -> this.getHints(state, base));
+    };
 
     default Cache<Set<? extends Hint>> getHintsCached(State state) {
         return Cache.cache(() -> this.getHints(state));

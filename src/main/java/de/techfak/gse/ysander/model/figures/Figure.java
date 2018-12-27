@@ -4,6 +4,7 @@ package de.techfak.gse.ysander.model.figures;
 import java.util.Objects;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.FENParseException;
 import de.techfak.gse.ysander.model.rules.Hint;
@@ -54,10 +55,11 @@ public abstract class Figure implements HintProvider {
      * the specific {@link Figure}s {@link Color} into account. Color regards are left to the
      * underlying {@link HintProvider}s.
      * @param state the state to create rules for
+     * @param base
      * @return hints for a figure of this kind
      */
     @Override
-    public abstract Set<? extends Hint> getHints(final State state);
+    public abstract Set<? extends Hint> getHints(final State state, final Field base);
 
     /**
      * @return the figures color

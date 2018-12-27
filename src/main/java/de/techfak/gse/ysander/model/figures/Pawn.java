@@ -3,6 +3,7 @@ package de.techfak.gse.ysander.model.figures;
 import java.util.Objects;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.HintProvider;
@@ -45,7 +46,7 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public Set<? extends Hint> getHints(final State state) {
+    public Set<? extends Hint> getHints(final State state, final Field base) {
 
         int ydelta = color().equals(Color.WHITE) ? -1 : 1;
 
@@ -58,7 +59,7 @@ public class Pawn extends Figure {
         } else {
             hints = hints.chain(new MoveHintProvider(0, ydelta, 2));
         }
-        return hints.getHints(state);
+        return hints.getHints(state, base);
     }
 
     @Override

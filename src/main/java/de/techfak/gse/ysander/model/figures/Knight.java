@@ -3,6 +3,7 @@ package de.techfak.gse.ysander.model.figures;
 import java.util.Objects;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.MoveHintProvider;
@@ -36,7 +37,7 @@ public class Knight extends Figure {
     }
 
     @Override
-    public Set<? extends Hint> getHints(final State state) {
+    public Set<? extends Hint> getHints(final State state, final Field base) {
         return new MoveHintProvider(-2, 1, 1)
             .chain(new MoveHintProvider(-2, -1, 1))
             .chain(new MoveHintProvider(-1, 2, 1))
@@ -53,7 +54,7 @@ public class Knight extends Figure {
             .chain(new ThreatHintProvider(2, -1, 1, this.color()))
             .chain(new ThreatHintProvider(1, 2, 1, this.color()))
             .chain(new ThreatHintProvider(1, -2, 1, this.color()))
-            .getHints(state);
+            .getHints(state, base);
     }
 
     @Override

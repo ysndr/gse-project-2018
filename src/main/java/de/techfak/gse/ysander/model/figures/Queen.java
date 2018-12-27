@@ -3,6 +3,7 @@ package de.techfak.gse.ysander.model.figures;
 import java.util.Objects;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
@@ -36,14 +37,14 @@ public class Queen extends Figure {
     }
 
     @Override
-    public Set<? extends Hint> getHints(final State state) {
+    public Set<? extends Hint> getHints(final State state, final Field base) {
         return new LinearMoveHintProvider(Axis.DIAGONAL)
             .chain(new LinearMoveHintProvider(Axis.VERTICAL))
             .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
             .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, this.color()))
             .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, this.color()))
             .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, this.color()))
-            .getHints(state);
+            .getHints(state, base);
     }
 
     @Override

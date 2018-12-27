@@ -18,15 +18,15 @@ class ChainedHintProviderTest {
     void chain() {
         AtomicInteger counter = new AtomicInteger();
 
-        HintProvider A = createHintPrivider(0,2, counter);
+        HintProvider A = createHintPrivider(0, 2, counter);
         HintProvider B = createHintPrivider(1, 0, counter);
 
-        A.chain(B).getHints(null);
+        A.chain(B).getHints(null, null);
 
         assertEquals(12, counter.get());
 
         counter.set(0);
-        Cache<Set<? extends Hint>> C = A.chain(B).getHintsCached(null);
+        Cache<Set<? extends Hint>> C = A.chain(B).getHintsCached(null, null);
         C.result();
         C.result(); // should be cached here;
 
@@ -41,7 +41,7 @@ class ChainedHintProviderTest {
     }
 
     private HintProvider createHintPrivider(int x ,int y, AtomicInteger counter) {
-        return (final State state) -> {
+        return (final State state, final Field base) -> {
 
                 Set<Hint> set = new HashSet<>();
                 counter.addAndGet(x*10 + y);

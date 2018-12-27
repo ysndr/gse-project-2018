@@ -1,6 +1,5 @@
 package de.techfak.gse.ysander.model.figures;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import de.techfak.gse.ysander.model.*;

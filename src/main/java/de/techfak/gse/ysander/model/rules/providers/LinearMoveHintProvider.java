@@ -25,17 +25,12 @@ public class LinearMoveHintProvider implements HintProvider {
 
 
     @Override
-    public Set<? extends Hint> getHints(final State state) {
+    public Set<? extends Hint> getHints(final State state, final Field base) {
         Set<MoveHint> hints = new HashSet<>();
-        Field selection = state.getSelection();
 
-
-        if (selection == null) {
-            return hints;
-        }
 
         Set<Field> targets = new HashSet<>();
-        HintProvider strategy = (s) -> null; // default
+        HintProvider strategy = (s, b) -> null; // default
 
 
         switch (this.axis) {
@@ -55,7 +50,7 @@ public class LinearMoveHintProvider implements HintProvider {
                 break;
         }
 
-        return strategy.getHints(state);
+        return strategy.getHints(state, base);
     }
 
 

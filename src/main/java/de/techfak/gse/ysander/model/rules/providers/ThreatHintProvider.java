@@ -46,11 +46,10 @@ public class ThreatHintProvider implements HintProvider {
      * @return List of fields to ove to in the given direcion
      */
     @Override
-    public Set<? extends Hint> getHints(final State state) {
-        Field selection = state.getSelection(); // guaranteed to be != null when this method is called
+    public Set<? extends Hint> getHints(final State state, final Field base) {
         Set<Field> targets = new HashSet<>();
 
-        if (selection == null) {
+        if (base == null) {
             return new HashSet<>();
         }
 
@@ -60,8 +59,8 @@ public class ThreatHintProvider implements HintProvider {
         }
 
         for (int i = 1; i <= this.reach; i++) {
-            int xpos = selection.getX() + i * xdelta;
-            int ypos = selection.getY() + i * ydelta;
+            int xpos = base.getX() + i * xdelta;
+            int ypos = base.getY() + i * ydelta;
 
             try {
                 Field target = new Field(xpos, ypos);
@@ -87,7 +86,7 @@ public class ThreatHintProvider implements HintProvider {
         }
 
         return targets.stream()
-            .map(field -> new Move(selection, field))
+            .map(field -> new Move(base, field))
             .map(ThreatHint::new).collect(Collectors.toSet());
 
     }

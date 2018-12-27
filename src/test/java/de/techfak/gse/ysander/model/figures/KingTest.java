@@ -5,17 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
 import de.techfak.gse.ysander.model.*;
 import de.techfak.gse.ysander.model.figures.Figure.Color;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.MoveHint;
-import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis.DIAGONAL;
 import static org.junit.jupiter.api.Assertions.*;
 
 class KingTest extends FigureTest {

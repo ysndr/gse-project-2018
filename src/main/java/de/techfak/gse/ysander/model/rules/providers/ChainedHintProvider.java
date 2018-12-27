@@ -3,6 +3,7 @@ package de.techfak.gse.ysander.model.rules.providers;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 
@@ -36,13 +37,14 @@ public class ChainedHintProvider implements HintProvider {
      * Creates a set of rules by unifying its wrapped rulesets rules with its
      * tails wrapped rulesets rules...
      * @param state the state to create rules for
+     * @param base
      * @return A combined set of rules contained in the chain
      */
     @Override
-    public Set<? extends Hint> getHints(final State state) {
-        Set<Hint> hints = new HashSet<>(wrapped.getHints(state));
+    public Set<? extends Hint> getHints(final State state, final Field base) {
+        Set<Hint> hints = new HashSet<>(wrapped.getHints(state, base));
         if (tail != null) {
-            hints.addAll(tail.getHints(state));
+            hints.addAll(tail.getHints(state, base));
         }
         return hints;
     }
