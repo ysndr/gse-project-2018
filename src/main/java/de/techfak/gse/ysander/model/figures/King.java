@@ -7,6 +7,7 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis;
+import de.techfak.gse.ysander.model.rules.providers.LinearThreatHintProvider;
 
 /**
  * The King figures.
@@ -39,6 +40,9 @@ public class King extends Figure {
         return new LinearMoveHintProvider(Axis.HORIZONTAL, 1)
             .chain(new LinearMoveHintProvider(Axis.VERTICAL, 1))
             .chain(new LinearMoveHintProvider(Axis.DIAGONAL, 1))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, 1))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, 1))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, 1))
             .getHints(state);
     }
 

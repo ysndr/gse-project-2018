@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 import de.techfak.gse.ysander.model.*;
+import de.techfak.gse.ysander.model.figures.Figure.Color;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.MoveHint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
@@ -15,17 +18,18 @@ import org.junit.jupiter.api.Test;
 import static de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis.DIAGONAL;
 import static org.junit.jupiter.api.Assertions.*;
 
-class KingTest {
+class KingTest extends FigureTest {
 
 
     State state;
 
     @BeforeEach
     void setUp() {
+        super.setUp();
         state = StateBuilder.defaultState().builder()
             .setGrid(GridBuilder.fromFEN("8/8/8/8/8/8/8/8")
                          .builder()
-                         .setField(new Field(3, 3), new King(Figure.Color.WHITE))
+                         .setField(new Field(3, 3), new King(Color.WHITE))
                          .createGrid())
             .setSelection(new Field(3, 3))
             .createState();
@@ -62,7 +66,7 @@ class KingTest {
             .setGrid(state
                          .getGrid()
                          .builder()
-                         .setField(new Field(0, 0), new King(Figure.Color.WHITE)).createGrid())
+                         .setField(new Field(0, 0), new King(Color.WHITE)).createGrid())
             .setSelection(new Field(0, 0)).createState();
 
         Set<Hint> hints = new HashSet<Field>(Arrays.asList(
@@ -87,7 +91,7 @@ class KingTest {
             .setGrid(state
                          .getGrid()
                          .builder()
-                         .setField(new Field(3, 4), new King(Figure.Color.WHITE)).createGrid())
+                         .setField(new Field(3, 4), new King(Color.WHITE)).createGrid())
             .createState();
 
         Set<Hint> hints = new HashSet<Field>(Arrays.asList(
@@ -108,4 +112,33 @@ class KingTest {
             state.getSelectedFigure().map(f -> f.getHints(state)).orElse(new HashSet<>()));
 
     }
+
+
+    @Test
+    void getHintsWithThreat() {
+        state = state.builder()
+            .setGrid(state
+                         .getGrid()
+                         .builder()
+                         .setField(new Field(3, 4), new King(Color.BLACK)).createGrid())
+            .createState();
+
+        Set<Hint> hints = hintSetFrom(
+            moveAt(new Field(2, 2)),
+            moveAt(new Field(2, 3)),
+            moveAt(new Field(2, 4)),
+            moveAt(new Field(3, 2)),
+            moveAt(new Field(4, 2)),
+            moveAt(new Field(4, 3)),
+            moveAt(new Field(4, 4)),
+            threatAt(new Field(3, 4))
+        );
+
+        assertEquals(
+            hints,
+            state.getSelectedFigure().map(f -> f.getHints(state)).orElse(new HashSet<>()));
+
+    }
+
+
 }

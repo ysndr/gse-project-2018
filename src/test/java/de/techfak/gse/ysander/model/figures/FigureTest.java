@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Move;
 import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.MoveHint;
 import de.techfak.gse.ysander.model.rules.ThreatHint;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -30,6 +31,10 @@ public class FigureTest {
 
     protected ThreatHint threatAt(Field target) {
         return new ThreatHint(new Move(this.from, target));
+    }
+
+    protected MoveHint moveAt(Field target) {
+        return new MoveHint(new Move(this.from, target));
     }
 
     protected Set<Hint> hintSetFrom(Hint... hints) {
