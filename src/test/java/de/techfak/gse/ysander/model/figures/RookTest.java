@@ -50,8 +50,8 @@ class RookTest extends FigureTest {
 
         assertEquals(new LinearMoveHintProvider(VERTICAL)
                          .chain(new LinearMoveHintProvider(HORIZONTAL))
-                         .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL))
-                         .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL))
+                         .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, WHITE))
+                         .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, WHITE))
                          .getHints(state),
                      new Rook(WHITE).getHints(state));
     }

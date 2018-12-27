@@ -37,7 +37,7 @@ public class Bishop extends Figure {
     @Override
     public Set<? extends Hint> getHints(final State state) {
         return new LinearMoveHintProvider(LinearMoveHintProvider.Axis.DIAGONAL)
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, this.color()))
             .getHints(state);
     }
 

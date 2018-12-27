@@ -38,8 +38,8 @@ public class Rook extends Figure {
     public Set<? extends Hint> getHints(final State state) {
         return new LinearMoveHintProvider(Axis.VERTICAL)
             .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, this.color()))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, this.color()))
             .getHints(state);
     }
 

@@ -64,7 +64,7 @@ class BishopTest extends FigureTest {
             Set<Hint> test = filter(MoveHint.class, new Bishop(Figure.Color.BLACK).getHints(state));
 
             assertEquals(10, filter(MoveHint.class, new Bishop(Figure.Color.BLACK).getHints(state)).size());
-            assertEquals(11, new Bishop(Figure.Color.BLACK).getHints(state).size());
+            assertEquals(11, new Bishop(Figure.Color.WHITE).getHints(state).size());
     }
 
 

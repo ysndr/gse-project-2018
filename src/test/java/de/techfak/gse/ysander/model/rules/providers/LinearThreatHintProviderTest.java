@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import de.techfak.gse.ysander.model.*;
-import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.figures.Figure.Color;
 import de.techfak.gse.ysander.model.figures.Knight;
 import de.techfak.gse.ysander.model.rules.ThreatHint;
@@ -31,6 +30,7 @@ class LinearThreatHintProviderTest {
                          .setField(new Field(4, 5), new Knight(Color.BLACK))
                          .setField(new Field(4, 3), new Knight(Color.WHITE))
                          .setField(new Field(0, 3), new Knight(Color.BLACK))
+                         .setField(new Field(0, 0), new Knight(Color.WHITE))
                          .createGrid())
             .setSelection(new Field(3, 3))
             .createState();
@@ -40,21 +40,28 @@ class LinearThreatHintProviderTest {
     @Test
     void getHints() {
 
-        assertEquals(new HashSet<>(), new LinearThreatHintProvider(Axis.VERTICAL).getHints(state));
+        assertEquals(new HashSet<>(), new LinearThreatHintProvider(Axis.VERTICAL, Color.WHITE).getHints(state));
 
         assertEquals(
             Stream.of(new ThreatHint(new Move(
                 new Field(3,3),
                 new Field(4,4))))
                 .collect(Collectors.toSet()),
-            new LinearThreatHintProvider(Axis.DIAGONAL).getHints(state));
+            new LinearThreatHintProvider(Axis.DIAGONAL, Color.WHITE).getHints(state));
+
+        assertEquals(
+            Stream.of(new ThreatHint(new Move(
+                new Field(3,3),
+                new Field(0,0))))
+                .collect(Collectors.toSet()),
+            new LinearThreatHintProvider(Axis.DIAGONAL, Color.BLACK).getHints(state));
 
         assertEquals(
             Stream.of(new ThreatHint(new Move(
                 new Field(3,3),
                 new Field(0,3))))
                 .collect(Collectors.toSet()),
-            new LinearThreatHintProvider(Axis.HORIZONTAL).getHints(state));
+            new LinearThreatHintProvider(Axis.HORIZONTAL, Color.WHITE).getHints(state));
         }
 
     @Test
@@ -66,7 +73,7 @@ class LinearThreatHintProviderTest {
                 new Field(4,4),
                 new Field(4,5))))
                 .collect(Collectors.toSet()),
-            new LinearThreatHintProvider(Axis.VERTICAL).getHints(state));
+            new LinearThreatHintProvider(Axis.VERTICAL, Color.WHITE).getHints(state));
 
     }
 
@@ -82,7 +89,7 @@ class LinearThreatHintProviderTest {
                 new Field(3,3),
                 new Field(4,4))))
                 .collect(Collectors.toSet()),
-            new LinearThreatHintProvider(Axis.DIAGONAL, 2).getHints(state));
+            new LinearThreatHintProvider(Axis.DIAGONAL, 2, Color.WHITE).getHints(state));
 
     }
 }

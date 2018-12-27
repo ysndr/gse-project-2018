@@ -45,14 +45,14 @@ public class Knight extends Figure {
             .chain(new MoveHintProvider(2, -1, 1))
             .chain(new MoveHintProvider(1, 2, 1))
             .chain(new MoveHintProvider(1, -2, 1))
-            .chain(new ThreatHintProvider(-2, 1, 1))
-            .chain(new ThreatHintProvider(-2, -1, 1))
-            .chain(new ThreatHintProvider(-1, 2, 1))
-            .chain(new ThreatHintProvider(-1, -2, 1))
-            .chain(new ThreatHintProvider(2, 1, 1))
-            .chain(new ThreatHintProvider(2, -1, 1))
-            .chain(new ThreatHintProvider(1, 2, 1))
-            .chain(new ThreatHintProvider(1, -2, 1))
+            .chain(new ThreatHintProvider(-2, 1, 1, this.color()))
+            .chain(new ThreatHintProvider(-2, -1, 1, this.color()))
+            .chain(new ThreatHintProvider(-1, 2, 1, this.color()))
+            .chain(new ThreatHintProvider(-1, -2, 1, this.color()))
+            .chain(new ThreatHintProvider(2, 1, 1, this.color()))
+            .chain(new ThreatHintProvider(2, -1, 1, this.color()))
+            .chain(new ThreatHintProvider(1, 2, 1, this.color()))
+            .chain(new ThreatHintProvider(1, -2, 1, this.color()))
             .getHints(state);
     }
 

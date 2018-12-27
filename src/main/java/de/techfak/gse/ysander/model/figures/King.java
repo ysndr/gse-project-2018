@@ -40,9 +40,9 @@ public class King extends Figure {
         return new LinearMoveHintProvider(Axis.HORIZONTAL, 1)
             .chain(new LinearMoveHintProvider(Axis.VERTICAL, 1))
             .chain(new LinearMoveHintProvider(Axis.DIAGONAL, 1))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, 1))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, 1))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, 1))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, 1, this.color()))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, 1, this.color()))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, 1, this.color()))
             .getHints(state);
     }
 

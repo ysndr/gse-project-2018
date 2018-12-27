@@ -5,6 +5,7 @@ import java.util.Set;
 
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.MoveHint;
 
@@ -14,13 +15,16 @@ public class LinearThreatHintProvider implements HintProvider {
 
     private final int reach;
 
-    public LinearThreatHintProvider(final Axis axis, final int reach) {
+    private final Figure.Color egoColor;
+
+    public LinearThreatHintProvider(final Axis axis, final int reach, final Figure.Color egoColor) {
         this.axis = axis;
         this.reach = reach;
+        this.egoColor = egoColor;
     }
 
-    public LinearThreatHintProvider(final Axis axis) {
-        this(axis, Integer.MAX_VALUE);
+    public LinearThreatHintProvider(final Axis axis, final Figure.Color egoColor) {
+        this(axis, Integer.MAX_VALUE, egoColor);
     }
 
 
@@ -40,18 +44,18 @@ public class LinearThreatHintProvider implements HintProvider {
 
         switch (this.axis) {
             case HORIZONTAL:
-                strategy = new ThreatHintProvider(1, 0, reach)
-                    .chain(new ThreatHintProvider(-1, 0, reach));
+                strategy = new ThreatHintProvider(1, 0, reach, egoColor)
+                    .chain(new ThreatHintProvider(-1, 0, reach, egoColor));
                 break;
             case VERTICAL:
-                strategy = new ThreatHintProvider(0, 1, reach)
-                    .chain(new ThreatHintProvider(0, -1, reach));
+                strategy = new ThreatHintProvider(0, 1, reach, egoColor)
+                    .chain(new ThreatHintProvider(0, -1, reach, egoColor));
                 break;
             case DIAGONAL:
-                strategy = new ThreatHintProvider(-1, 1, reach)
-                    .chain(new ThreatHintProvider(1, -1, reach))
-                    .chain(new ThreatHintProvider(1, 1, reach))
-                    .chain(new ThreatHintProvider(-1, -1, reach));
+                strategy = new ThreatHintProvider(-1, 1, reach, egoColor)
+                    .chain(new ThreatHintProvider(1, -1, reach, egoColor))
+                    .chain(new ThreatHintProvider(1, 1, reach, egoColor))
+                    .chain(new ThreatHintProvider(-1, -1, reach, egoColor));
                 break;
         }
 

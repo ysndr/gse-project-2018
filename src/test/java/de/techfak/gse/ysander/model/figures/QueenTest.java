@@ -45,7 +45,7 @@ class QueenTest extends FigureTest {
             .createState();
 
 
-        assertEquals(24, new Queen(Figure.Color.BLACK).getHints(state).size());
+        assertEquals(24, new Queen(Figure.Color.WHITE).getHints(state).size());
     }
 
     @Test

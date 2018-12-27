@@ -6,7 +6,6 @@ import java.util.Set;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.HintProvider;
-import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
 import de.techfak.gse.ysander.model.rules.providers.MoveHintProvider;
 import de.techfak.gse.ysander.model.rules.providers.ThreatHintProvider;
 
@@ -48,13 +47,16 @@ public class Pawn extends Figure {
     @Override
     public Set<? extends Hint> getHints(final State state) {
 
-        HintProvider hints = new ThreatHintProvider(1, color().equals(Color.WHITE) ? -1 : 1,1)
-            .chain(new ThreatHintProvider(-1,  color().equals(Color.WHITE) ? -1 : 1, 1));
+        int ydelta = color().equals(Color.WHITE) ? -1 : 1;
+
+
+        HintProvider hints = new ThreatHintProvider(1, ydelta, 1, this.color())
+            .chain(new ThreatHintProvider(-1,  ydelta, 1, this.color()));
 
         if (getMoved()) {
-            hints = hints.chain(new MoveHintProvider(0, color().equals(Color.WHITE) ? -1 : 1, 1));
+            hints = hints.chain(new MoveHintProvider(0, ydelta, 1));
         } else {
-            hints = hints.chain(new MoveHintProvider(0, color().equals(Color.WHITE) ? -1 : 1, 2));
+            hints = hints.chain(new MoveHintProvider(0, ydelta, 2));
         }
         return hints.getHints(state);
     }

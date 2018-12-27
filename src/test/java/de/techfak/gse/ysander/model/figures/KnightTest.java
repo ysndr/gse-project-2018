@@ -67,7 +67,7 @@ class KnightTest extends FigureTest {
                          .createGrid())
             .createState();
 
-        assertEquals(hints, new Knight(Figure.Color.BLACK).getHints(state));
+        assertEquals(hints, new Knight(Figure.Color.WHITE).getHints(state));
 
     }
 

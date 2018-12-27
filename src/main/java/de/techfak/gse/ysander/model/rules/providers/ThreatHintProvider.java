@@ -12,7 +12,6 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
-import de.techfak.gse.ysander.model.rules.MoveHint;
 import de.techfak.gse.ysander.model.rules.ThreatHint;
 
 public class ThreatHintProvider implements HintProvider {
@@ -23,15 +22,18 @@ public class ThreatHintProvider implements HintProvider {
 
     private final int reach;
 
-    public ThreatHintProvider(final int xdelta, final int ydelta) {
-        this(xdelta, ydelta, Integer.MAX_VALUE);
+    private final Figure.Color egoColor;
+
+    public ThreatHintProvider(final int xdelta, final int ydelta, final Figure.Color egoColor) {
+        this(xdelta, ydelta, Integer.MAX_VALUE, egoColor);
     }
 
 
-    public ThreatHintProvider(final int xdelta, final int ydelta, final int reach) {
+    public ThreatHintProvider(final int xdelta, final int ydelta, final int reach, final Figure.Color egoColor) {
         this.ydelta = ydelta;
         this.xdelta = xdelta;
         this.reach = reach;
+        this.egoColor = egoColor;
     }
 
     /**
@@ -67,7 +69,7 @@ public class ThreatHintProvider implements HintProvider {
                 Optional<Boolean> counterPlayersFigureOnField = state.getGrid()
                     .getFigureOnField(target)
                     .map(Figure::color)
-                    .map(c -> !c.equals(state.getColor()));
+                    .map(c -> !c.equals(egoColor));
 
                 if (!counterPlayersFigureOnField.isPresent()) {
                     continue;

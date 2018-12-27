@@ -40,9 +40,9 @@ public class Queen extends Figure {
         return new LinearMoveHintProvider(Axis.DIAGONAL)
             .chain(new LinearMoveHintProvider(Axis.VERTICAL))
             .chain(new LinearMoveHintProvider(Axis.HORIZONTAL))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL))
-            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL, this.color()))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.VERTICAL, this.color()))
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.HORIZONTAL, this.color()))
             .getHints(state);
     }
 
