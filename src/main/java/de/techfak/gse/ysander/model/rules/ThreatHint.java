@@ -15,7 +15,7 @@ public class ThreatHint extends MoveHint {
 
     @Override
     public String toString() {
-        return "ThreatHint{}";
+        return "ThreatHint{move=" + getMove() + "}";
     }
 }
 
