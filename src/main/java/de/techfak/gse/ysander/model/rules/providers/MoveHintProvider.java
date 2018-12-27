@@ -50,10 +50,6 @@ public class MoveHintProvider implements HintProvider {
             return new HashSet<>();
         }
 
-        if (!state.getSelectedFigure().map(Figure::color).isPresent()) {
-            return new HashSet<>();
-        }
-
         if (this.xdelta == 0 && this.ydelta == 0) {
             return new HashSet<>();
         }

@@ -52,9 +52,6 @@ public class ThreatHintProvider implements HintProvider {
             return new HashSet<>();
         }
 
-        if (!state.getSelectedFigure().isPresent()) {
-            return new HashSet<>();
-        }
 
         if (this.xdelta == 0 && this.ydelta == 0) {
             return new HashSet<>();
