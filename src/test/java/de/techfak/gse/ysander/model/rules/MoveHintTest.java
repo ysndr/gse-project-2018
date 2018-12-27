@@ -40,7 +40,7 @@ class MoveHintTest {
     void apply() {
         State state = StateBuilder.defaultState();
         assertEquals(
-            this.hint.apply(state),
+            hint.apply(state),
             state.builder()
                 .setGrid(
                     state.getGrid()
