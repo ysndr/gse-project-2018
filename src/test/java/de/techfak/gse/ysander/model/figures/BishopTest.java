@@ -14,12 +14,13 @@ import org.junit.jupiter.api.Test;
 import static de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider.Axis.DIAGONAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class BishopTest {
+class BishopTest extends FigureTest {
 
     State state;
 
     @BeforeEach
     void setUp() {
+        super.setUp();
         state = StateBuilder.defaultState().builder()
             .setGrid(GridBuilder.fromFEN("8/8/8/8/8/8/8/8")
                          .builder()
@@ -44,5 +45,27 @@ class BishopTest {
                      new Bishop(Figure.Color.WHITE).getHints(state));
 
     }
+
+    @Test
+    void getHintsWithThreat() {
+
+        state = state.builder()
+            .setGrid(state.getGrid().builder()
+                         .setField(
+                             new Field(5, 5),
+                             new Pawn(Figure.Color.BLACK))
+                         .createGrid())
+            .createState();
+
+        assertEquals(
+            hintSetFrom(threatAt(new Field(5,5))),
+            filter(ThreatHint.class, new Bishop(Figure.Color.WHITE).getHints(state)));
+
+            Set<Hint> test = filter(MoveHint.class, new Bishop(Figure.Color.BLACK).getHints(state));
+
+            assertEquals(10, filter(MoveHint.class, new Bishop(Figure.Color.BLACK).getHints(state)).size());
+            assertEquals(11, new Bishop(Figure.Color.BLACK).getHints(state).size());
+    }
+
 
 }

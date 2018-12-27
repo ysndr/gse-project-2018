@@ -6,6 +6,7 @@ import java.util.Set;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.LinearMoveHintProvider;
+import de.techfak.gse.ysander.model.rules.providers.LinearThreatHintProvider;
 
 /**
  * The Bishop figures.
@@ -35,7 +36,9 @@ public class Bishop extends Figure {
 
     @Override
     public Set<? extends Hint> getHints(final State state) {
-        return new LinearMoveHintProvider(LinearMoveHintProvider.Axis.DIAGONAL).getHints(state);
+        return new LinearMoveHintProvider(LinearMoveHintProvider.Axis.DIAGONAL)
+            .chain(new LinearThreatHintProvider(LinearThreatHintProvider.Axis.DIAGONAL))
+            .getHints(state);
     }
 
     @Override
