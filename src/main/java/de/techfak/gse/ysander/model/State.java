@@ -2,14 +2,17 @@ package de.techfak.gse.ysander.model;
 
 import java.util.Objects;
 import java.util.Optional;
-
-import javax.swing.text.html.Option;
+import java.util.Set;
 
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.error.NoFigureMovedException;
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
 import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
 import de.techfak.gse.ysander.model.figures.Figure;
+import de.techfak.gse.ysander.model.rules.Hint;
+import de.techfak.gse.ysander.model.rules.providers.HintProvider;
+import de.techfak.gse.ysander.model.rules.providers.SelectableHintProvider;
+import de.techfak.gse.ysander.util.Cache;
 
 import static de.techfak.gse.ysander.model.figures.Figure.Color;
 
@@ -25,6 +28,8 @@ public final class State {
 
     private final Field selection;
 
+    private final Cache<Set<? extends Hint>> hints;
+
 
     State(Grid grid, Color color) {
         this(grid, color, null);
@@ -34,6 +39,8 @@ public final class State {
         this.grid = grid;
         this.color = color;
         this.selection = selection;
+
+        this.hints = this.createHintProvider().getHintsCached(this);
     }
 
     public Color getColor() {
@@ -50,6 +57,21 @@ public final class State {
 
     public Optional<Figure> getSelectedFigure() {
         return grid.getFigureOnField(getSelection());
+    }
+
+    public Set<? extends Hint> getHints() {
+        return this.hints.result();
+    }
+
+
+    private HintProvider createHintProvider() {
+        HintProvider hintProvider = new SelectableHintProvider();
+
+        if (this.getSelectedFigure().isPresent()) {
+            hintProvider = hintProvider.chain(this.getSelectedFigure().get());
+        }
+
+        return hintProvider;
     }
 
     // Modifiers
