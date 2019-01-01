@@ -3,7 +3,10 @@ package de.techfak.gse.ysander.view.fx;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import de.techfak.gse.ysander.communication.drivers.FieldDriver;
+import de.techfak.gse.ysander.communication.drivers.HintDriver;
+import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
+import de.techfak.gse.ysander.communication.handlers.FxImportExport;
+import de.techfak.gse.ysander.controller.GlobalErrorEmergencyExit;
 import de.techfak.gse.ysander.controller.MultiplayerChessController;
 import de.techfak.gse.ysander.model.Player;
 import de.techfak.gse.ysander.model.State;
@@ -34,6 +37,7 @@ public class FXApplication extends javafx.application.Application {
 
     /**
      * Default launcher. Does not allow setting configuration as parameter.
+     *
      * @param args program arguments
      */
     public static void main(String... args) {
@@ -55,19 +59,27 @@ public class FXApplication extends javafx.application.Application {
         try {
 
             ChessUI root = new ChessUI();
+            Scene scene = new Scene(root);
+            FxImportExport importExport = new FxImportExport(scene.getWindow());
+
+
+            ErrorHandler errorHandler = GlobalErrorEmergencyExit.getInstance();
+
             MultiplayerChessController controller = new MultiplayerChessController(
-                root.getController(),
                 FXApplication.initialState,
-                new FieldDriver(new Player(Figure.Color.WHITE), root.getController()),
-                new FieldDriver(new Player(Figure.Color.BLACK), root.getController()));
+                root.getController(),
+                errorHandler,
+                new HintDriver(new Player(Figure.Color.WHITE), root.getController()),
+                new HintDriver(new Player(Figure.Color.BLACK), root.getController()),
+                importExport,
+                importExport
+            );
 
             root.getController().setLoadHandler(controller);
             root.getController().setSaveHandler(controller);
 
             root.getController().start();
 
-
-            Scene scene = new Scene(root);
 
             stage.setTitle("GSE project: Chess");
             stage.setScene(scene);
