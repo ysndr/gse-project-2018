@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 
-import de.techfak.gse.ysander.communication.handlers.FieldInputHandler;
+import de.techfak.gse.ysander.communication.handlers.HintInputHandler;
 import de.techfak.gse.ysander.communication.handlers.LoadHandler;
 import de.techfak.gse.ysander.communication.handlers.SaveHandler;
 import de.techfak.gse.ysander.communication.inputs.*;
@@ -22,7 +22,7 @@ import de.techfak.gse.ysander.view.View;
 /**
  * Controller for the main view that implements all interfaces the backend (game controllers) needs.
  */
-public class ChessUIController implements View, FieldInput, LoadInput, SaveInput {
+public class ChessUIController implements View, HintInput, LoadInput, SaveInput {
 
     @FXML
     private GridPane grid;
@@ -54,33 +54,32 @@ public class ChessUIController implements View, FieldInput, LoadInput, SaveInput
 
     private Window parent;
 
-    private FieldInputHandler inputHandler = (f) -> { };
+    private HintInputHandler inputHandler = (h) -> { };
 
-    private LoadHandler loadHandler = (p) -> { };
+    private LoadHandler loadHandler = (p) -> { return this.state.get(); };
 
-    private SaveHandler saveHandler = (p) -> { };
+    private SaveHandler saveHandler = (p, state) -> { };
 
     /**
      * Component Controller
-     * - Listen to all tile clicks and expose to {@link FieldInputHandler}.
+     * - Listen to all tile clicks and expose to {@link HintInputHandler}.
      * - Bind all tiles to the state property.
      * - Listen to state changes and apply current player to the indicator.
      * - on initialization disable grid until start is clicked (why?? :D)
      */
     @FXML
     public void initialize() {
-        this.labelState.setText("stoped");
-        this.grid.setDisable(true);
-        this.grid.getChildren().stream()
-            .filter(n -> n instanceof ChessTile)
-            .map(n -> (ChessTile) n)
+        this.reset();
+       this.grid.getChildren().stream()
+            .filter(ChessTile.class::isInstance)
+            .map(ChessTile.class::cast)
             .forEach(tile -> {
                 tile.stateProperty().bind(state);
                 tile.onClickProperty().addListener((observableValue, field, t1) -> {
                     if (t1 == null) {
                         return;
                     }
-                    inputHandler.handleFieldInput(t1);
+                    inputHandler.handleHintInput(t1);
                 });
             });
 
@@ -97,11 +96,20 @@ public class ChessUIController implements View, FieldInput, LoadInput, SaveInput
         });
 
 
-        this.menuLoad.setOnAction((e) -> loadHandler.loadState(parent));
-        this.menuSave.setOnAction((e) -> saveHandler.saveState(parent));
+        this.menuLoad.setOnAction((e) -> {
+            this.reset();
+            loadHandler.loadState(parent);
+        });
+        this.menuSave.setOnAction((e) -> saveHandler.saveState(parent, state.get()));
         this.menuStart.setOnAction((e) -> this.onStartCB.run());
 
+    }
 
+
+    private void reset() {
+        this.menuStart.setDisable(false);
+        this.grid.setDisable(true);
+        this.labelState.setText("stopped");
     }
 
 
@@ -131,8 +139,8 @@ public class ChessUIController implements View, FieldInput, LoadInput, SaveInput
     }
 
     @Override
-    public void setFieldInputHandler(final FieldInputHandler fieldInputHandler) {
-        this.inputHandler = fieldInputHandler;
+    public void setHintInputHandler(final HintInputHandler hintInputHandler) {
+        this.inputHandler = hintInputHandler;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ChessTile extends AnchorPane {
 
     private final ObjectProperty<State> state = new SimpleObjectProperty<>();
 
-    private final ObjectProperty<Field> onClick = new SimpleObjectProperty<>();
+    private final ObjectProperty<Hint> onClick = new SimpleObjectProperty<>();
 
     private final Field fieldKey;
 
@@ -92,6 +92,7 @@ public class ChessTile extends AnchorPane {
 
     /**
      * Component initialization. Binds to clicks and state changes.
+     * TODO: If move than one hint applies only the "first" is applied
      */
     @FXML
     public void initialize() {
@@ -105,7 +106,7 @@ public class ChessTile extends AnchorPane {
 
         this.tileInput.setOnMouseClicked(event -> {
             this.onClick.setValue(null);
-            this.onClick.setValue(this.fieldKey);
+            this.onClick.setValue(this.hints.iterator().next());
         });
         this.stateProperty().addListener((observable, old, value) -> {
             this.update(value);
@@ -198,11 +199,11 @@ public class ChessTile extends AnchorPane {
         return state.get();
     }
 
-    public Field getOnClick() {
+    public Hint getOnClick() {
         return onClick.get();
     }
 
-    public ObjectProperty<Field> onClickProperty() {
+    public ObjectProperty<Hint> onClickProperty() {
         return onClick;
     }
 
