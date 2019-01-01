@@ -14,7 +14,9 @@ import javafx.stage.Window;
 import de.techfak.gse.ysander.communication.handlers.HintInputHandler;
 import de.techfak.gse.ysander.communication.handlers.LoadHandler;
 import de.techfak.gse.ysander.communication.handlers.SaveHandler;
-import de.techfak.gse.ysander.communication.inputs.*;
+import de.techfak.gse.ysander.communication.inputs.HintInput;
+import de.techfak.gse.ysander.communication.inputs.LoadInput;
+import de.techfak.gse.ysander.communication.inputs.SaveInput;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.view.View;
@@ -56,9 +58,9 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
 
     private HintInputHandler inputHandler = (h) -> { };
 
-    private LoadHandler loadHandler = (p) -> { return this.state.get(); };
+    private LoadHandler loadHandler = () -> { return this.state.get(); };
 
-    private SaveHandler saveHandler = (p, state) -> { };
+    private SaveHandler saveHandler = (state) -> { };
 
     /**
      * Component Controller
@@ -70,7 +72,7 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     @FXML
     public void initialize() {
         this.reset();
-       this.grid.getChildren().stream()
+        this.grid.getChildren().stream()
             .filter(ChessTile.class::isInstance)
             .map(ChessTile.class::cast)
             .forEach(tile -> {
@@ -98,9 +100,9 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
 
         this.menuLoad.setOnAction((e) -> {
             this.reset();
-            loadHandler.loadState(parent);
+            this.loadHandler.loadState(); // setting is left to the callee site
         });
-        this.menuSave.setOnAction((e) -> saveHandler.saveState(parent, state.get()));
+        this.menuSave.setOnAction((e) -> saveHandler.saveState(state.get()));
         this.menuStart.setOnAction((e) -> this.onStartCB.run());
 
     }
