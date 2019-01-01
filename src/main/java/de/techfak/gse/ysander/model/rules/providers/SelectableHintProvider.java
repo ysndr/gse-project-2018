@@ -10,6 +10,7 @@ import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.SelectableHint;
+import de.techfak.gse.ysander.model.rules.SelectedHint;
 
 public class SelectableHintProvider implements HintProvider {
 
@@ -27,16 +28,20 @@ public class SelectableHintProvider implements HintProvider {
     @Override
     public Set<? extends Hint> getHints(final State state, final Field base) {
         Figure.Color egoColor = (this.egoColor == null) ? state.getColor() : this.egoColor;
+        Set<Hint> hints = new HashSet<>();
+
 
         if (state.getSelection() != null) {
-            return new HashSet<>();
+            hints.add(new SelectedHint(state.getSelection()));
         }
 
-        return state.getGrid().getFigures().stream()
-            .filter(e -> e.getValue().color().equals(egoColor))                 // only current players
-            .map(Map.Entry::getKey)                                             // convert to field
-            .map(SelectableHint::new)                                           // wrap in hint
-            .collect(Collectors.toSet());                                       // collect in set
-        }
+        hints.addAll(state.getGrid().getFigures().stream()
+                         .filter(e -> e.getValue().color().equals(egoColor))                 // only current players
+                         .filter(e -> !e.getKey().equals(state.getSelection()))              // that are not selected
+                         .map(Map.Entry::getKey)                                             // convert to field
+                         .map(SelectableHint::new)                                           // wrap in hint
+                         .collect(Collectors.toSet()));                                      // collect in set
+        return hints;
+    }
 
 }
