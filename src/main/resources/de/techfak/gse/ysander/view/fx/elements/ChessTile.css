@@ -1,10 +1,30 @@
+SELECTED,
+SELECTABLE,
+DISABLED,
+MOVETARGET,
+THREATTARGET,
 
-#tileInput.selected {
-  -fx-background-color: #00aae0f0 !important;
+
+
+#tileInput.SELECTED {
+  -fx-background-color: rgba(0, 170, 224, 0.94) !important;
 }
 
-#tileInput.unselected {
+#tileInput.SELECTABLE {
+  -fx-background-color: rgba(152, 224, 197, 0.94) !important;
+}
+
+#tileInput.DISABLED {
   -fx-background-color: #0000d00d ;
+}
+
+#tileInput.MOVETARGET {
+  -fx-background-color: rgba(39, 224, 114, 0.94) !important;
+}
+
+#tileInput.THREATTARGET {
+  -fx-background-color: rgba(224, 61, 47, 0.94) !important;
+
 }
 
 

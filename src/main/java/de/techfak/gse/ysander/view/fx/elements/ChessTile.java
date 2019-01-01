@@ -157,10 +157,12 @@ public class ChessTile extends AnchorPane {
         }).map(DisplayStyle::name)
             .collect(Collectors.toSet());
 
-        if (this.hints.size() > 1) {
-            this.getStyleClass().addAll(styles);
+        if (this.hints.size() > 0) {
+            this.tileInput.getStyleClass().addAll(styles);
         }
-
+        else {
+            this.tileInput.getStyleClass().add(DisplayStyle.DISABLED.name());
+        }
 
 
 
