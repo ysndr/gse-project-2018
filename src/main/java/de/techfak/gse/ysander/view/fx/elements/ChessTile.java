@@ -1,6 +1,9 @@
 package de.techfak.gse.ysander.view.fx.elements;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
@@ -21,6 +24,7 @@ import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
 import de.techfak.gse.ysander.model.figures.Figure;
+import de.techfak.gse.ysander.model.rules.*;
 
 /**
  * Custom JavaFX element to wrap one tile that can hold a figure and receives
@@ -44,6 +48,8 @@ public class ChessTile extends AnchorPane {
     private final ObjectProperty<Field> onClick = new SimpleObjectProperty<>();
 
     private final Field fieldKey;
+
+    private Set<Hint> hints = new HashSet<>();
 
     @FXML
     private Button tileInput;
@@ -115,12 +121,7 @@ public class ChessTile extends AnchorPane {
      * @param value the new state
      */
     private void update(final State value) {
-        this.tileInput.getStyleClass().clear();
-        if (this.fieldKey.equals(value.getSelection())) {
-            this.tileInput.getStyleClass().add(SELECTED);
-        } else {
-            this.tileInput.getStyleClass().add(UNSELECTED);
-        }
+        this.updateHints(value);
 
         if (value.getGrid().getFigureOnField(fieldKey).isPresent()) {
             Figure fig = value.getGrid().getFigureOnField(fieldKey).get();
@@ -129,6 +130,52 @@ public class ChessTile extends AnchorPane {
                 fig.canonicalName(),
                 fig.color().toString());
         }
+    }
+
+    /**
+     * Sets hints targetng this tile the corrsponding style classes.
+     * @param value current state
+     */
+    private void updateHints(final State value) {
+        this.tileInput.getStyleClass().clear();
+
+        this.hints = value.getHints().stream()
+            .filter(hint -> hint.target().equals(this.fieldKey))
+            .collect(Collectors.toSet());
+
+        Set<String> styles = this.hints.stream().map(hint -> {
+            if (hint.getClass().equals(MoveHint.class)) {
+                return DisplayStyle.MOVETARGET;
+            } else if (hint.getClass().equals(ThreatHint.class)) {
+                return DisplayStyle.THREATTARGET;
+            } else if (hint.getClass().equals(SelectableHint.class)) {
+                return  DisplayStyle.SELECTABLE;
+            } else if (hint.getClass().equals(SelectedHint.class)) {
+                return DisplayStyle.SELECTED;
+            }
+            return  DisplayStyle.DISABLED;
+        }).map(DisplayStyle::name)
+            .collect(Collectors.toSet());
+
+        if (this.hints.size() > 1) {
+            this.getStyleClass().addAll(styles);
+        }
+
+
+
+
+
+
+    }
+
+
+    private enum DisplayStyle {
+        SELECTED,
+        SELECTABLE,
+        DISABLED,
+        MOVETARGET,
+        THREATTARGET,
+        MULTI
     }
 
 
