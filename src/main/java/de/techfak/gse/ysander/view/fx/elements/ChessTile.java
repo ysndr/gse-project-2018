@@ -153,20 +153,12 @@ public class ChessTile extends AnchorPane {
             } else if (hint.getClass().equals(SelectedHint.class)) {
                 return DisplayStyle.SELECTED;
             }
-            return  DisplayStyle.DISABLED;
+            return  DisplayStyle.UNSELECTED;
         }).map(DisplayStyle::name)
             .collect(Collectors.toSet());
 
-        if (this.hints.size() > 0) {
-            this.tileInput.getStyleClass().addAll(styles);
-        }
-        else {
-            this.tileInput.getStyleClass().add(DisplayStyle.DISABLED.name());
-        }
-
-
-
-
+        this.tileInput.setDisable(this.hints.size() == 0);
+        this.tileInput.getStyleClass().addAll(styles);
 
     }
 
@@ -174,7 +166,7 @@ public class ChessTile extends AnchorPane {
     private enum DisplayStyle {
         SELECTED,
         SELECTABLE,
-        DISABLED,
+        UNSELECTED,
         MOVETARGET,
         THREATTARGET,
         MULTI
