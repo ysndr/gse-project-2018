@@ -27,6 +27,7 @@ public abstract class BaseChessController {
 
     protected void updateState(final State state) {
         this.state = state;
+        this.view.display(state);
     }
 }
 
