@@ -1,7 +1,10 @@
 package de.techfak.gse.ysander.model.rules.providers;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
@@ -34,6 +37,16 @@ public interface HintProvider {
 
     default ChainedHintProvider chain(HintProvider other) {
         return new ChainedHintProvider(this).chain(other);
+    }
+
+    static Set<? extends Hint> filter(Set<? extends Hint> hints, Class<? extends Hint> type) {
+        return filter(hints, Collections.singletonList(type));
+    }
+
+    static Set<? extends Hint> filter(Set<? extends Hint> hints, List<Class<? extends Hint>> types) {
+        Set<Class<? extends Hint>> typeSet = new HashSet<>(types);
+
+        return hints.stream().filter(h -> typeSet.contains(((Hint) h).getClass())).collect(Collectors.toSet());
     }
 
 
