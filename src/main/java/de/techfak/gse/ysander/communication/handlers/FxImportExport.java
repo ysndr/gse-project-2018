@@ -19,6 +19,12 @@ import de.techfak.gse.ysander.model.error.JavaPlatformException;
 public class FxImportExport implements SaveHandler, LoadHandler {
 
 
+    private final Window parent;
+
+    public FxImportExport(final Window parent) {
+        this.parent = parent;
+    }
+
     private FileChooser getFileChooser() {
         final FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "*.fen"));
@@ -26,7 +32,7 @@ public class FxImportExport implements SaveHandler, LoadHandler {
     }
 
     @Override
-    public void saveState(Window parent, final State state) throws ChessGameException {
+    public void saveState(final State state) throws ChessGameException {
 
         final FileChooser chooser = this.getFileChooser();
         chooser.setTitle("Save FEN");
@@ -48,7 +54,7 @@ public class FxImportExport implements SaveHandler, LoadHandler {
     }
 
     @Override
-    public State loadState(Window parent) throws ChessGameException {
+    public State loadState() throws ChessGameException {
         final FileChooser chooser = this.getFileChooser();
         chooser.setTitle("Load FEN");
         File file = chooser.showOpenDialog(parent);
