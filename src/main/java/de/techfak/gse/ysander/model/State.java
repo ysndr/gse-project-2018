@@ -4,10 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import de.techfak.gse.ysander.model.error.InvalidMoveException;
-import de.techfak.gse.ysander.model.error.NoFigureMovedException;
-import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
-import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
+import de.techfak.gse.ysander.model.error.*;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.HintProvider;
@@ -173,6 +170,23 @@ public final class State {
 
         return new StateBuilder().setGrid(gridAfterMove).setColor(playerAfterMove).createState();
 
+    }
+
+    /**
+     * Applies itself to the given {@link Hint} thereby delegating the
+     * construction of a new state to it. If the hint is not in the set of hints
+     * valid for this state an {@link InvalidHintException} is thrown.
+     * @param hint the hint to apply
+     * @return a new state constructed by the hint
+     * @throws InvalidHintException if the hint could not be derived from the
+     * current configuration
+     */
+    public State applyHint(Hint hint) throws InvalidHintException {
+        if (!this.getHints().contains(hint)) {
+            throw new InvalidHintException(hint);
+        }
+
+        return hint.apply(this);
     }
 
     /**
