@@ -18,6 +18,7 @@ import de.techfak.gse.ysander.communication.inputs.HintInput;
 import de.techfak.gse.ysander.communication.inputs.LoadInput;
 import de.techfak.gse.ysander.communication.inputs.SaveInput;
 import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.view.View;
 
@@ -37,6 +38,7 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
 
     @FXML
     private MenuItem menuSave;
+
 
     @FXML
     private MenuItem menuStart;
@@ -95,6 +97,12 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
             } else {
                 currentPlayerIndicator.setImage(new Image("/de/techfak/gse/ysander/model/figures/king_black.png"));
             }
+
+            t1.hasWon().ifPresent(color -> {
+                message(String.format("%s has won!"));
+                reset();
+            });
+
         });
 
 
@@ -111,7 +119,7 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     private void reset() {
         this.menuStart.setDisable(false);
         this.grid.setDisable(true);
-        this.labelState.setText("stopped");
+        message("Game stopped");
     }
 
 
@@ -128,6 +136,11 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     @Override
     public void start() {
         onInitCB.run();
+    }
+
+    @Override
+    public void message(final String message) {
+        this.labelState.setText(message);
     }
 
     @Override
