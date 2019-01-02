@@ -31,6 +31,65 @@ public class GridBuilder {
     private Map<Field, Figure> grid;
 
     /**
+     * Creates a Grid from a given String in FENotation.
+     * If a field is not occupied by the default figure we assume the figure on
+     * it has been moved before
+     *
+     * @param fen Serialized grid
+     * @return deserialized Grid
+     * @throws FENParseException if FEN format is not obeyed
+     */
+    public static Grid fromFEN(String fen) throws FENParseException {
+        Grid reference = defaultGrid();
+
+        String[] rows = fen.split("/");
+        if (rows.length < Grid.GRID_SIZE) {
+            throw new FENParseException();
+        }
+
+        Map<Field, Figure> grid = new HashMap<>();
+        Map<String, Figure> mapping = new HashMap<>();
+        Arrays.asList(FIGURES).forEach((Figure f) -> mapping.put(f.symbol(), f));
+
+        for (int r = 0; r < rows.length; r++) {
+            String row = rows[r];
+            int processed = 0;
+            for (int i = 0; i < row.length(); i++) {
+                String field = String.valueOf(row.charAt(i));
+
+                if (!mapping.containsKey(field)) {
+                    try {
+                        processed += Integer.parseInt(field);
+                    } catch (NumberFormatException e) {
+                        throw new FENParseException();
+                    }
+                    continue;
+                }
+                try {
+                    Field target = new Field(processed, r);
+                    final Figure figure = mapping.get(field);
+
+                    Figure placed = reference.getFigureOnField(target)
+                        .filter(ref -> ref.equals(figure))
+                        .map(ref -> figure)
+                        .orElse(figure.moved());
+
+                    grid.put(target, placed);
+                } catch (InvalidFieldException e) {
+                    throw new FENParseException();
+                }
+
+                processed++;
+            }
+            if (processed != Grid.GRID_SIZE) {
+                throw new FENParseException();
+            }
+        }
+
+        return new Grid(grid);
+    }
+
+    /**
      * Creates a preconfigured grd with the default common setup.
      *
      * @return a setup grid
@@ -77,54 +136,6 @@ public class GridBuilder {
 
         return new Grid(grid);
     }
-
-    /**
-     * Creates a Grid from a given String in FENotation.
-     *
-     * @param fen Serialized grid
-     * @return deserialized Grid
-     * @throws FENParseException if FEN format is not obeyed
-     */
-    public static Grid fromFEN(String fen) throws FENParseException {
-        String[] rows = fen.split("/");
-        if (rows.length < Grid.GRID_SIZE) {
-            throw new FENParseException();
-        }
-
-        Map<Field, Figure> grid = new HashMap<>();
-        Map<String, Figure> mapping = new HashMap<>();
-        Arrays.asList(FIGURES).forEach((Figure f) -> mapping.put(f.symbol(), f));
-
-        for (int r = 0; r < rows.length; r++) {
-            String row = rows[r];
-            int processed = 0;
-            for (int i = 0; i < row.length(); i++) {
-                String field = String.valueOf(row.charAt(i));
-
-                if (!mapping.containsKey(field)) {
-                    try {
-                        processed += Integer.parseInt(field);
-                    } catch (NumberFormatException e) {
-                        throw new FENParseException();
-                    }
-                    continue;
-                }
-                try {
-                    grid.put(new Field(processed, r), mapping.get(field));
-                } catch (InvalidFieldException e) {
-                    throw new FENParseException();
-                }
-
-                processed++;
-            }
-            if (processed != Grid.GRID_SIZE) {
-                throw new FENParseException();
-            }
-        }
-
-        return new Grid(grid);
-    }
-
 
     /**
      * Create Builder from grid.
