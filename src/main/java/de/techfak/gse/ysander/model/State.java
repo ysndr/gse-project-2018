@@ -1,11 +1,14 @@
 package de.techfak.gse.ysander.model;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import de.techfak.gse.ysander.model.error.*;
 import de.techfak.gse.ysander.model.figures.Figure;
+import de.techfak.gse.ysander.model.figures.King;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.providers.HintProvider;
 import de.techfak.gse.ysander.model.rules.providers.SelectableHintProvider;
@@ -58,6 +61,30 @@ public final class State {
 
     public Set<? extends Hint> getHints() {
         return this.hints.result();
+    }
+
+    /**
+     * Looks up which kings still stands. If there is only one king left, that
+     * kings color must have won by now.
+     * @return an optional filled with the winning color, null in case of the
+     * unlikely event that there is no king anymore (?) and empty if not won
+     */
+    public Optional<Color> hasWon() {
+        Set<Color> colors = this.grid.getFigures().stream()
+            .map(Map.Entry::getValue)
+            .filter(figure -> figure.getClass().equals(King.class))
+            .map(Figure::color)
+            .collect(Collectors.toSet());
+
+        if (colors.size() == 0) {
+            return Optional.ofNullable(null);
+        }
+        if (colors.size() < 2) {
+            return colors.stream().findFirst();
+        }
+
+        return Optional.empty();
+
     }
 
 
