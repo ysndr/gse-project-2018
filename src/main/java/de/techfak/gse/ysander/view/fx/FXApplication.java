@@ -77,6 +77,7 @@ public class FXApplication extends javafx.application.Application {
 
             root.getController().setLoadHandler(controller);
             root.getController().setSaveHandler(controller);
+            root.getController().setResetHandler(controller);
 
             root.getController().start();
 

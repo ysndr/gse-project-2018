@@ -1,12 +1,10 @@
 package de.techfak.gse.ysander.controller;
 
 import de.techfak.gse.ysander.communication.drivers.PlayerInputDriver;
-import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
-import de.techfak.gse.ysander.communication.handlers.LoadHandler;
-import de.techfak.gse.ysander.communication.handlers.PlayerInputHandler;
-import de.techfak.gse.ysander.communication.handlers.SaveHandler;
+import de.techfak.gse.ysander.communication.handlers.*;
 import de.techfak.gse.ysander.model.Player;
 import de.techfak.gse.ysander.model.State;
+import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.InvalidMoveException;
 import de.techfak.gse.ysander.model.figures.Figure;
@@ -17,7 +15,7 @@ import de.techfak.gse.ysander.view.View;
  * Main controller managing the the control flow between
  * input -> model -> output.
  */
-public class MultiplayerChessController extends BaseChessController implements PlayerInputHandler, LoadHandler, SaveHandler {
+public class MultiplayerChessController extends BaseChessController implements PlayerInputHandler, LoadHandler, SaveHandler, ResetHandler {
 
     private final PlayerInputDriver playerWhite;
 
@@ -92,5 +90,10 @@ public class MultiplayerChessController extends BaseChessController implements P
         } catch (ChessGameException e) {
             errorHandler.handleError(e);
         }
+    }
+
+    @Override
+    public void resetState() {
+        updateState(StateBuilder.defaultState());
     }
 }

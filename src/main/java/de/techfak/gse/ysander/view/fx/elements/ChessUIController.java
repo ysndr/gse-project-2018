@@ -13,9 +13,11 @@ import javafx.stage.Window;
 
 import de.techfak.gse.ysander.communication.handlers.HintInputHandler;
 import de.techfak.gse.ysander.communication.handlers.LoadHandler;
+import de.techfak.gse.ysander.communication.handlers.ResetHandler;
 import de.techfak.gse.ysander.communication.handlers.SaveHandler;
 import de.techfak.gse.ysander.communication.inputs.HintInput;
 import de.techfak.gse.ysander.communication.inputs.LoadInput;
+import de.techfak.gse.ysander.communication.inputs.ResetInput;
 import de.techfak.gse.ysander.communication.inputs.SaveInput;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.StateBuilder;
@@ -25,7 +27,7 @@ import de.techfak.gse.ysander.view.View;
 /**
  * Controller for the main view that implements all interfaces the backend (game controllers) needs.
  */
-public class ChessUIController implements View, HintInput, LoadInput, SaveInput {
+public class ChessUIController implements View, HintInput, LoadInput, SaveInput, ResetInput {
 
     @FXML
     private GridPane grid;
@@ -39,6 +41,8 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     @FXML
     private MenuItem menuSave;
 
+    @FXML
+    private MenuItem menuReset;
 
     @FXML
     private MenuItem menuStart;
@@ -63,6 +67,8 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     private LoadHandler loadHandler = () -> { return this.state.get(); };
 
     private SaveHandler saveHandler = (state) -> { };
+
+    private ResetHandler resetHandler = () -> { };
 
     /**
      * Component Controller
@@ -98,9 +104,12 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
                 currentPlayerIndicator.setImage(new Image("/de/techfak/gse/ysander/model/figures/king_black.png"));
             }
 
+            // let user reset the game any time
+            menuReset.setDisable(t1.equals(StateBuilder.defaultState()));
+
             t1.hasWon().ifPresent(color -> {
-                message(String.format("%s has won!"));
                 reset();
+                message(String.format("%s has won!", color));
             });
 
         });
@@ -112,6 +121,9 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
         });
         this.menuSave.setOnAction((e) -> saveHandler.saveState(state.get()));
         this.menuStart.setOnAction((e) -> this.onStartCB.run());
+        this.menuReset.setOnAction((e) -> {
+            resetHandler.resetState();
+        });
 
     }
 
@@ -166,6 +178,11 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput 
     @Override
     public void setSaveHandler(final SaveHandler handler) {
         this.saveHandler = handler;
+    }
+
+    @Override
+    public void setResetHandler(final ResetHandler resetHandler) {
+        this.resetHandler = resetHandler;
     }
 
     public void setParent(Window parent) {
