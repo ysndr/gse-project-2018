@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import de.techfak.gse.ysander.communication.drivers.HintDriver;
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
 import de.techfak.gse.ysander.communication.handlers.FxImportExport;
+import de.techfak.gse.ysander.communication.handlers.UIErrorHandler;
 import de.techfak.gse.ysander.controller.GlobalErrorEmergencyExit;
 import de.techfak.gse.ysander.controller.MultiplayerChessController;
 import de.techfak.gse.ysander.model.Player;
@@ -63,7 +64,7 @@ public class FXApplication extends javafx.application.Application {
             FxImportExport importExport = new FxImportExport(scene.getWindow());
 
 
-            ErrorHandler errorHandler = GlobalErrorEmergencyExit.getInstance();
+            ErrorHandler errorHandler = new UIErrorHandler(root.getController());
 
             MultiplayerChessController controller = new MultiplayerChessController(
                 FXApplication.initialState,

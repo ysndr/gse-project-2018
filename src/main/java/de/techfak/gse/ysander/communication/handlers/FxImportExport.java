@@ -5,8 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.util.IllegalFormatException;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -39,6 +41,9 @@ public class FxImportExport implements SaveHandler, LoadHandler {
             throw new JavaPlatformException("No file selected", new NoSuchFileException(""));
         }
 
+        if (!file.getPath().replaceAll(".*\\.", "").equals("fen")) {
+            throw new JavaPlatformException("File has no `*.fen` ending", new NoSuchFileException(file.getPath()));
+        }
         Path path = file.toPath();
 
         try {
