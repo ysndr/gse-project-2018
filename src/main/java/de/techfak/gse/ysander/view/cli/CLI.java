@@ -52,6 +52,11 @@ public class CLI implements View, RawInput {
     }
 
     @Override
+    public void message(final String message) {
+        System.out.println(message);
+    }
+
+    @Override
     public void display(State state) {
         System.out.println(state.toFEN());
     }

@@ -16,5 +16,7 @@ public interface View extends Output<State> {
      */
     void start();
 
+    void message(String message);
+
     void setOnInitCB(Runnable onsonInitCB);
 }
