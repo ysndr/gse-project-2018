@@ -18,10 +18,6 @@ public class MoveHint implements Hint {
         this.move = move;
     }
 
-    public Move getMove() {
-        return move;
-    }
-
     @Override
     public Field target() {
         return move.getTo();
@@ -42,6 +38,10 @@ public class MoveHint implements Hint {
         }
         final MoveHint moveHint = (MoveHint) o;
         return Objects.equals(getMove(), moveHint.getMove());
+    }
+
+    public Move getMove() {
+        return move;
     }
 
     @Override

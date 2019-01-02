@@ -3,17 +3,19 @@ package de.techfak.gse.ysander.model.rules.providers;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Move;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.error.InvalidFieldException;
-import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.MoveHint;
 
+/**
+ * Provide hints to move to fields ydelta, and xdelta away from the origin
+ * reach times.
+ */
 public class MoveHintProvider implements HintProvider {
 
     private final int ydelta;
@@ -22,11 +24,22 @@ public class MoveHintProvider implements HintProvider {
 
     private final int reach;
 
+    /**
+     * Construct a provider with unlimited reach.
+     *
+     * @param xdelta
+     * @param ydelta
+     */
     public MoveHintProvider(final int xdelta, final int ydelta) {
         this(xdelta, ydelta, Integer.MAX_VALUE);
     }
 
-
+    /**
+     * Construct a provider with limited reach.
+     *
+     * @param xdelta
+     * @param ydelta
+     */
     public MoveHintProvider(final int xdelta, final int ydelta, final int reach) {
         this.ydelta = ydelta;
         this.xdelta = xdelta;

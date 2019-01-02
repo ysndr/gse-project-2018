@@ -52,7 +52,7 @@ public class Pawn extends Figure {
 
 
         HintProvider hints = new ThreatHintProvider(1, ydelta, 1, this.color())
-            .chain(new ThreatHintProvider(-1,  ydelta, 1, this.color()));
+            .chain(new ThreatHintProvider(-1, ydelta, 1, this.color()));
 
         if (getMoved()) {
             hints = hints.chain(new MoveHintProvider(0, ydelta, 1));

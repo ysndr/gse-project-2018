@@ -46,14 +46,6 @@ public class StateBuilder {
             .withColor(Figure.Color.fromFEN(color));
     }
 
-    public static StateBuilder of(State state) {
-        return new StateBuilder()
-            .setSelection(state.getSelection())
-            .setColor(state.getColor())
-            .setGrid(state.getGrid());
-    }
-
-
     /**
      * Creates a default state with default {@link Grid} and White as starting
      * player.
@@ -87,26 +79,6 @@ public class StateBuilder {
     }
 
     /**
-     * Set current selected Field.
-     *
-     * @param selection
-     * @return this builder for fluent chaining
-     */
-    public StateBuilder setSelection(final Field selection) {
-        this.selection = selection;
-        return this;
-    }
-
-    /**
-     * Delete selection
-     * @return
-     */
-    public StateBuilder resetSelection() {
-        this.selection = null;
-        return this;
-    }
-
-    /**
      * Build a full state from gathered information.
      *
      * @return packed State
@@ -121,7 +93,39 @@ public class StateBuilder {
         return new State(grid, color, selection);
     }
 
+    /**
+     * Create a new builder from a given {@link State}.
+     *
+     * @param state
+     * @return
+     */
+    public static StateBuilder of(State state) {
+        return new StateBuilder()
+            .setSelection(state.getSelection())
+            .setColor(state.getColor())
+            .setGrid(state.getGrid());
+    }
 
+    /**
+     * Set current selected Field.
+     *
+     * @param selection the field to be selected
+     * @return this builder for fluent chaining
+     */
+    public StateBuilder setSelection(final Field selection) {
+        this.selection = selection;
+        return this;
+    }
+
+    /**
+     * Delete selection.
+     *
+     * @return Builder with invalidated selecton.
+     */
+    public StateBuilder resetSelection() {
+        this.selection = null;
+        return this;
+    }
 
 
 }

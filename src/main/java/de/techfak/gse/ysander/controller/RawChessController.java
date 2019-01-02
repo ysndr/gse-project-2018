@@ -15,6 +15,13 @@ public class RawChessController extends BaseChessController implements MoveHandl
 
     private final RawInputDriver rawInput;
 
+    /**
+     * Constructs a new Controller
+     *
+     * @param view
+     * @param rawInput
+     * @param initialState
+     */
     public RawChessController(final View view,
                               final RawInputDriver rawInput,
                               final State initialState) {

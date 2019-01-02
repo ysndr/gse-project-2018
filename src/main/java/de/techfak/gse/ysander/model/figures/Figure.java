@@ -19,6 +19,7 @@ public abstract class Figure implements HintProvider {
 
 
     private final Color color;
+
     private final boolean moved;
 
     public Figure(final Color color) {
@@ -54,12 +55,13 @@ public abstract class Figure implements HintProvider {
      * Used to get the hints for the selected field. Therefore it does not take
      * the specific {@link Figure}s {@link Color} into account. Color regards are left to the
      * underlying {@link HintProvider}s.
+     *
      * @param state the state to create rules for
      * @param base
      * @return hints for a figure of this kind
      */
     @Override
-    public abstract Set<? extends Hint> getHints(final State state, final Field base);
+    public abstract Set<? extends Hint> getHints(State state, Field base);
 
     /**
      * @return the figures color

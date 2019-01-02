@@ -16,6 +16,7 @@ public class ChessGame {
      * Game launch method.
      * Parses arguments and runs the the kind of Application depending on
      * {@code --gui} flag
+     *
      * @param args programm args
      */
     public static void main(String[] args) {

@@ -16,6 +16,9 @@ import de.techfak.gse.ysander.model.StateBuilder;
 import de.techfak.gse.ysander.model.error.ChessGameException;
 import de.techfak.gse.ysander.model.error.JavaPlatformException;
 
+/**
+ * Provide the logic to load and save States with javaFX components.
+ */
 public class FxImportExport implements SaveHandler, LoadHandler {
 
 
@@ -23,12 +26,6 @@ public class FxImportExport implements SaveHandler, LoadHandler {
 
     public FxImportExport(final Window parent) {
         this.parent = parent;
-    }
-
-    private FileChooser getFileChooser() {
-        final FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "*.fen"));
-        return chooser;
     }
 
     @Override
@@ -53,13 +50,19 @@ public class FxImportExport implements SaveHandler, LoadHandler {
         }
     }
 
+    private FileChooser getFileChooser() {
+        final FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FEN files", "*.fen"));
+        return chooser;
+    }
+
     @Override
     public State loadState() throws ChessGameException {
         final FileChooser chooser = this.getFileChooser();
         chooser.setTitle("Load FEN");
         File file = chooser.showOpenDialog(parent);
         if (file == null) {
-            throw new JavaPlatformException("No file selected", new NoSuchFileException("")) ;
+            throw new JavaPlatformException("No file selected", new NoSuchFileException(""));
         }
         Path path = file.toPath();
 

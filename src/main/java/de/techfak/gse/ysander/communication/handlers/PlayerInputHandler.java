@@ -1,6 +1,5 @@
 package de.techfak.gse.ysander.communication.handlers;
 
-import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Player;
 import de.techfak.gse.ysander.model.rules.Hint;
 

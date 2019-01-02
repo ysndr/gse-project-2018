@@ -6,6 +6,9 @@ import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.StateBuilder;
 
+/**
+ * A hint that represents fields that can be selected by the current player.
+ */
 public class SelectableHint implements Hint {
 
     private final Field selectable;

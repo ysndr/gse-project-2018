@@ -16,7 +16,14 @@ public abstract class BaseChessController {
 
     protected View view;
 
-
+    /**
+     * Constructor of BaseController.
+     * Binds, State View and error Handler
+     *
+     * @param state        that is managed by the controller
+     * @param view         that the controller uses to display state
+     * @param errorHandler that is called to show errors
+     */
     protected BaseChessController(final State state, final View view, final ErrorHandler errorHandler) {
         this.state = state;
         this.view = view;

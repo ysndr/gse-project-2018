@@ -15,7 +15,11 @@ import de.techfak.gse.ysander.view.View;
  * Main controller managing the the control flow between
  * input -> model -> output.
  */
-public class MultiplayerChessController extends BaseChessController implements PlayerInputHandler, LoadHandler, SaveHandler, ResetHandler {
+public class MultiplayerChessController extends BaseChessController
+    implements PlayerInputHandler,
+               LoadHandler,
+               SaveHandler,
+               ResetHandler {
 
     private final PlayerInputDriver playerWhite;
 
@@ -25,7 +29,17 @@ public class MultiplayerChessController extends BaseChessController implements P
 
     private final SaveHandler saveHandler;
 
-
+    /**
+     * Construct a new Controller.
+     *
+     * @param initialState
+     * @param view
+     * @param errorHandler
+     * @param playerWhite
+     * @param playerBlack
+     * @param loadHandler  delegate for load actions
+     * @param saveHandler  delegate for save actions
+     */
     public MultiplayerChessController(final State initialState,
                                       final View view,
                                       final ErrorHandler errorHandler,

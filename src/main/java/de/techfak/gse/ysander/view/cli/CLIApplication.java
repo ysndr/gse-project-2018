@@ -11,6 +11,7 @@ import de.techfak.gse.ysander.model.State;
 public class CLIApplication {
     /**
      * Initializes Drivers and Controller with a given state.
+     *
      * @param state initialState
      */
     public static void startCLI(final State state) {

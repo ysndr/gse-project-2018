@@ -8,5 +8,5 @@ import de.techfak.gse.ysander.model.error.ChessGameException;
  * TODO: Could default methods be used here?
  */
 public interface SaveHandler {
-    void saveState(final State state) throws ChessGameException;
+    void saveState(State state) throws ChessGameException;
 }

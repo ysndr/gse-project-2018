@@ -135,6 +135,7 @@ public class ChessTile extends AnchorPane {
 
     /**
      * Sets hints targetng this tile the corrsponding style classes.
+     *
      * @param value current state
      */
     private void updateHints(final State value) {
@@ -150,11 +151,11 @@ public class ChessTile extends AnchorPane {
             } else if (hint.getClass().equals(ThreatHint.class)) {
                 return DisplayStyle.THREATTARGET;
             } else if (hint.getClass().equals(SelectableHint.class)) {
-                return  DisplayStyle.SELECTABLE;
+                return DisplayStyle.SELECTABLE;
             } else if (hint.getClass().equals(SelectedHint.class)) {
                 return DisplayStyle.SELECTED;
             }
-            return  DisplayStyle.UNSELECTED;
+            return DisplayStyle.UNSELECTED;
         }).map(DisplayStyle::name)
             .collect(Collectors.toSet());
 
@@ -162,17 +163,6 @@ public class ChessTile extends AnchorPane {
         this.tileInput.getStyleClass().addAll(styles);
 
     }
-
-
-    private enum DisplayStyle {
-        SELECTED,
-        SELECTABLE,
-        UNSELECTED,
-        MOVETARGET,
-        THREATTARGET,
-        MULTI
-    }
-
 
     // accessor
     public int getX() {
@@ -205,6 +195,18 @@ public class ChessTile extends AnchorPane {
 
     public ObjectProperty<Hint> onClickProperty() {
         return onClick;
+    }
+
+    /**
+     * Possible styles for tiles.
+     */
+    private enum DisplayStyle {
+        SELECTED,
+        SELECTABLE,
+        UNSELECTED,
+        MOVETARGET,
+        THREATTARGET,
+        MULTI
     }
 
 }

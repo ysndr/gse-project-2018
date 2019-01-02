@@ -12,6 +12,9 @@ import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.SelectableHint;
 import de.techfak.gse.ysander.model.rules.SelectedHint;
 
+/**
+ * Computes Hints for selectable and selected fields.
+ */
 public class SelectableHintProvider implements HintProvider {
 
     private final Figure.Color egoColor;

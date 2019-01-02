@@ -43,6 +43,24 @@ public final class State {
         this.hints = this.createHintProvider().getHintsCached(this);
     }
 
+    private HintProvider createHintProvider() {
+        HintProvider hintProvider = new SelectableHintProvider();
+
+        if (this.getSelectedFigure().isPresent()) {
+            hintProvider = hintProvider.chain(this.getSelectedFigure().get());
+        }
+
+        return hintProvider;
+    }
+
+    public Optional<Figure> getSelectedFigure() {
+        return grid.getFigureOnField(getSelection());
+    }
+
+    public Field getSelection() {
+        return selection;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -51,21 +69,10 @@ public final class State {
         return grid;
     }
 
-    public Field getSelection() {
-        return selection;
-    }
-
-    public Optional<Figure> getSelectedFigure() {
-        return grid.getFigureOnField(getSelection());
-    }
-
-    public Set<? extends Hint> getHints() {
-        return this.hints.result();
-    }
-
     /**
      * Looks up which kings still stands. If there is only one king left, that
      * kings color must have won by now.
+     *
      * @return an optional filled with the winning color, null in case of the
      * unlikely event that there is no king anymore (?) and empty if not won
      */
@@ -87,17 +94,6 @@ public final class State {
 
     }
 
-
-    private HintProvider createHintProvider() {
-        HintProvider hintProvider = new SelectableHintProvider();
-
-        if (this.getSelectedFigure().isPresent()) {
-            hintProvider = hintProvider.chain(this.getSelectedFigure().get());
-        }
-
-        return hintProvider;
-    }
-
     // Modifiers
     State withGrid(Grid grid) {
         return StateBuilder.of(this)
@@ -110,20 +106,6 @@ public final class State {
             .setColor(color)
             .createState();
     }
-
-    private State withSelection(Field selection) {
-        return StateBuilder.of(this)
-            .setSelection(selection)
-            .createState();
-    }
-
-    private State withoutSelection() {
-        return new StateBuilder()
-            .setGrid(this.grid)
-            .setColor(this.color)
-            .createState();
-    }
-
 
     /**
      * Tries to apply a field onto the current state by setting the currently
@@ -151,16 +133,16 @@ public final class State {
 
 
         if (this.selection != null) {
-            Optional<Figure> onSelection= grid.getFigureOnField(this.selection);
+            Optional<Figure> onSelection = grid.getFigureOnField(this.selection);
             // switch to other figure of the same player
-            if (onSelection.isPresent() && onField.isPresent() && onField.get().color().equals(onSelection.get().color())) {
+            if (onSelection.isPresent() && onField.isPresent()
+                && onField.get().color().equals(onSelection.get().color())) {
                 return this.withSelection(field);
             }
 
             return this.applyMove(new Move(this.selection, field));
 
         }
-
 
 
         if (!onField.isPresent()) {
@@ -175,6 +157,18 @@ public final class State {
 
     }
 
+    private State withSelection(Field selection) {
+        return StateBuilder.of(this)
+            .setSelection(selection)
+            .createState();
+    }
+
+    private State withoutSelection() {
+        return new StateBuilder()
+            .setGrid(this.grid)
+            .setColor(this.color)
+            .createState();
+    }
 
     /**
      * Applies a {@link Move} onto the current State. If successful returns a
@@ -203,10 +197,11 @@ public final class State {
      * Applies itself to the given {@link Hint} thereby delegating the
      * construction of a new state to it. If the hint is not in the set of hints
      * valid for this state an {@link InvalidHintException} is thrown.
+     *
      * @param hint the hint to apply
      * @return a new state constructed by the hint
      * @throws InvalidHintException if the hint could not be derived from the
-     * current configuration
+     *                              current configuration
      */
     public State applyHint(Hint hint) throws InvalidHintException {
         if (!this.getHints().contains(hint)) {
@@ -216,8 +211,13 @@ public final class State {
         return hint.apply(this);
     }
 
+    public Set<? extends Hint> getHints() {
+        return this.hints.result();
+    }
+
     /**
      * Create a builder from ths intstance.
+     *
      * @return StateBuilder loaded with this
      */
     public StateBuilder builder() {
@@ -227,6 +227,11 @@ public final class State {
 
     // Converters
 
+    @Override
+    public String toString() {
+        return toFEN();
+    }
+
     /**
      * Converts state into FEN notation.
      *
@@ -234,11 +239,6 @@ public final class State {
      */
     public String toFEN() {
         return String.format("%s %s", this.grid.toFEN(), this.color.toFEN());
-    }
-
-    @Override
-    public String toString() {
-        return toFEN();
     }
 
     // Util

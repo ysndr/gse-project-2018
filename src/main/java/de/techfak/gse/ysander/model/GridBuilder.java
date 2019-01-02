@@ -11,6 +11,9 @@ import de.techfak.gse.ysander.model.figures.*;
 import static de.techfak.gse.ysander.model.figures.Figure.Color.BLACK;
 import static de.techfak.gse.ysander.model.figures.Figure.Color.WHITE;
 
+/**
+ * Construct Grid objects.
+ */
 public class GridBuilder {
 
     private static final Figure[] FIGURES = {
@@ -125,6 +128,7 @@ public class GridBuilder {
 
     /**
      * Create Builder from grid.
+     *
      * @param grid
      * @return GridBuilder instance
      */
@@ -134,7 +138,8 @@ public class GridBuilder {
 
     /**
      * Set a grid.
-     * @param grid
+     *
+     * @param grid the map to use as grid
      * @return GridBuilder instance
      */
     GridBuilder setGrid(final Map<Field, Figure> grid) {
@@ -143,18 +148,8 @@ public class GridBuilder {
     }
 
     /**
-     * Set a specific {@link Field} to hold the given {@link Figure}
-     * @param field key
-     * @param figure value
-     * @return GridBuilder Instance
-     */
-    public GridBuilder setField(final Field field, final Figure figure) {
-        this.grid.put(field, figure);
-        return this;
-    }
-
-    /**
      * Delete a {@link Figure} on the grid.
+     *
      * @param field field to clear
      * @return GridBuilderInstance
      */
@@ -167,6 +162,7 @@ public class GridBuilder {
      * Apply a move by setting the targets fields value to the value of the
      * source field.
      * If the source field is not set, do nothing.
+     *
      * @param move to apply
      * @return GridBuilder
      */
@@ -181,9 +177,21 @@ public class GridBuilder {
         return this;
     }
 
+    /**
+     * Set a specific {@link Field} to hold the given {@link Figure}.
+     *
+     * @param field  key
+     * @param figure value
+     * @return GridBuilder Instance
+     */
+    public GridBuilder setField(final Field field, final Figure figure) {
+        this.grid.put(field, figure);
+        return this;
+    }
 
     /**
      * Assemble {@link Grid}.
+     *
      * @return {@link Grid}
      */
     public Grid createGrid() {

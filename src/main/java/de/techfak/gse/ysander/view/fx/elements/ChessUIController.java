@@ -64,7 +64,8 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput,
 
     private HintInputHandler inputHandler = (h) -> { };
 
-    private LoadHandler loadHandler = () -> { return this.state.get(); };
+    private LoadHandler loadHandler = () -> this.state.get();
+
 
     private SaveHandler saveHandler = (state) -> { };
 
@@ -137,6 +138,11 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput,
 
     // stuff
 
+    @Override
+    public void message(final String message) {
+        this.labelState.setText(message);
+    }
+
     private ObjectProperty<State> stateProperty() {
         return state;
     }
@@ -148,11 +154,6 @@ public class ChessUIController implements View, HintInput, LoadInput, SaveInput,
     @Override
     public void start() {
         onInitCB.run();
-    }
-
-    @Override
-    public void message(final String message) {
-        this.labelState.setText(message);
     }
 
     @Override

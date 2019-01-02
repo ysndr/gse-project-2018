@@ -14,6 +14,9 @@ import de.techfak.gse.ysander.model.figures.Figure;
 import de.techfak.gse.ysander.model.rules.Hint;
 import de.techfak.gse.ysander.model.rules.ThreatHint;
 
+/**
+ * Provides ThreatHints for fields that are endangered by the current egoColor.
+ */
 public class ThreatHintProvider implements HintProvider {
 
     private final int ydelta;
@@ -24,11 +27,24 @@ public class ThreatHintProvider implements HintProvider {
 
     private final Figure.Color egoColor;
 
+    /**
+     * Constructs a provider with unlimited reach.
+     *
+     * @param xdelta
+     * @param ydelta
+     * @param egoColor color of the attacking player
+     */
     public ThreatHintProvider(final int xdelta, final int ydelta, final Figure.Color egoColor) {
         this(xdelta, ydelta, Integer.MAX_VALUE, egoColor);
     }
 
-
+    /**
+     * Constructs a provider with limited reach.
+     *
+     * @param xdelta
+     * @param ydelta
+     * @param egoColor color of the attacking player
+     */
     public ThreatHintProvider(final int xdelta, final int ydelta, final int reach, final Figure.Color egoColor) {
         this.ydelta = ydelta;
         this.xdelta = xdelta;
@@ -41,7 +57,8 @@ public class ThreatHintProvider implements HintProvider {
      * 1. try to find the figure on the given field
      * 2. compare its color with the current players color
      * 3. stop if no figure found, or the figure has the players color or
-     *    an otherwise invalid field is looked up.
+     * an otherwise invalid field is looked up.
+     *
      * @param state current state
      * @return List of fields to ove to in the given direcion
      */

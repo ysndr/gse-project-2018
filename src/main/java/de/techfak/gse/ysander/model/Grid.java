@@ -4,7 +4,7 @@ import java.util.*;
 
 import de.techfak.gse.ysander.model.error.NoFigureOnFieldException;
 import de.techfak.gse.ysander.model.error.NotPlayersTurnException;
-import de.techfak.gse.ysander.model.figures.*;
+import de.techfak.gse.ysander.model.figures.Figure;
 
 /**
  * The internal representation of the grid.
@@ -18,8 +18,8 @@ public final class Grid {
     public static final int GRID_SIZE = 8;
 
 
-
     // Constructors
+
     /**
      * Our internal representation of the grid.
      */
@@ -31,15 +31,6 @@ public final class Grid {
 
 
     // Accessors
-
-    /**
-     * Savely access grid.
-     * @return copy of the grid map
-     */
-    public Map<Field, Figure> getGrid() {
-        return new HashMap<>(grid);
-    }
-
 
     /**
      * Convert fields char represented index into absolut int coordinate on the
@@ -61,6 +52,15 @@ public final class Grid {
      */
     public static int getIndexY(char key) {
         return Y_KEYS.indexOf(key);
+    }
+
+    /**
+     * Savely access grid.
+     *
+     * @return copy of the grid map
+     */
+    public Map<Field, Figure> getGrid() {
+        return new HashMap<>(grid);
     }
 
     /**
@@ -116,6 +116,7 @@ public final class Grid {
 
     /**
      * Create a builder from this instance to make immutable changes.
+     *
      * @return a builder Instance
      */
     public GridBuilder builder() {

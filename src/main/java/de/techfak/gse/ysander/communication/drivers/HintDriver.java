@@ -1,18 +1,15 @@
 package de.techfak.gse.ysander.communication.drivers;
 
 import de.techfak.gse.ysander.communication.handlers.ErrorHandler;
-import de.techfak.gse.ysander.communication.handlers.FieldInputHandler;
 import de.techfak.gse.ysander.communication.handlers.HintInputHandler;
 import de.techfak.gse.ysander.communication.handlers.PlayerInputHandler;
-import de.techfak.gse.ysander.communication.inputs.FieldInput;
 import de.techfak.gse.ysander.communication.inputs.HintInput;
-import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.Player;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 
 /**
- * Connects to a {@link FieldInput} and enriches that.
+ * Connects to a {@link HintInput} and enriches that.
  */
 public class HintDriver implements PlayerInputDriver, HintInputHandler {
 

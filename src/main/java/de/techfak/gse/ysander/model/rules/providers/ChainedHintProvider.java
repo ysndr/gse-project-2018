@@ -7,9 +7,15 @@ import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.State;
 import de.techfak.gse.ysander.model.rules.Hint;
 
+/**
+ * A {@link HintProvider} that allows the chaining of several providers, by
+ * constructing a singly linked list that wraps {@link HintProvider}s in its
+ * nodes that are iterated when hints are calculated.
+ */
 public class ChainedHintProvider implements HintProvider {
 
     private final HintProvider wrapped;
+
     private ChainedHintProvider tail;
 
     public ChainedHintProvider(final HintProvider wrapped) {
@@ -22,6 +28,7 @@ public class ChainedHintProvider implements HintProvider {
      * Creates a simple singly linked list of {@link ChainedHintProvider}s by
      * managing a tail of another {@link ChainedHintProvider} which might contain a
      * tail itself or not recursing further.
+     *
      * @param other the other {@link HintProvider} to chain up
      * @return new {@link ChainedHintProvider} which has the current one as its tail.
      */
@@ -34,11 +41,12 @@ public class ChainedHintProvider implements HintProvider {
 
 
     /**
-     * Creates a set of rules by unifying its wrapped rulesets rules with its
-     * tails wrapped rulesets rules...
+     * Creates a set of rules by unifying its wrapped hintsets hints with its
+     * tails wrapped hintsets hints... hints, hints, hints :D
+     *
      * @param state the state to create rules for
      * @param base
-     * @return A combined set of rules contained in the chain
+     * @return A combined set of hints contained in the chain
      */
     @Override
     public Set<? extends Hint> getHints(final State state, final Field base) {

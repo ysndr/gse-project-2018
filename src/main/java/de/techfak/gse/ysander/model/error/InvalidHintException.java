@@ -1,10 +1,9 @@
 package de.techfak.gse.ysander.model.error;
 
-import de.techfak.gse.ysander.model.Field;
 import de.techfak.gse.ysander.model.rules.Hint;
 
 /**
- * An Exception indicating that an invalid hint was to be applied
+ * An Exception indicating that an invalid hint was to be applied.
  */
 public class InvalidHintException extends ChessGameException {
 
