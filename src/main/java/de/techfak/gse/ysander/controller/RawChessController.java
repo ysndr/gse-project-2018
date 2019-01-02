@@ -18,12 +18,12 @@ public class RawChessController extends BaseChessController implements MoveHandl
     public RawChessController(final View view,
                               final RawInputDriver rawInput,
                               final State initialState) {
-        super(view, initialState);
+        super(initialState, view, GlobalErrorEmergencyExit.getInstance());
 
         this.rawInput = rawInput;
 
         view.setOnInitCB(() -> view.display(initialState));
-        rawInput.setErrorHandler(this);
+        rawInput.setErrorHandler(this.errorHandler);
         rawInput.setMoveHandler(this);
     }
 
@@ -32,7 +32,7 @@ public class RawChessController extends BaseChessController implements MoveHandl
         // end of series of moves
         // TODO: think about it, is this the right way?
         if (move == null) {
-            output.display(state);
+            view.display(state);
             return;
         }
 
@@ -40,9 +40,9 @@ public class RawChessController extends BaseChessController implements MoveHandl
         try {
             newState = state.applyMove(move);
         } catch (InvalidMoveException e) {
-            this.handleError(e);
+            errorHandler.handleError(e);
             return;
         }
-        super.setState(newState);
+        super.updateState(newState);
     }
 }
