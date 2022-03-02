@@ -1,5 +1,9 @@
 # GSE project: ChessGame
 
+This project wwas part of the curriculum during my Bachelor's.
+Its put here for reference and archivation purposes only. 
+
+
 ## USAGE:
 
 ```
@@ -30,6 +34,3 @@ chessgame [--gui] [<fen>]
 - the figure on the right shows which players turn it is
 
 -------
-
-GIT checkout:
-git clone https://tdpe.techfak.uni-bielefeld.de/git/gse-ws-2018-ysander.git
